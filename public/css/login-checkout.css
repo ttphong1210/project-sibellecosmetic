@@ -1,0 +1,11 @@
+/* CSS Login CheckOut */
+
+.login .form-group input{
+    border: none !important;
+    border-bottom: 1px solid !important;
+}
+.register .signup-form .form-group input{
+    width: 70%;
+    border: none;
+    border-bottom: 1px solid;
+}
