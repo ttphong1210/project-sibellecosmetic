@@ -134,6 +134,12 @@ Route::group(['namespace'=>'Admin'],function(){
              Route::get('delete-customer/{id}','OrderController@getDeleteCustomer');
 
         });
+        Route::group(['prefix'=>'delivery'],function(){
+            Route::get('/','DeliveryController@getDelivery');
+            Route::post('select-delivery','DeliveryController@postSelectDelivery');
+            Route::post('add-delivery','DeliveryController@postAddDelivery');
+            // Route::post('/','DeliveryController@postDelivery');
+        });
     });
 });
 

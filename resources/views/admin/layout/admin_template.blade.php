@@ -18,12 +18,56 @@
 
   <script type="text/javascript" src="{{asset('editor/ckeditor/ckeditor.js')}}"></script>
   <!-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script> -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
      CKEDITOR.replace('description');
      CKEDITOR.replace('edit_description');
   
   </script>
+  <script>
+    $(document).ready(function(){
+      $('.add_delivery').click(function(){
+        var city = $('.city').val();
+        var district = $('.district').val();
+        var ward = $('.ward').val();
+        var feeship = $('.fee_ship').val();
+        var _token = $('input[name = "_token"]').val();
+       
+        $.ajax({
+            url: "/admin/delivery/add-delivery",
+            method: 'POST',
+            data:{city:city, district:district,_token:_token, ward:ward, feeship:feeship},
+            success:function(data){
+              alert('Thêm phí vận chuyển thành công');
+            }
+          })
+      })
+      
+        $('.choose').on('change',(function(){
+          var action = $(this).attr('id');
+          var ma_id = $(this).val();
+          var _token = $('input[name = "_token"]').val();
+          var result = '';
+          // alert(action);
+          // alert(matp);
+          // alert(_token);
 
+          if(action == 'city'){
+              result = 'district';
+          }else{
+            result = 'ward';
+          }
+          $.ajax({
+            url: "/admin/delivery/select-delivery",
+            method: 'POST',
+            data:{action:action, ma_id:ma_id,_token:_token},
+            success:function(data){
+              $('#'+result).html(data);
+            }
+          })
+      }));
+    })
+  </script>
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -279,6 +323,16 @@
           <ul class="treeview-menu">
             <li><a href="{{asset('admin/order')}}">Tất cả đơn hàng</a></li>
             <li><a href="{{asset('admin/order/customer')}}">Danh sách khách hàng order</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Phí vận chuyển</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{asset('admin/delivery')}}">Thông tin phí vận chuyển</a></li>
           </ul>
         </li>
       </ul>

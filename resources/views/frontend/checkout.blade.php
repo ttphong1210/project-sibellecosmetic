@@ -10,7 +10,7 @@
             <div class="row">
                 <form class="row contact_form" action="{{asset('checkout')}}" method="POST" novalidate="novalidate">
                     <div class="col-lg-8">
-                        <h3>Chi tiết thanh toán</h3>
+                        <h3>Địa chỉ giao hàng</h3>
                         @if(session('alert'))
                         <div class="alert alert-success">
                             {{session('alert')}}
