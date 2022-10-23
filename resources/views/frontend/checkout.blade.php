@@ -19,12 +19,11 @@
                         <div class="row">
                             <div class="col-md-12 form-group p_star">
                                 <span class="placeholder" data-placeholder="Họ và Tên"></span>
-                                <input type="text" required class="form-control" name="name" />
-
+                                <input type="text" required class="form-control" name="name"/>
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <span class="placeholder" data-placeholder="Số điện thoại"></span>
-                                <input type="text" required class="form-control" id="number" name="number_phone" />
+                                <input type="text" required class="form-control" id="number" name="number_phone"/>
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <span class="placeholder" data-placeholder=" Email"></span>

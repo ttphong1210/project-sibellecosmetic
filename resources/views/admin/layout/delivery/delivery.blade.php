@@ -58,25 +58,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($infoFeeship as $key => $item)
+                            @foreach($infoFeeship as $key => $item)
                             <tr>
-                               
-                                    <td>{{$item->name_city}}</td>
-                                    <td>{{$item->name_district}}</td>
-                                    <td>{{$item->name_ward}}</td>
-                                    <td>{{number_format($item->fee_feeship,0,',','.')}} đ</td>
-                               
+                                <td>{{$item->name_city}}</td>
+                                <td>{{$item->name_district}}</td>
+                                <td>{{$item->name_ward}}</td>
+                                <td contenteditable="" class="feeship_edit" data-feeship_id="{{$item->fee_id}}">{{number_format($item->fee_feeship,0,',','.')}}</td>
                             </tr>
                             @endforeach
                         </tbody>
-                        <!-- <tfoot>
-                            <tr>
-                                <th>Tên Tỉnh/Thành phố</th>
-                                <th>Tên Quận/Huyện</th>
-                                <th>Tên Phường/Xã</th>
-                                <th>Phí vận chuyển</th>
-                            </tr>
-                        </tfoot> -->
                     </table>
                 </div>
                 <!-- /.box-body -->

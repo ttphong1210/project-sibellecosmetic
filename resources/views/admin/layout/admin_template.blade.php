@@ -19,6 +19,8 @@
   <script type="text/javascript" src="{{asset('editor/ckeditor/ckeditor.js')}}"></script>
   <!-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
   <script>
      CKEDITOR.replace('description');
      CKEDITOR.replace('edit_description');
@@ -41,16 +43,33 @@
               alert('Thêm phí vận chuyển thành công');
             }
           })
-      })
+      });
+
+      $(document).on('blur','.feeship_edit', function(){
+
+        var feeship_id = $(this).data('feeship_id');
+        var fee_value = $(this).text();
+        var _token = $('input[name = "_token"]').val();
+        // console.log($(this).val();
+        // alert(feeship_id);
+        // alert(fee_value);
+
+        $.ajax({
+          url: "/admin/delivery/update-delivery",
+          method: "POST",
+          data:{feeship_id:feeship_id, fee_value:fee_value, _token:_token},
+          success:function(data){
+            alert('Sửa phí ship thành công');
+             window.location.reload();
+          }
+        });
+      });
       
         $('.choose').on('change',(function(){
           var action = $(this).attr('id');
           var ma_id = $(this).val();
           var _token = $('input[name = "_token"]').val();
           var result = '';
-          // alert(action);
-          // alert(matp);
-          // alert(_token);
 
           if(action == 'city'){
               result = 'district';

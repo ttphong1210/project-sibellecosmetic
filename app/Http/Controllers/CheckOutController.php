@@ -41,11 +41,6 @@ class CheckOutController extends Controller
         // return back();
         return back()->with('alert','Vui lòng nhập đầy đủ thông tin');
       }
-        // if ($validator->fails()) {
-        //     return redirect('/checkout')
-        //         ->withErrors($validator)
-        //         ->withInput();
-        // }
 
         try {
 

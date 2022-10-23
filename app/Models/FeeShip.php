@@ -8,7 +8,7 @@ class FeeShip extends Model
 {
     //
     protected $table = 'feeship';
-    protected $primaKey = 'fee_id' ;
+    protected $primaKey = 'fee_id';
     protected $fillable = [
         'fee_matp','fee_maqh','fee_xaid'
     ];
