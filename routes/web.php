@@ -51,6 +51,8 @@ Route::group(['prefix' => 'cart'], function () {
 Route::get('complete', 'CartController@getComplete');
 Route::get('checkout', 'CheckOutController@getCheckout');
 Route::post('checkout', 'CheckOutController@postCheckout');
+Route::post('charge-shipping','CheckOutController@charge_shipping');
+
 
 // Account Customer
 Route::group(['prefix' => 'account'], function () {

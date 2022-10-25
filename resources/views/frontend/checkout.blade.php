@@ -19,11 +19,11 @@
                         <div class="row">
                             <div class="col-md-12 form-group p_star">
                                 <span class="placeholder" data-placeholder="Họ và Tên"></span>
-                                <input type="text" required class="form-control" name="name"/>
+                                <input type="text" required class="form-control" name="name" />
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <span class="placeholder" data-placeholder="Số điện thoại"></span>
-                                <input type="text" required class="form-control" id="number" name="number_phone"/>
+                                <input type="text" required class="form-control" id="number" name="number_phone" />
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <span class="placeholder" data-placeholder=" Email"></span>
@@ -133,6 +133,32 @@
                     </div>
 
                     {{csrf_field()}}
+                </form>
+                <form role="form delivery_form" method="POST" action="{{asset('charge-shipping')}}" style="width: 66%;" enctype="multipart/form-data">
+                    @include('errors.note')
+                    <div class="box-body">
+                        <div class="form-group">
+                            <select required name="city" id="city" class="form-control choose city">
+                                <option value="0">-- Chọn tỉnh/thành phố --</option>
+                                @foreach($city as $key => $c)
+                                <option value="{{$c->matp}}">{{$c->name_city}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select required name="district" id="district" class="form-control choose district">
+                                <option value="">-- Chọn quận/huyện --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select required name="ward" id="ward" class="form-control ward">
+                                <option value="">-- Chọn phường/xã --</option>
+                            </select>
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" data-token="{{ csrf_token() }}" style="background-color: #71cd14 ; border:none;" name="delivery" class="btn btn-primary add_delivery">Tính phí vận chuyển</button>
+                        </div>
+                        {{csrf_field()}}
                 </form>
             </div>
 

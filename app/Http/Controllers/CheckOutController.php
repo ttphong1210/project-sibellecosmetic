@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetail;
@@ -9,11 +10,13 @@ use Carbon\Carbon;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Stmt\TryCatch;
-
+use App\Models\District;
+use App\Models\Wards;
 class CheckOutController extends Controller
 {
 
@@ -21,8 +24,35 @@ class CheckOutController extends Controller
     {
         $data['cart'] = Cart::content();
         $data['total'] = Cart::subtotal(0,',','.');
-        // dd($data);
+        $data['city'] = City::orderBy('matp','ASC')->get();
+        // $data['infoFeeship'] = DB::table('feeship')
+        //     ->join('tinhthanhpho', 'feeship.fee_matp', '=', 'tinhthanhpho.matp')
+        //     ->join('quanhuyen', 'feeship.fee_maqh', '=', 'quanhuyen.maqh')
+        //     ->join('xaphuongthitran', 'feeship.fee_xaid', '=', 'xaphuongthitran.xaid')
+        //     ->orderBy('fee_id', 'DESC')
+        //     ->get();
         return view('frontend.checkout', $data);
+    }
+
+    public function charge_shipping(Request $request){
+        $data = $request->all();
+        if ($data['action']) {
+            $output = '';
+            if ($data['action'] == "city") {
+                $select_district = District::where('matp', $data['ma_id'])->orderBy('maqh', 'ASC')->get();
+                $output = '<option> -- Chọn quận/huyện --</option>';
+                foreach ($select_district as $key => $district) {
+                    $output .= '<option value="' . $district->maqh . '">' . $district->name_district . '</option>';
+                }
+            } else {
+                $select_ward = Wards::where('maqh', $data['ma_id'])->orderBy('xaid', 'ASC')->get();
+                $output = '<option>-- Chọn phường/xã --</option>';
+                foreach ($select_ward as $key => $ward) {
+                    $output .= '<option value="' . $ward->xaid . '">' . $ward->name_ward . '</option>';
+                }
+            }
+        }
+        echo $output;
     }
 
     public function postCheckout(Request $request)

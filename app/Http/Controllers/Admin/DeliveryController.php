@@ -23,7 +23,7 @@ class DeliveryController extends Controller
             ->join('xaphuongthitran', 'feeship.fee_xaid', '=', 'xaphuongthitran.xaid')
             ->orderBy('fee_id', 'DESC')
             ->get();
-        // dd($data);
+        //dd($data);
         return view('admin.layout.delivery.delivery', $data);
     }
 

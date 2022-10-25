@@ -34,7 +34,32 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function(){
+    $('.choose').on('change', function(){
+      var action = $(this).attr('id');
+      var ma_id = $(this).val();
+      var _token = $('input[name = "_token"]').val();
+      var result = '';
+      // alert(action);
+      // alert(ma_id);
+      if(action == 'city'){
+        result = 'district'
+      }else{
+        result = 'ward'
+      }
+      $.ajax({
+        url: "/charge-shipping",
+        method: 'POST',
+        data:{action:action, ma_id:ma_id, _token:_token},
+        success:function(data){
+         $('#'+result).html(data);
+        }
 
+      })
+    })
+  })
+</script>
 </head>
 <body>
  <!--================Header Menu Area =================-->
