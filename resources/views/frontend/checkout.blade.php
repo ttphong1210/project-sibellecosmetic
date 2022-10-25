@@ -34,19 +34,6 @@
                                 <span class="placeholder" data-placeholder="Địa chỉ"></span>
                                 <input type="text" required class="form-control" id="address" name="address" />
                             </div>
-                            <!-- <div class="col-md-12 form-group p_star">
-                                <span class="placeholder" data-placeholder="Phường/Xã"></span>
-                                <input type="text" required class="form-control" id="add2" name="add2" />
-                            </div>
-                            <div class="col-md-12 form-group p_star">
-                                <span class="placeholder" data-placeholder="Quận/Huyện"></span>
-                                <input type="text" required class="form-control" id="add3" name="add3" />
-                            </div>
-                            <div class="col-md-12 form-group p_star">
-                                <span class="placeholder" data-placeholder="Tỉnh/Thành phố"></span>
-                                <input type="text" required class="form-control" id="city" name="city" />
-                            </div> -->
-
                             <div class="col-md-12 form-group">
                                 <div class="creat_account">
                                     <input type="checkbox" id="f-option2" name="selector" />
