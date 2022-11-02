@@ -73,22 +73,46 @@
                                 <li>
                                     <a class="summary-main table" style="margin: 0px;" href="#">
                                         <p class="col subtotal-title">Tạm tính:</p>
-                                        <span class="col text-right">{{$total}}đ</span>
+                                        <span class="col text-right">{{number_format($subtotal)}}đ</span>  
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
+                                
+                                @if(Session::has('feeship'))
+                                    <li>
+                                        <a href="#" id="fee-ship-checkout">
                                         <p class="col subtotal-title"> Phí ship:</p>
-                                        <span> </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="summary-main table" href="#">
-                                        <p class="col total-title">Tổng tiền:</p>
-
-                                        <span class="col text-right">{{$total}}vnđ</span>
-                                    </a>
-                                </li>
+                                        <i class="fa fa-close" style="padding:18px 10px;"></i>
+                                            <span>
+                                                {{number_format(Session::get('feeship'),0,',','.')}} đ
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="summary-main table" id="total-checkout" href="#">
+                                            <p class="col total-title">Tổng tiền:</p>
+                                            <?php  $total = $subtotal + session()->get('feeship') ?>
+                                            <span class="col text-right"> <?php echo number_format($total,0,',','.')?> đ </span>
+                                        </a>
+                                    </li>
+                                    @else
+                                     <?php $fee = 25000 ?>
+                                    <li>
+                                        <a href="#" id="fee-ship-checkout">
+                                            <p class="col subtotal-title"> Phí ship:</p>
+                                            <span>
+                                                {{number_format($fee,0,',','.')}}đ
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="summary-main table" id="total-checkout" href="#">
+                                            <p class="col total-title">Tổng tiền:</p>
+                                            <?php $total = $subtotal + $fee ?>
+                                            <span class="col text-right"> <?php echo number_format($total)?>đ </span>
+                                        </a>
+                                    </li>
+                                    
+                                @endif
                             </ul>
                             <!-- <div class="list-2">
                             <div class="summary-main table">
@@ -134,7 +158,7 @@
 
                     {{csrf_field()}}
                 </form>
-                <form role="form delivery_form" method="POST" action="{{asset('charge-shipping')}}" style="width: 66%;" enctype="multipart/form-data">
+                <form role="form delivery_form" method="POST" action="" style="width: 66%;" enctype="multipart/form-data">
                     @include('errors.note')
                     <div class="box-body">
                         <div class="form-group">
@@ -156,7 +180,7 @@
                             </select>
                         </div>
                         <div class="box-footer">
-                            <button type="button" data-token="{{ csrf_token() }}" style="background-color: #71cd14 ; border:none;" name="delivery" class="btn btn-primary add_delivery">Tính phí vận chuyển</button>
+                            <button type="button" data-token="{{ csrf_token() }}" style="background-color:#71cd14 ;" name="charge-shipping" class="btn btn-primary charge-shipping">Tính phí vận chuyển</button>
                         </div>
                         {{csrf_field()}}
                 </form>

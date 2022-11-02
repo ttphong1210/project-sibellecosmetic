@@ -24,8 +24,8 @@
   <script>
      CKEDITOR.replace('description');
      CKEDITOR.replace('edit_description');
-  
   </script>
+  
   <script>
     $(document).ready(function(){
       $('.add_delivery').click(function(){
@@ -41,6 +41,7 @@
             data:{city:city, district:district,_token:_token, ward:ward, feeship:feeship},
             success:function(data){
               alert('Thêm phí vận chuyển thành công');
+              location.reload();
             }
           })
       });
@@ -50,9 +51,6 @@
         var feeship_id = $(this).data('feeship_id');
         var fee_value = $(this).text();
         var _token = $('input[name = "_token"]').val();
-        // console.log($(this).val();
-        // alert(feeship_id);
-        // alert(fee_value);
 
         $.ajax({
           url: "/admin/delivery/update-delivery",
@@ -60,7 +58,7 @@
           data:{feeship_id:feeship_id, fee_value:fee_value, _token:_token},
           success:function(data){
             alert('Sửa phí ship thành công');
-             window.location.reload();
+             location.reload();
           }
         });
       });

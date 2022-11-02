@@ -63,7 +63,8 @@ class DeliveryController extends Controller
         # code...
         $fee_ship = FeeShip::where('fee_id', '=', $request['feeship_id'])
         ->update([
-            'fee_feeship' => rtrim($request['fee_value'],'.')
+            'fee_feeship' => $request['fee_value']
         ]);
     }
 }
+// rtrim($request['fee_value'],'.')

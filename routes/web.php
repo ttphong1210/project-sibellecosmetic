@@ -10,22 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/test', function(){
-//     return view('admin.layout.test');
-// });
-// Route::get('/app', function(){
-//     return view('layouts.app');
-// });
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
 
-// use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('email', function(){
-//     return view('frontend.email');
-// });
 Route::get('contact', function () {
     return view('frontend.contact');
 })->name('contact');
@@ -51,7 +38,9 @@ Route::group(['prefix' => 'cart'], function () {
 Route::get('complete', 'CartController@getComplete');
 Route::get('checkout', 'CheckOutController@getCheckout');
 Route::post('checkout', 'CheckOutController@postCheckout');
+Route::post('select-shipping-infomation','CheckOutController@select_shipping_infomation');
 Route::post('charge-shipping','CheckOutController@charge_shipping');
+Route::get('delete-feeship','CheckOutController@delete_feeship');
 
 
 // Account Customer
