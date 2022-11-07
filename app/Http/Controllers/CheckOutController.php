@@ -18,6 +18,7 @@ use PhpParser\Node\Stmt\TryCatch;
 use App\Models\District;
 use App\Models\FeeShip;
 use App\Models\Wards;
+use Gloudemans\Shoppingcart\Cart as ShoppingcartCart;
 use Illuminate\Support\Facades\Session;
 // use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -27,7 +28,6 @@ class CheckOutController extends Controller
     public function getCheckout()
     {
         $data['cart'] = Cart::content();
-        $data['subtotal'] = (int)Cart::subtotal(0,',','.')*1000;
         $data['city'] = City::orderBy('matp', 'ASC')->get();
 
         return view('frontend.checkout', $data);
@@ -148,5 +148,6 @@ class CheckOutController extends Controller
     }
     public function delete_feeship(){
         Session::forget('feeship');
+        return back();
     }
 }

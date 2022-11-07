@@ -54,11 +54,7 @@
                         <div class="order_box">
                             <h2>Thông tin đơn hàng</h2>
                             <ul class="list">
-                                <!-- <li>
-                                    <a href="#">Product
-                                        <span>Total</span>
-                                    </a>
-                                </li> -->
+                            <?php $totalProduct =  0 ?>
                                 @foreach($cart as $item)
                                 <li>
                                     <a href="#">
@@ -67,38 +63,40 @@
                                         <span style="width: 20%;" class="last">{{number_format($item->price*$item->qty,0,',','.')}}đ</span>
                                     </a>
                                 </li>
+                                <?php $totalProduct +=$item->price*$item->qty?>
                                 @endforeach
                             </ul>
                             <ul class="list list_2">
                                 <li>
                                     <a class="summary-main table" style="margin: 0px;" href="#">
                                         <p class="col subtotal-title">Tạm tính:</p>
-                                        <span class="col text-right">{{number_format($subtotal)}}đ</span>  
+                                        <span class="col text-right"><?php echo number_format( $totalProduct,0,',','.')?>đ</span> 
                                     </a>
                                 </li>
                                 
                                 @if(Session::has('feeship'))
                                     <li>
-                                        <a href="#" id="fee-ship-checkout">
+                                        <a href="{{asset('delete-feeship')}}" id="fee-ship-checkout">
                                         <p class="col subtotal-title"> Phí ship:</p>
                                         <i class="fa fa-close" style="padding:18px 10px;"></i>
                                             <span>
-                                                {{number_format(Session::get('feeship'),0,',','.')}} đ
+                                                {{number_format(Session::get('feeship'),0,',','.')}}đ
                                             </span>
                                         </a>
                                     </li>
                                     <li>
                                         <a class="summary-main table" id="total-checkout" href="#">
                                             <p class="col total-title">Tổng tiền:</p>
-                                            <?php  $total = $subtotal + session()->get('feeship') ?>
-                                            <span class="col text-right"> <?php echo number_format($total,0,',','.')?> đ </span>
+                                            <?php  $total_after_feeship = $totalProduct + session()->get('feeship') ?>
+                                            <span class="col text-right"> <?php echo number_format($total_after_feeship,0,',','.')?>đ </span>
                                         </a>
                                     </li>
                                     @else
                                      <?php $fee = 25000 ?>
                                     <li>
                                         <a href="#" id="fee-ship-checkout">
-                                            <p class="col subtotal-title"> Phí ship:</p>
+                                            <p class="col subtotal-title"> Phí ship: <small>Toàn quốc</small></p>
+                                           
                                             <span>
                                                 {{number_format($fee,0,',','.')}}đ
                                             </span>
@@ -107,8 +105,8 @@
                                     <li>
                                         <a class="summary-main table" id="total-checkout" href="#">
                                             <p class="col total-title">Tổng tiền:</p>
-                                            <?php $total = $subtotal + $fee ?>
-                                            <span class="col text-right"> <?php echo number_format($total)?>đ </span>
+                                            <?php $total_after_feeship = $totalProduct + $fee?>
+                                            <span class="col text-right"> <?php echo number_format($total_after_feeship,0,',','.')?>đ </span>
                                         </a>
                                     </li>
                                     
