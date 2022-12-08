@@ -67,14 +67,7 @@ class CheckOutController extends Controller
                     Session::put('feeship', $fee->fee_feeship);
                     Session::save();
                 }
-            
-        //    $output.=' <p class="col subtotal-title"> Phí ship:</p>';
-        //   foreach($feeship as $key => $fee){
-        //     $output.='<span>'.number_format($fee->fee_feeship,0,',','.').' đ</span>';
           }
-          
-        //}
-        // echo $output;
     }
     public function postCheckout(Request $request)
     {
@@ -88,8 +81,7 @@ class CheckOutController extends Controller
             'number_phone' => 'required|numeric|min:10'
         ]);
         if ($validator->fails()) {
-            // session()->flash('errors','Vui lòng nhập đầy đủ thông tin');
-            // return back();
+
             return back()->with('alert', 'Vui lòng nhập đầy đủ thông tin');
         }
 

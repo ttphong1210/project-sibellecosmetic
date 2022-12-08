@@ -97,11 +97,12 @@
                             <ul class="nav navbar-nav navbar-right right_nav pull-right">
                                 <li class="nav-item">
                                     <form action="{{asset('search/')}}" method="get" class="icons">
-                                        <input type="text" placeholder="Tìm kiếm.." id="input-search" name="result">
-                                        <button type="submit"> <i id="icon-search" class="ti-search" aria-hidden="true"></i></button>
+                                        <div class="form-search">
+                                            <input type="text" placeholder="Tìm kiếm.." id="input-search" name="result" style="border:none; outline:none;">
+                                            <button type="submit" style="outline: none;"> <i id="icon-search" class="ti-search" aria-hidden="true"></i></button>
+                                        </div>
                                     </form>
                                 </li>
-
                                 <li class="nav-item submenu dropdown ">
                                     <a href="{{asset('cart/show')}}" class="icons" style="padding-right:10px;">
                                         <i class="ti-shopping-cart"></i>
@@ -118,7 +119,7 @@
                                                     @foreach(Cart::content() as $item)
                                                     <tr class="items-minicart">
                                                         <td style="width: 30%;">
-                                                            <img width="100%" src="{{asset('storage/avatar/'.$item->options->img)}}" >
+                                                            <img width="100%" src="{{asset('storage/avatar/'.$item->options->img)}}">
                                                         </td>
                                                         <td class="name-cart minicart">{{$item->name}}</td>
                                                         <td class="qty-cart minicart">{{$item->qty}}x</td>
@@ -180,7 +181,7 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="#" class="icons">
+                                    <a href="{{asset('favorite')}}" class="icons">
                                         <i class="ti-heart" aria-hidden="true"></i>
                                     </a>
                                 </li>

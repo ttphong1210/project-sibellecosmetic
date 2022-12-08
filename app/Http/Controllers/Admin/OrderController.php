@@ -57,8 +57,5 @@ class OrderController extends Controller
         Order::destroy($id);
         return back();
     }
-    // public function getDeleteCustomer($id){
-    //     Customer::destroy($id);
-    //     return redirect()->back()->with('message','Successfully delete customer!');
-    // }
+
 }

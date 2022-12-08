@@ -5,8 +5,23 @@
 
 <div class="container body">
     <div class="product-detail row">
-        <div class="col-xs-4 col-md-6 item-photo product-detail-image">
-            <img style="max-width:100%; height:80%" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+        <div class="col-xs-4 col-md-6 product-detail-image">
+            <div class="row">
+            <div class="col-md-4">
+                <div id="divId" onclick="changeImageOnClick(event)">
+                    <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+                    <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+                    <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+
+                    <!-- <img class="imgStyle" src="https://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-300mmf_35-56g_ed_vr/img/sample/img_02.jpg" /> -->
+                    <!-- <img class="imgStyle" src="https://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-300mmf_35-56g_ed_vr/img/sample/img_03.jpg" /> -->
+                </div>
+            </div>
+            <div class="col-md-8">
+                <img id="mainImage" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+            </div>
+            </div>
+
         </div>
         <div class="col-xs-5 col-md-6 product-detail-info" style="border:0px solid gray">
             <div class="product-detail-title">
@@ -14,7 +29,7 @@
                     <h1>{{$item->prod_name}}</h1>
                     <div class="product-useful">
 
-                        <h5><small>Sản phẩm thuộc công dụng: <a style="color:black" href="#">{{$cateName[0]->cate_name}}</a></small></h5>
+                        <h5><small>Sản phẩm thuộc công dụng: <a style="color:black" href="{{asset('category/'.$cateName[0]->cate_id.'/'.$cateName[0]->cate_slug.'.html')}}">{{$cateName[0]->cate_name}}</a></small></h5>
                     </div>
                 </div>
                 <div class="product-detail-sale-price">
@@ -34,10 +49,10 @@
                 <div class="product-detail-option">
                     <div class="qty-section">
                         <div class="row">
-                            <div class="qty-section-title col-md-2">
+                            <div class="qty-section-title col-md-4">
                                 Số lượng:
                             </div>
-                            <div class="col-md-10">
+                            <div class="col-md-8">
                                 <div id="order-qty" class="enumber-control">
                                     <input aria-label="Số lượng" value="1" min="1" max="100" maxlength="2" name="quantity" class="qty" type="number" style="text-align:center;">
                                 </div>
@@ -52,10 +67,28 @@
                     </small></h6>
             </div>
 
-            <div class="section" style="padding-bottom:20px;">
-                <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><a href="{{asset('cart/add/'.$item->prod_id)}}" style="color:black;"> Thêm vào giỏ hàng</a></button>
-                <h6><a href="#"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span> Agregar a
-                        lista de deseos</a></h6>
+            <div class="section" style="padding:20px 0;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-action btn-add-to-cart"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><a class="icon-ti-cart ti-cart" href="{{asset('cart/add/'.$item->prod_id)}}"> Thêm vào giỏ hàng <i class="ti-shopping-cart-full"></i></a></button>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <form action="{{asset('add-product-favorite')}}" method="POST">
+                            {{csrf_field()}}
+                            <input type="hidden" value="{{$item->prod_id}}" class="product_favorite_id_{{$item->prod_id}}">
+                            <input type="hidden" value="{{$item->prod_name}}" class="product_favorite_name_{{$item->prod_id}}">
+                            <input type="hidden" value="{{$item->prod_img}}" class="product_favorite_image_{{$item->prod_id}}">
+                            <input type="hidden" value="{{$item->prod_price}}" class="product_favorite_price_{{$item->prod_id}}">
+                            <button class="btn btn-action btn-add-to-wishlist"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span><a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
+                            Thêm vào yêu thích <i class="ti-heart"></i>
+                                </a></button>
+                        </form> -->
+                        <button class="btn btn-action btn-add-to-wishlist"><span class="glyphicon glyphicon-heart-empty" style="cursor:pointer;"></span><a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
+                                Thêm vào yêu thích <i class="ti-heart"></i>
+                            </a></button>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -89,9 +122,9 @@
         </div>
     </div>
     <div class="product-different">
-    <div class="title">
-                <h3>Sản phẩm khác</h3>
-            </div>
+        <div class="title">
+            <h3>Sản phẩm khác</h3>
+        </div>
         <div class="lunchbox">
             <div class="row swiper" id="swiper1">
                 <div class="swiper-wrapper">
@@ -133,4 +166,27 @@
         </div>
     </div>
 </div>
+<script>
+    var images = document.getElementsByTagName("img");
+    // debugger;
+    for (var i = 0; i < images.length; i++) {
+        images[i].onmouseover = function() {
+            this.style.cursor = "hand";
+            this.style.borderColor = "grey";
+        };
+        images[i].onmouseout = function() {
+            this.style.cursor = "pointer";
+            this.style.borderColor = "white";
+        };
+    }
+
+    function changeImageOnClick(event) {
+        // debugger;
+        var targetElement = event.srcElement;
+        // debugger;
+        if (targetElement.tagName === "IMG") {
+            mainImage.src = targetElement.getAttribute("src");
+        }
+    }
+</script>
 @endsection

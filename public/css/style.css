@@ -143,6 +143,7 @@ ul {
     font-size: 14px;
     border-radius: 15px;
     padding: 10px;
+    outline: none;
 }
 
 .header_area .navbar .icons {
@@ -161,6 +162,7 @@ ul {
 .header_area .navbar .icons button{
     background-color: white;
     border: none;
+    border-radius: 10px;
 }
 
 @media (max-width: 992px) {
@@ -195,6 +197,11 @@ ul {
     box-shadow: none;
     margin: 0px;
     background: #fff;
+}
+.header_area .navbar .nav .nav-item .form-search{
+    border: 1px solid;
+    width: 100%;
+    border-radius: 15px;
 }
 @media (min-width: 992px) {
     .header_area .navbar .nav .nav-item.submenu ul {
@@ -5024,3 +5031,34 @@ body {
 .inspired_share_area{
     background-color: #fafafa;
 }
+
+/* CSS FAVORITE BLADE */
+.item-favorite{
+    border-left: 1px solid #eee;
+    font-size: .875rem;
+}
+.favorite{
+    border-bottom: 1px solid #eee;
+}
+.item-favorite .product-favorite{
+    padding: 15px;
+    text-align: -webkit-left;
+}
+.item-favorite .product-favorite .product-favorite-name{
+    margin-bottom: 10px;
+}
+.item-favorite .btn-buy .btn-buy-product{
+    background-color: #71cd14;
+    border: none;
+    border-radius: 15px;
+    color: white;
+    width: 100%;
+    height: 40%;
+}
+.btn-buy-product:hover{
+    background-color: white;
+    border-color: #71cd14;
+    color: #71cd14;
+}
+
+    

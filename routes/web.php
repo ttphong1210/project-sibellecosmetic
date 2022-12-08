@@ -25,11 +25,12 @@ Route::get('detail/{id}/{slug}.html', 'FrontEndController@getDetail');
 Route::get('category/{id}/{slug}.html', 'FrontEndController@getCategory');
 Route::get('brand/{id}/{slug}.html', 'FrontEndController@getBrand');
 Route::get('search', 'FrontEndController@getSearch');
+Route::get('favorite','FrontEndController@getFavorite');
+Route::post('add-product-favorite','FrontEndController@add_product_favorite');
 
 // Route Cart
 Route::group(['prefix' => 'cart'], function () {
     Route::get('add/{id}', 'CartController@getAddCart');
-
     Route::get('show', 'CartController@getShowCart');
     Route::get('delete/{id}', 'CartController@getDeleteCart');
     Route::get('update', 'CartController@getUpdateCart');

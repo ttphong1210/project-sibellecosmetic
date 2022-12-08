@@ -14,17 +14,7 @@
         )    
     }
 </script>
-<!-- <script>
-    (function(){
-        const classname = document.querySelectorAll('input','.cart-quantity')
 
-        Array.from(classname).forEach(function(element){
-            element.addEventListener('change', function(){
-                alert('change');
-            })
-        })
-    })
-</script> -->
 @if(Cart::count() >0)
 
     <div class="container px-4 py-5 mx-auto">

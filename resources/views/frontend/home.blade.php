@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('title','Trang chủ')
 @section('content')
-<script>
+<!-- <script>
   $(document).ready(function() {
     $(".p_icon i").click(function() {
       $(this).toggleClass("ti-heart");
     });
   });
-</script>
+</script> -->
 <div>
   <!--================Home Banner Area =================-->
   <section class="home_banner_area mb-40">
@@ -111,29 +111,37 @@
             @foreach($featured as $item)
             <div class="col-md-3 swiper-slide">
               <div class="single-product">
-                <div class="product-img">
-                  <img class="img-fluid" style="width:255px; height:258.44px" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
-                  <div class="p_icon">
-                    <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
-                      <i class="ti-eye"></i>
-                    </a>
-                    <a href="#">
-                      <i class="ti-heart"></i>
-                    </a>
-                    <a href="{{asset('cart/add/'.$item->prod_id)}}">
-                      <i class="ti-shopping-cart"></i>
-                    </a>
+                <form enctype="multipart/form-data">
+                  {{csrf_field()}}
+                  <input type="hidden" value="{{$item->prod_id}}" class="product_favorite_id_{{$item->prod_id}}">
+                  <input type="hidden" value="{{$item->prod_name}}" class="product_favorite_name_{{$item->prod_id}}">
+                  <input type="hidden" value="{{$item->prod_img}}" class="product_favorite_image_{{$item->prod_id}}">
+                  <input type="hidden" value="{{$item->prod_price}}" class="product_favorite_price_{{$item->prod_id}}">
+                  <div class="product-img">
+                    <img class="img-fluid" style="width:255px; height:258.44px" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
+                    <div class="p_icon">
+                      <a  href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
+                        <i class="ti-eye"></i>
+                      </a>
+                      <a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
+                        <i class="ti-heart"></i>
+                      </a>
+                      <a  href="{{asset('cart/add/'.$item->prod_id)}}">
+                        <i class="ti-shopping-cart"></i>
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div class="product-btm">
-                  <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
-                    <h4>{{$item->prod_name}}</h4>
-                  </a>
-                  <div class="mt-3">
-                    <span class="mr-4">{{number_format($item->prod_price,0,',','.')}}VND</span>
-                    <del><small> {{number_format($item->prod_promotion,0,',','.')}}VND</small></del>
+                  <div class="product-btm">
+                    <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
+                      <h4>{{$item->prod_name}}</h4>
+                    </a>
+                    <div class="mt-3">
+                      <span class="mr-4">{{number_format($item->prod_price,0,',','.')}}VND</span>
+                      <del><small> {{number_format($item->prod_promotion,0,',','.')}}VND</small></del>
+                    </div>
                   </div>
-                </div>
+                  <!-- <div class="message"> </div> -->
+                </form>
               </div>
             </div>
             @endforeach
@@ -182,8 +190,8 @@
                     <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
                       <i class="ti-eye"></i>
                     </a>
-                    <a href="#">
-                      <i class="ti-heart"></i>
+                    <a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
+                      <i class=" ti-heart"></i>
                     </a>
                     <a href="{{asset('cart/add/'.$item->prod_id)}}">
                       <i class="ti-shopping-cart"></i>
@@ -230,8 +238,8 @@
                 <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
                   <i class="ti-eye"></i>
                 </a>
-                <a href="#">
-                  <i class="ti-heart"></i>
+                <a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
+                  <i class=" ti-heart"></i>
                 </a>
                 <a href="{{asset('cart/add/'.$item->prod_id)}}">
                   <i class="ti-shopping-cart"></i>
@@ -264,38 +272,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="row">
-        @foreach($suggested as $item)
-        <div class="col-lg-3 col-md-6">
-          <div class="single-product">
-            <div class="product-img">
-              <img class="img-fluid w-100" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
-              <div class="p_icon">
-                <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
-                  <i class="ti-eye"></i>
-                </a>
-                <a href="#">
-                  <i class="ti-heart"></i>
-                </a>
-                <a href="{{asset('cart/add/'.$item->prod_id)}}">
-                  <i class="ti-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-            <div class="product-btm">
-              <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
-                <h4>{{$item->prod_name}}</h4>
-              </a>
-              <div class="mt-3">
-                <span class="mr-4">{{number_format($item->prod_price,0,',','.')}}VND</span>
-                <del><small> {{number_format($item->prod_promotion,0,',','.')}}VND</small></del>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        @endforeach
-      </div> -->
   </section>
   <!--================ End Knowledge $ Share Area =================-->
 

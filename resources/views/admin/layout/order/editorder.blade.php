@@ -75,7 +75,7 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <td colspan="3"><b>Tổng tiền</b></td>
+                                <td colspan="3"><b>Tổng tiền:</b> <small>(Bao gồm phí ship)</small></td>
                                 <td></td>
                                 <td colspan="1"><b class="text-red">{{number_format($customerInfo->total,0,',','.')}} VNĐ</b></td>
                             </tr>

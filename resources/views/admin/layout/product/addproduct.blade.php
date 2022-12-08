@@ -24,6 +24,12 @@
 						<input required id="exampleInputFile" type="file" name="img" accept="image/*">
 					   <img src="" alt="">
 					</div>
+                    <div class="form-group" >
+						<label>Ảnh chi tiết sản phẩm</label>
+						<input id="exampleInputFileGallery" type="file" name="image-gallery" multiple accept="image/*">
+					   <img src="" alt="">
+                       <div class="preview"> </div>
+					</div>
                     <div class="form-group">
                         <label> Trạng thái </label>
                         <select required name="status" class="form-control">
