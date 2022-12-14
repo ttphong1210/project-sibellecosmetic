@@ -14,6 +14,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\VarDumper\Cloner\Data;
 
+use function Psy\debug;
+
 class FrontEndController extends Controller
 {
     public function getHome()
@@ -119,43 +121,38 @@ class FrontEndController extends Controller
     public function add_product_favorite(Request $request)
     {
         $data = $request->all();
-        $session_id = substr(md5(microtime()), rand(0, 26), 5);
-        $product_favorite = Session::get('favorite');
-        if ($product_favorite == true) {
-            $is_avaiable = 0;
-            $key = array_keys(session()->get('favorite'));
-            $value = array_values(session()->get('favorite'));
-            $validate = true;
-            foreach ($product_favorite as $key => $val) {
-                if ($val['product_id'] == $data['product_favorite_id']) {
-                    unset($product_favorite[$key]);
-                }              
+        $product_id = $data['product_favorite_id'];
+        // $session_id = substr(md5(microtime()), rand(0, 26), 5);
+        $product_favorite = @Session::get('favorite');
+        
+        if (isset($product_favorite)) {
+            if (empty($product_favorite[$product_id])) {
+                $product_favorite[$product_id] = array(
+                    'product_id' => $data['product_favorite_id'],
+                    'product_name' => $data['product_favorite_name'],
+                    'product_image' => $data['product_favorite_image'],
+                    'product_price' => $data['product_favorite_price'],
+                );
+                Session::put('favorite', $product_favorite);
+                 return response()->json(['action' => 'add', 'message' => 'Thêm sản phẩm vào yêu thích !']);
+            } else {
+                unset($product_favorite[$product_id]);
+                Session::put('favorite', $product_favorite);
+                 return response()->json(['action' => 'remove', 'message' => 'Xoá sản phẩm khỏi yêu thích !']);
             }
-
-            if($is_avaiable == 0){
-                $product_favorite[] = array(
-                        'session_id' => $session_id,
-                        'product_id' => $data['product_favorite_id'],
-                        'product_name' => $data['product_favorite_name'],
-                        'product_image' => $data['product_favorite_image'],
-                        'product_price' => $data['product_favorite_price'],
-                    );             
-            }
-            Session::put('favorite', $product_favorite);   
-            return response()->json(['action' => 'update', 'message' => 'Cập nhật sản phẩm yêu thích !']);
-
-
-        } else {
-            $product_favorite[] = array(
-                'session_id' => $session_id,
+            Session::save();
+            die();
+        }
+        else{
+            $product_favorite[$product_id] = array(
                 'product_id' => $data['product_favorite_id'],
                 'product_name' => $data['product_favorite_name'],
                 'product_image' => $data['product_favorite_image'],
                 'product_price' => $data['product_favorite_price'],
             );
             Session::put('favorite', $product_favorite);
-            return response()->json(['action' => 'add', 'message' => 'Thêm sản  phẩm yêu thích']);
-        }
-        Session::save();
+            return response()->json(['action' => 'add', 'message' => 'Thêm sản phẩm vào yêu thích !']);
+            Session::save();
+        }      
     }
 }

@@ -162,7 +162,7 @@
   <script>
     $(document).ready(function() {
       $('.icon-ti-heart').on('click', function() {
-        debugger;
+        // debugger;
         var id = $(this).attr('data-id');
         var product_favorite_id = $('.product_favorite_id_' + id).val();
         var product_favorite_name = $('.product_favorite_name_' + id).val();
@@ -185,9 +185,9 @@
             if (response.action == 'add') {
               $('a[data-id = ' + product_favorite_id + ']').html('<i class="fa fa-heart" style="font-size:20px;color:red"></i>');
               alert(response.message);
-            }else if(response.action == 'update'){
-              $('a[data-id = ' + product_favorite_id + ']').html('<i class="fa fa-heart" style="font-size:20px;color:red"></i>');
-              alert(response.message);
+            // }else if(response.action == 'update'){
+            //   // $('a[data-id = ' + product_favorite_id + ']').html('<i class="fa fa-heart" style="font-size:20px;color:red"></i>');
+            //   alert(response.message);
             } else if(response.action == 'exist'){
               $('a[data-id = ' + product_favorite_id + ']').html('<i class="fa fa-heart" style="font-size:20px;color:red"></i>');
               alert(response.message);

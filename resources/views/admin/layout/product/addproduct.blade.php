@@ -21,14 +21,16 @@
                     </div>
                     <div class="form-group" >
 						<label>Ảnh sản phẩm</label>
-						<input required id="exampleInputFile" type="file" name="img" accept="image/*">
-					   <img src="" alt="">
+						<input required id="exampleInputFile" type="file" name="img" accept="image/*" onchange="fileUpload(event)">
+					    <img id="previewImage" src="" alt="" width="150px" style="margin-top:10px ;">
 					</div>
                     <div class="form-group" >
 						<label>Ảnh chi tiết sản phẩm</label>
-						<input id="exampleInputFileGallery" type="file" name="image-gallery" multiple accept="image/*">
+						<input id="exampleInputFileGallery" type="file" name="image-gallery" multiple accept="image/*" onchange="loadFileGallery(event)">
 					   <img src="" alt="">
-                       <div class="preview"> </div>
+                       <div id="preview">
+                            <!-- <img id="fileImageGallery" src="" alt="" width="150px"> -->
+                       </div>
 					</div>
                     <div class="form-group">
                         <label> Trạng thái </label>
@@ -92,4 +94,24 @@
             </div>
     </section>
      <!-- /.content -->
+    //  <script>
+    //     var loadFile = function(event) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(){
+    //         var output = document.getElementById('previewImage');
+    //         output.src = reader.result;
+    //         };
+    //         reader.readAsDataURL(event.target.files[0]);
+    //     };
+    //     </script>
+    //  <script>
+    //     var loadFileGallery = function(event) {
+    //         var reader = new FileReader();
+    //         reader.onload = function(){
+    //         var output = document.getElementById('fileImageGallery');
+    //         output.src = reader.result;
+    //         };
+    //         reader.readAsDataURL(event.target.files[0]);
+    //     };
+    //     </script>
 @endsection

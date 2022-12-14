@@ -85,6 +85,36 @@
       }));
     })
   </script>
+  <script type="text/javascript">
+      function fileUpload(event){
+       // var fileUploads = event.target.fileUploads;
+        var reader = new FileReader();
+        reader.onload = function(){
+          var outputPreview = document.getElementById('previewImage');
+          outputPreview.src = reader.result;
+          
+          // output.src = reader.result;
+        }
+        reader.readAsDataURL(event.target.files[0]);
+      }
+  </script>
+  <script type="text/javascript">
+
+      function loadFileGallery(event){
+        var input = document.getElementById('exampleInputFileGallery');
+        // console.log(input);
+        // debugger;
+        var inputLe = input.files.length;
+        // console.log(inputLe);
+          for(i = 0; i<= inputLe; i++){
+          var urls = URL.createObjectURL(input.files[i]);
+          document.getElementById('preview').innerHTML += '<img src="'+urls+'"style="width: 150px; margin:0px 5px;">';
+        }
+        
+        
+      }
+    // }
+  </script>
   <!-- Google Font -->
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">

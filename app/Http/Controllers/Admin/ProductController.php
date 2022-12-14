@@ -34,6 +34,8 @@ class ProductController extends Controller
     public function postAddProduct(AddProductRequest $request){
         $filename = $request->file('img')->getClientOriginalName();
         $destination_path = 'public/avatar';
+        $fileupload = $request->file('img')->getClientOriginalName();
+        $multiple_path = 'public/gallery';
        
         $product = new Product;
         $product->prod_name = $request->name;

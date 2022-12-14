@@ -12,7 +12,7 @@
         </div>
 
         <div class="my-auto col-10 item-favorite" style="padding: 0 40px;">
-  
+        
             @if(session()->get('favorite') == true)
                 @foreach(Session::get('favorite') as $key => $item)
                 <div class="row text-right favorite">
