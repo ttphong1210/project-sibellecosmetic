@@ -162,18 +162,18 @@
                                     @if(Auth::check())
                                     <ul class="dropdown-menu-user">
                                         <li class="nav-link">
-                                            <a href="#" style="color: black;">{{Auth::user()->name}}</a>
+                                            <a href="#" style="color: black;"> Chào {{Auth::user()->name}}</a>
                                         </li>
                                         <li class="nav-link">
                                             <a href="{{asset('account/logout_customer')}}" style="color: black;">Logout</a>
                                         </li>
                                     </ul>
                                     @else
-                                    <ul class="dropdown-menu-user">
-                                        <li class="nav-link">
+                                    <ul class="dropdown-menu-user d-flex row">
+                                        <li class="col-md-6 nav-link">
                                             <a href="{{asset('account/login_customer')}}" style="color: black;">Đăng nhập</a>
                                         </li>
-                                        <li class="nav-link">
+                                        <li class="col-md-6 nav-link">
                                             <a href="{{asset('account/register')}}" style="color: black;">Đăng ký</a>
                                         </li>
                                     </ul>

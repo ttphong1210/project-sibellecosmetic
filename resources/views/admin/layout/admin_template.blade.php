@@ -110,10 +110,7 @@
           var urls = URL.createObjectURL(input.files[i]);
           document.getElementById('preview').innerHTML += '<img src="'+urls+'"style="width: 150px; margin:0px 5px;">';
         }
-        
-        
       }
-    // }
   </script>
   <!-- Google Font -->
   <link rel="stylesheet"
@@ -382,6 +379,16 @@
             <li><a href="{{asset('admin/delivery')}}">Thông tin phí vận chuyển</a></li>
           </ul>
         </li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Hình ảnh bìa</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{asset('admin/slider')}}">Tất cả hình ảnh</a></li>
+          </ul>
+        </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
@@ -401,7 +408,6 @@
   @yield('content')
 
   </div>
-  <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
   <footer class="main-footer">

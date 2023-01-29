@@ -185,18 +185,11 @@
             if (response.action == 'add') {
               $('a[data-id = ' + product_favorite_id + ']').html('<i class="fa fa-heart" style="font-size:20px;color:red"></i>');
               alert(response.message);
-            // }else if(response.action == 'update'){
-            //   // $('a[data-id = ' + product_favorite_id + ']').html('<i class="fa fa-heart" style="font-size:20px;color:red"></i>');
-            //   alert(response.message);
-            } else if(response.action == 'exist'){
-              $('a[data-id = ' + product_favorite_id + ']').html('<i class="fa fa-heart" style="font-size:20px;color:red"></i>');
-              alert(response.message);
             } else if (response.action == 'remove') {
               $('a[data-id = ' + product_favorite_id + ']').html('<i class="ti-heart"></i>');
               alert(response.message);
             }
           }
-
         })
       })
     })

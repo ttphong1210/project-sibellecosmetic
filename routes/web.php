@@ -117,5 +117,8 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::post('add-delivery', 'DeliveryController@postAddDelivery');
             Route::post('update-delivery', 'DeliveryController@postEditDelivery');
         });
+        Route::group(['prefix' => 'slider'], function () {
+            Route::get('/', 'SliderController@getSlider');
+        });
     });
 });

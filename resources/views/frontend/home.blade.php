@@ -190,8 +190,6 @@
                   <input type="hidden" value="{{$item->prod_name}}" class="product_favorite_name_{{$item->prod_id}}">
                   <input type="hidden" value="{{$item->prod_img}}" class="product_favorite_image_{{$item->prod_id}}">
                   <input type="hidden" value="{{$item->prod_price}}" class="product_favorite_price_{{$item->prod_id}}">
-
-                
                 <div class="product-img">
                   <img class="img-fluid w-100" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
                   <div class="p_icon">

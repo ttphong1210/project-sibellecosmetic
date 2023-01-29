@@ -6,8 +6,6 @@
                 <div class="box-header with-border">
                 <h3 class="box-title"></h3>
                 </div>
-                <!-- /.box-header -->
-                <!-- form start -->
                 <form role="form" method="post" action="#" enctype="multipart/form-data">
                     @include('errors.note')
                 <div class="box-body">
@@ -93,25 +91,4 @@
                 </form>
             </div>
     </section>
-     <!-- /.content -->
-    //  <script>
-    //     var loadFile = function(event) {
-    //         var reader = new FileReader();
-    //         reader.onload = function(){
-    //         var output = document.getElementById('previewImage');
-    //         output.src = reader.result;
-    //         };
-    //         reader.readAsDataURL(event.target.files[0]);
-    //     };
-    //     </script>
-    //  <script>
-    //     var loadFileGallery = function(event) {
-    //         var reader = new FileReader();
-    //         reader.onload = function(){
-    //         var output = document.getElementById('fileImageGallery');
-    //         output.src = reader.result;
-    //         };
-    //         reader.readAsDataURL(event.target.files[0]);
-    //     };
-    //     </script>
 @endsection

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<!-- @section('title') -->
+@section('title', $brandName->brand_name)
 @section('content')
 <section class="banner_area">
   <div class="banner_inner d-flex align-items-center">

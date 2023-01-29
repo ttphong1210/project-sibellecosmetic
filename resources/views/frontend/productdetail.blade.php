@@ -7,19 +7,19 @@
     <div class="product-detail row">
         <div class="col-xs-4 col-md-6 product-detail-image">
             <div class="row">
-            <div class="col-md-4">
-                <div id="divId" onclick="changeImageOnClick(event)">
-                    <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
-                    <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
-                    <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+                <div class="col-md-4">
+                    <div id="divId" onclick="changeImageOnClick(event)">
+                        <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+                        <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+                        <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
 
-                    <!-- <img class="imgStyle" src="https://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-300mmf_35-56g_ed_vr/img/sample/img_02.jpg" /> -->
-                    <!-- <img class="imgStyle" src="https://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-300mmf_35-56g_ed_vr/img/sample/img_03.jpg" /> -->
+                        <!-- <img class="imgStyle" src="https://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-300mmf_35-56g_ed_vr/img/sample/img_02.jpg" /> -->
+                        <!-- <img class="imgStyle" src="https://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-300mmf_35-56g_ed_vr/img/sample/img_03.jpg" /> -->
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <img id="mainImage" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
-            </div>
+                <div class="col-md-8">
+                    <img id="mainImage" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+                </div>
             </div>
 
         </div>
@@ -131,29 +131,37 @@
                     @foreach($product as $item)
                     <div class="col-md-3 swiper-slide">
                         <div class="single-product">
-                            <div class="product-img">
-                                <img class="img-fluid" style="width:255px; height:258.44px" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
-                                <div class="p_icon">
-                                    <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
-                                        <i class="ti-eye"></i>
-                                    </a>
-                                    <a href="#">
-                                        <i class="ti-heart"></i>
-                                    </a>
-                                    <a href="{{asset('cart/add/'.$item->prod_id)}}">
-                                        <i class="ti-shopping-cart"></i>
-                                    </a>
+                            <form>
+                                {{csrf_field()}}
+                                <input type="hidden" value="{{$item->prod_id}}" class="product_favorite_id_{{$item->prod_id}}">
+                                <input type="hidden" value="{{$item->prod_name}}" class="product_favorite_name_{{$item->prod_id}}">
+                                <input type="hidden" value="{{$item->prod_img}}" class="product_favorite_image_{{$item->prod_id}}">
+                                <input type="hidden" value="{{$item->prod_price}}" class="product_favorite_price_{{$item->prod_id}}">
+
+                                <div class="product-img">
+                                    <img class="img-fluid" style="width:255px; height:258.44px" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
+                                    <div class="p_icon">
+                                        <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
+                                            <i class="ti-eye"></i>
+                                        </a>
+                                        <a href="#">
+                                            <i class="ti-heart"></i>
+                                        </a>
+                                        <a href="{{asset('cart/add/'.$item->prod_id)}}">
+                                            <i class="ti-shopping-cart"></i>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="product-btm">
-                                <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
-                                    <h4>{{$item->prod_name}}</h4>
-                                </a>
-                                <div class="mt-3">
-                                    <span class="mr-4">{{number_format($item->prod_price,0,',','.')}}VND</span>
-                                    <del><small> {{number_format($item->prod_promotion,0,',','.')}}VND</small></del>
+                                <div class="product-btm">
+                                    <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
+                                        <h4>{{$item->prod_name}}</h4>
+                                    </a>
+                                    <div class="mt-3">
+                                        <span class="mr-4">{{number_format($item->prod_price,0,',','.')}}VND</span>
+                                        <del><small> {{number_format($item->prod_promotion,0,',','.')}}VND</small></del>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     @endforeach
