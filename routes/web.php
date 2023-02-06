@@ -51,6 +51,12 @@ Route::group(['prefix' => 'account'], function () {
     Route::get('register', 'AccountCustomerController@getAddAcc');
     Route::post('register', 'AccountCustomerController@postAddAcc');
     Route::get('logout_customer', 'AccountCustomerController@getLogOutCus');
+    Route::get('forgot_password', 'AccountCustomerController@getForgotPassword');
+    Route::post('reset-password', 'AccountCustomerController@postResetPassword');
+    Route::get('update-new-password', 'AccountCustomerController@getUpdateNewPassword');
+    Route::post('update-new-password', 'AccountCustomerController@postUpdateNewPassword');
+
+
 });
 
 // Route Admin

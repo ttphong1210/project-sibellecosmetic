@@ -126,7 +126,7 @@ class CheckOutController extends Controller
             $data['cart'] = Cart::content();
             $data['total'] = Cart::subtotal(0, ',', '.');
             Mail::send('frontend.email', $data, function ($message) use ($email) {
-                $message->from('typhong1210@gmail.com', 'Si.Belle Cosmetic');
+                $message->from('supportSi.BelleCosmetic@gmail.com', 'Si.Belle Cosmetic');
                 $message->to($email, $email);
                 $message->cc('hoaithukt999@gmail.com', 'Trần Thị Hoài Thu');
                 $message->subject('Xác nhận mua hàng Si.Belle Cosmetic');

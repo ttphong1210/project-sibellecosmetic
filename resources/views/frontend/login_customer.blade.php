@@ -33,9 +33,9 @@
                         </button>
                         <div class="creat_account">
                             <input type="checkbox" id="f-option" name="selector" />
-                            <label for="f-option">Remember me</label>
+                            <label for="f-option">Ghi nhớ đăng nhập</label>
                         </div>
-                        <a class="lost_pass" href="#">Lost your password?</a>
+                        <a class="lost_pass" href="{{asset('account/forgot_password')}}">Quên mật khẩu?</a>
                     </div>
                     
                 </form>

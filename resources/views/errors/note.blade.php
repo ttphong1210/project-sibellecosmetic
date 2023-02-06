@@ -1,6 +1,9 @@
 @if(Session::has('error'))
     <p class="alert alert-danger">{{Session::get('error')}}</p>
 @endif
-@foreach($errors->all() as $error)
+@if(Session::has('message'))
+    <p class="alert alert-success">{{Session::get('message')}}</p>
+@endif
+<!-- @foreach($errors->all() as $error)
     <p class="alert alert-danger">{{$error}}</p>
-@endforeach 
+@endforeach  -->

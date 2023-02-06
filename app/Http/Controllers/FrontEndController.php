@@ -122,7 +122,6 @@ class FrontEndController extends Controller
     {
         $data = $request->all();
         $product_id = $data['product_favorite_id'];
-        // $session_id = substr(md5(microtime()), rand(0, 26), 5);
         $product_favorite = @Session::get('favorite');
         
         if (isset($product_favorite)) {
