@@ -91,7 +91,7 @@ class AccountCustomerController extends Controller
                 $data['body_send_mail'] = $link_reset_password;
 
                 Mail::send('frontend.mail_reset_password_notify', $data, function ($message) use ($send_to_mail, $title_send_mail) {
-                    $message->from('supportSi.BelleCosmetic@gmail.com', $title_send_mail);
+                    $message->from('supportSi.BelleCosmetic@gmail.com', 'Si.Belle Cosmetics');
                     $message->to($send_to_mail, $send_to_mail);
                     $message->subject($title_send_mail);
                 });

@@ -47,7 +47,6 @@ class ProductController extends Controller
                 $ext = strtolower($file->getClientOriginalExtension());
                 $image_full_name = $filename_gallery . '.' . $ext;
                 $multiple_path = 'public/gallery/';
-                // $image_url = $multiple_path . $image_full_name;
                 $file->storeAs($multiple_path, $image_full_name);
                 $allImage[]= $image_full_name;
             }
@@ -61,7 +60,6 @@ class ProductController extends Controller
         $product->prod_cate = $request->cate;
         $product->prod_brand = $request->brand;
         $product->prod_featured = $request->featured;
-        //  dd($product);
 
         $product->save();
         $path = $request->file('img')->storeAs($destination_path, $filename);
@@ -95,8 +93,7 @@ class ProductController extends Controller
             $filename = $image->getClientOriginalName();
             $path = $image->storeAs('public/avatar',$filename);
             $product->prod_img = $request->file('image')->getClientOriginalName();
-            // $destination_path = 'public/avatar';
-            // $path = $request->file('img')->storeAs($destination_path,$img);
+
         }  
         $allImage = array();
         if($request->hasFile('image-gallery')){
@@ -105,7 +102,6 @@ class ProductController extends Controller
                 $ext = strtolower($file->getClientOriginalExtension());
                 $image_full_name = $filename_gallery . '.' . $ext;
                 $multiple_path = 'public/gallery/';
-                // $image_url = $multiple_path . $image_full_name;
                 $file->storeAs($multiple_path, $image_full_name);
                 $allImage[]= $image_full_name;
             }
