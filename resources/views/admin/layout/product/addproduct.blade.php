@@ -23,8 +23,8 @@
 					    <img id="previewImage" src="" alt="" width="150px" style="margin-top:10px ;">
 					</div>
                     <div class="form-group" >
-						<label>Ảnh chi tiết sản phẩm</label>
-						<input id="exampleInputFileGallery" type="file" name="image-gallery" multiple accept="image/*" onchange="loadFileGallery(event)">
+						<label>Thư viện ảnh sản phẩm</label>
+						<input id="exampleInputFileGallery" type="file" name="image-gallery[]" multiple accept="image/*" onchange="loadFileGallery(event)">
 					   <img src="" alt="">
                        <div id="preview">
                             <!-- <img id="fileImageGallery" src="" alt="" width="150px"> -->

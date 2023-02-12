@@ -8,7 +8,6 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Http\Requests\AddProductRequest;
 use App\Models\Brand;
-
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -34,14 +33,27 @@ class ProductController extends Controller
     public function postAddProduct(AddProductRequest $request){
         $filename = $request->file('img')->getClientOriginalName();
         $destination_path = 'public/avatar';
-        $fileupload = $request->file('img')->getClientOriginalName();
-        $multiple_path = 'public/gallery';
+        // $file_upload_gallery = $request->file('image-gallery')->getClientOriginalName();
+        $allImage = array();
        
         $product = new Product;
         $product->prod_name = $request->name;
         $product->prod_slug = Str::slug($request->name);
         $product->prod_price = $request->price;
         $product->prod_img = $filename;
+        if($request->hasFile('image-gallery')){
+            foreach($request->file('image-gallery') as $file){
+                $filename_gallery = md5(rand(1000,10000));
+                $ext = strtolower($file->getClientOriginalExtension());
+                $image_full_name = $filename_gallery . '.' . $ext;
+                $multiple_path = 'public/gallery/';
+                // $image_url = $multiple_path . $image_full_name;
+                $file->storeAs($multiple_path, $image_full_name);
+                $allImage[]= $image_full_name;
+            }
+            $product->prod_gallery = implode('|', $allImage);
+        }
+
         $product->prod_status = $request->status;
         $product->prod_summary= $request->summary;
         $product->prod_des = $request->description;
@@ -49,6 +61,8 @@ class ProductController extends Controller
         $product->prod_cate = $request->cate;
         $product->prod_brand = $request->brand;
         $product->prod_featured = $request->featured;
+        //  dd($product);
+
         $product->save();
         $path = $request->file('img')->storeAs($destination_path, $filename);
         return back()->with('status','Add Product Successfull');
@@ -63,6 +77,7 @@ class ProductController extends Controller
     }
 
     public function postEditProduct(Request $request,$id){
+
         $product = Product::find($id);
 
         $product->prod_name = $request->name; 
@@ -83,11 +98,21 @@ class ProductController extends Controller
             // $destination_path = 'public/avatar';
             // $path = $request->file('img')->storeAs($destination_path,$img);
         }  
-        // dd($product);
+        $allImage = array();
+        if($request->hasFile('image-gallery')){
+            foreach($request->file('image-gallery') as $file){
+                $filename_gallery = md5(rand(1000,10000));
+                $ext = strtolower($file->getClientOriginalExtension());
+                $image_full_name = $filename_gallery . '.' . $ext;
+                $multiple_path = 'public/gallery/';
+                // $image_url = $multiple_path . $image_full_name;
+                $file->storeAs($multiple_path, $image_full_name);
+                $allImage[]= $image_full_name;
+            }
+            $product->prod_gallery = implode('|', $allImage);
+        }
         $product->update();
         return redirect('admin/product');
-        // $product::where('prod_id',$id)->update($product);
-        // return redirect('admin/product');
     }
 
     public function getDeleteProduct($id){

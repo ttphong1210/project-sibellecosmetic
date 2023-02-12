@@ -93,7 +93,6 @@
           var outputPreview = document.getElementById('previewImage');
           outputPreview.src = reader.result;
           
-          // output.src = reader.result;
         }
         reader.readAsDataURL(event.target.files[0]);
       }

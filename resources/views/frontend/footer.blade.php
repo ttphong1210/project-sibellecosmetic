@@ -1,10 +1,7 @@
 <footer class="footer-32892 pb-0">
   <div class="site-section">
     <div class="container">
-
-
       <div class="row">
-
         <div class="col-md pr-md-5 mb-4 mb-md-0">
           <h3> Si.Belle Cosmetic </h3>
           <p class="mb-3"> Address: 77 Quang Trung - TP Đà Nẵng
@@ -18,18 +15,15 @@
           </form>
         </div>
         <div class="col-md mb-4 mb-md-0">
-          <h3>Latest Tweet</h3>
+          <h3>Thông điệp Si</h3>
           <ul class="list-unstyled tweets">
             <li class="d-flex">
               <div class="mr-4"><span class="icon icon-twitter"></span></div>
               <div>Si.Belle mong muốn sẽ giúp bạn thực sự hiểu được làn da của mình, cảm nhận được những thay đổi và biến chuyển của làn da theo thời gian. Từ đó, Si.Belle sẽ gợi ý cho bạn những quy trình dưỡng da phù hợp cũng như sử dụng những sản phẩm một cách hiệu quả nhất.
-
               </div>
             </li>
-
           </ul>
         </div>
-
 
         <div class="col-md-3 mb-4 mb-md-0">
           <h3>Thông tin và hướng dẫn</h3>

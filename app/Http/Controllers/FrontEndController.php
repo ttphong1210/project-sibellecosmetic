@@ -25,7 +25,7 @@ class FrontEndController extends Controller
         $data['categories'] = Category::all();
         $data['featured'] = Product::where('prod_featured', 1)->orderBy('prod_id', 'desc')->get();
         $data['new'] = Product::orderBy('prod_id', 'desc')->take(4)->get();
-        $data['suggested'] = Product::all()->take(8);
+        $data['suggested'] = Product::inRandomOrder()->take(8)->get();
         //dd($data);
         return view('frontend.home', $data);
     }
@@ -46,7 +46,7 @@ class FrontEndController extends Controller
                 $data['product'] = DB::table('products')->orderBy('prod_price', 'DESC')->paginate(9)->appends(request()->query());
             };
         } else {
-            $data['product'] = Product::paginate(9);
+            $data['product'] = Product::orderBy('prod_id', 'desc')->paginate(9);
         };
 
         return view('frontend.product', $data);
@@ -55,7 +55,6 @@ class FrontEndController extends Controller
     public function getDetail($id)
     {
         $data['item'] = Product::find($id);
-
         $data['cateName'] = Product::where('prod_id', $id)
             ->join('categories', 'products.prod_cate', '=', 'categories.cate_id')
             ->get();

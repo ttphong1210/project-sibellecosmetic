@@ -28,6 +28,19 @@
 						<input id="exampleInputFile" type="file" name="image" accept="image/*">
 					   <img src="{{asset('storage/avatar/'.$product->prod_img)}}" width="150px" alt="">
 					</div>
+                    <div class="form-group" >
+						<label>Thư viện ảnh sản phẩm</label>
+						<input id="exampleInputFileGallery" type="file" name="image-gallery[]" multiple accept="image/*" onchange="loadFileGallery(event)">
+                        <?php
+                            $image = explode('|', $product->prod_gallery)
+                        ?>
+                        @foreach($image as $file)
+                            <img src="{{asset('storage/gallery/'.$file)}}" alt="" width="100" style="margin-right: 10px; margin-top:10px;">
+                        @endforeach
+                       <div id="preview">
+                            <!-- <img id="fileImageGallery" src="" alt="" width="150px"> -->
+                       </div>
+					</div>
                     <div class="form-group">
                         <label> Trạng thái </label>
                         <select required name="status" class="form-control">
@@ -89,17 +102,5 @@
                 </form>
             </div>
     </section>
-     //.content 
-    //<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script> 
 
 @endsection
-
-// @section('script')
-//     <script>
-//         ClassicEditor
-//             .create( document.querySelector( '#task-textarea' ) )
-//             .catch( error => {
-//                 console.error( error );
-//             } );
-//     </script>
-// @endsection

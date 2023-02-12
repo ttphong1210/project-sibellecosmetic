@@ -7,17 +7,22 @@
     <div class="product-detail row">
         <div class="col-xs-4 col-md-6 product-detail-image">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div id="divId" onclick="changeImageOnClick(event)">
-                        <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
-                        <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
-                        <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+                    <?php
+                        $images = explode('|', $item->prod_gallery) ;
+                    ?>
+                    @foreach($images as $file)
+                        <img class="imgStyle" src="{{asset('storage/gallery/'.$file)}}" />
+                    @endforeach
+                        <!-- <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
+                        <img class="imgStyle" src="{{asset('storage/avatar/'.$item->prod_img)}}" /> -->
 
                         <!-- <img class="imgStyle" src="https://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-300mmf_35-56g_ed_vr/img/sample/img_02.jpg" /> -->
                         <!-- <img class="imgStyle" src="https://imgsv.imaging.nikon.com/lineup/lens/zoom/normalzoom/af-s_dx_18-300mmf_35-56g_ed_vr/img/sample/img_03.jpg" /> -->
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <img id="mainImage" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
                 </div>
             </div>
@@ -176,7 +181,6 @@
 </div>
 <script>
     var images = document.getElementsByTagName("img");
-    // debugger;
     for (var i = 0; i < images.length; i++) {
         images[i].onmouseover = function() {
             this.style.cursor = "hand";
@@ -187,11 +191,8 @@
             this.style.borderColor = "white";
         };
     }
-
     function changeImageOnClick(event) {
-        // debugger;
         var targetElement = event.srcElement;
-        // debugger;
         if (targetElement.tagName === "IMG") {
             mainImage.src = targetElement.getAttribute("src");
         }
