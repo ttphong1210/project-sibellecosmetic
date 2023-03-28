@@ -33,7 +33,7 @@ class CheckOutController extends Controller
         return view('frontend.checkout', $data);
     }
 
-    public function select_shipping_infomation(Request $request)
+    public function postSelectShippingInfomation(Request $request)
     {
         $data = $request->all();
         if ($data['action']) {
@@ -54,7 +54,7 @@ class CheckOutController extends Controller
         }
         echo $output;
     }
-    public function charge_shipping(Request $request)
+    public function postChargeShipping(Request $request)
     {
         $data = $request->all();
         //  $output = '';
@@ -126,7 +126,6 @@ class CheckOutController extends Controller
             $data['cart'] = Cart::content();
             $data['total'] = Cart::subtotal(0, ',', '.');
             Mail::send('frontend.email', $data, function ($message) use ($email) {
-                $message->from('supportSi.BelleCosmetic@gmail.com', 'Si.Belle Cosmetic');
                 $message->to($email, $email);
                 $message->cc('hoaithukt999@gmail.com', 'Trần Thị Hoài Thu');
                 $message->subject('Xác nhận mua hàng Si.Belle Cosmetic');
@@ -138,7 +137,7 @@ class CheckOutController extends Controller
             echo $e->getMessage();
         }
     }
-    public function delete_feeship(){
+    public function getDeleteFeeship(){
         Session::forget('feeship');
         return back();
     }

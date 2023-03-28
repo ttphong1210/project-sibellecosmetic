@@ -58,7 +58,7 @@ class FrontEndController extends Controller
         $data['cateName'] = Product::where('prod_id', $id)
             ->join('categories', 'products.prod_cate', '=', 'categories.cate_id')
             ->get();
-        $data['product'] = Product::all();
+        $data['product'] = Product::inRandomOrder()->get();
 
         return view('frontend.productdetail', $data);
     }
@@ -117,7 +117,7 @@ class FrontEndController extends Controller
     {
         return view('frontend.favorite');
     }
-    public function add_product_favorite(Request $request)
+    public function postAddProductFavorite(Request $request)
     {
         $data = $request->all();
         $product_id = $data['product_favorite_id'];

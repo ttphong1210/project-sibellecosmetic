@@ -7,13 +7,13 @@
       <div class="banner_content d-md-flex justify-content-between align-items-center">
         <div class="mb-3 mb-md-0">
           <h2>Sản phẩm {{$cateName->cate_name}}</h2>
-          <p>Very us move be blessed multiply night</p>
+          <!-- <p>Very us move be blessed multiply night</p> -->
         </div>
-        <div class="page_link">
+        <!-- <div class="page_link">
           <a href="{{route('home')}}">Home</a>
           <a href="category.html">Shop</a>
           <a href="category.html">Women Fashion</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

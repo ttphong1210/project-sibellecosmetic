@@ -4,7 +4,8 @@
   <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <link rel="icon" href="{{asset('img/favicon.png')}}" type="image/png" />
+  <link rel="icon" href="{{asset('img/logo-cosmetic.png')}}" type="image/png" />
+  
 
   <title>SI.BELLE Cosmetic | @yield('title')</title>
   <!-- Bootstrap CSS -->
@@ -18,14 +19,6 @@
   <link rel="stylesheet" href="{{asset('css/fonts/themify-icons.css')}}" />
   <link rel="stylesheet" href="{{asset('css/owlcarousel/owl.carousel.min.css')}}" />
   <link rel="" type="" href="http://sachinchoolur.github.io/lightslider/dist/css/lightslider.css">
-  <!-- <link rel="stylesheet" type="" href="{{asset('css/lightslider.css')}}">
-  <link rel="stylesheet" type="" href="{{asset('css/lightslider.min.css')}}">
-  <link rel="stylesheet" type="" href="{{asset('css/lightgallery.min.css')}}">
-  <link rel="stylesheet" type="" href="{{asset('css/prettify.css')}}"> -->
-  <!-- <link rel="" type="" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.css">
-  <link rel="" type="" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/css/lightslider.min.css">
-  <link rel="" type="" href="https://cdnjs.cloudflare.com/ajax/libs/lightslider/1.1.6/img/controls.png"> -->
-
 
   <!-- main css -->
   

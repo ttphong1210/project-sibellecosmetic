@@ -275,7 +275,7 @@
         <div class="col-lg-12">
           <div class="main_title">
             <h2 style="padding-top: 20px;"><span>Kiến thức & Quà tặng</span></h2>
-            <p>Những chia sẻ thú vị và thông tin hữu ích</p>
+            <p style="text-align: center;">Những chia sẻ thú vị và thông tin hữu ích</p>
           </div>
         </div>
       </div>

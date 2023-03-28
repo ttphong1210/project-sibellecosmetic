@@ -58,7 +58,6 @@ class AccountCustomerController extends Controller
         Auth::logout();
         return redirect('/');
     }
-
     public function getForgotPassword()
     {
         return view('frontend.forgot_password');

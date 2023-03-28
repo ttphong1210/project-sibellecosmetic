@@ -6,14 +6,18 @@
     <div class="container">
       <div class="banner_content d-md-flex justify-content-between align-items-center">
         <div class="mb-3 mb-md-0">
-          <h2>Sản phẩm</h2>
-          <p>Very us move be blessed multiply night</p>
+          <h2> Tất cả sản phẩm</h2>
+          <!-- <p style="font-size: 14px;">Tại Si.Belle bạn sẽ được: <br>
+
+            Chia sẻ kiến thức chăm sóc da theo từng độ tuổi.<br>
+            Tư vấn quy trình dưỡng da phù hợp theo nhu cầu.<br>
+            Cam kết hàng chính hãng đã qua kiểm nghiệm và chọn lọc.</p> -->
         </div>
-        <div class="page_link">
+        <!-- <div class="page_link">
           <a href="{{route('home')}}">Home</a>
           <a href="category.html">Shop</a>
           <a href="category.html">Women Fashion</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -80,7 +84,7 @@
                       <del><small>{{number_format($item->prod_promotion,0,',','.')}}VND</small></del>
                     </div>
                   </div>
-                  </form>
+                </form>
               </div>
             </div>
             @endforeach

@@ -27,11 +27,11 @@
                 <form action="{{asset('account/register')}}" method="POST" class="register-form" id="register-form">
                     <div class="form-group">
                         <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                        <input type="text" required name="name" id="name" placeholder="Họ và Tên" />
+                        <input type="text" required name="name" id="name" placeholder="Họ và Tên" value="{{old('name')}}" />
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="zmdi zmdi-email"></i></label>
-                        <input type="email" required name="email" id="email" placeholder="Email của bạn" />
+                        <input type="email" required name="email" id="email" placeholder="Email của bạn" value="{{old('email')}}"/>
                     </div>
                     <div class="form-group">
                         <label for="pass"><i class="zmdi zmdi-lock"></i></label>

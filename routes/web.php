@@ -26,7 +26,7 @@ Route::get('category/{id}/{slug}.html', 'FrontEndController@getCategory');
 Route::get('brand/{id}/{slug}.html', 'FrontEndController@getBrand');
 Route::get('search', 'FrontEndController@getSearch');
 Route::get('favorite','FrontEndController@getFavorite');
-Route::post('add-product-favorite','FrontEndController@add_product_favorite');
+Route::post('add-product-favorite','FrontEndController@postAddProductFavorite');
 
 // Route Cart
 Route::group(['prefix' => 'cart'], function () {
@@ -39,9 +39,9 @@ Route::group(['prefix' => 'cart'], function () {
 Route::get('complete', 'CartController@getComplete');
 Route::get('checkout', 'CheckOutController@getCheckout');
 Route::post('checkout', 'CheckOutController@postCheckout');
-Route::post('select-shipping-infomation','CheckOutController@select_shipping_infomation');
-Route::post('charge-shipping','CheckOutController@charge_shipping');
-Route::get('delete-feeship','CheckOutController@delete_feeship');
+Route::post('select-shipping-infomation','CheckOutController@postSelectShippingInfomation');
+Route::post('charge-shipping','CheckOutController@postChargeShipping');
+Route::get('delete-feeship','CheckOutController@getDeleteFeeship');
 
 
 // Account Customer
@@ -65,10 +65,15 @@ Route::group(['namespace' => 'Admin'], function () {
         Route::get('/', 'LoginController@getLogin');
         Route::post('/', 'LoginController@postLogin')->name('login');
     });
+   
     Route::get('logout', 'HomeController@getLogout');
 
     Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogedOut'], function () {
         Route::get('home', 'HomeController@getHome');
+
+        Route::group(['prefix' => 'user'], function(){
+            Route::get('all-user', 'UserController@getAllUser');
+        });
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', 'CategoryController@getCate');
 
@@ -128,3 +133,5 @@ Route::group(['namespace' => 'Admin'], function () {
         });
     });
 });
+
+//Authentication Route
