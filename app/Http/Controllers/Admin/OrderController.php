@@ -24,7 +24,6 @@ class OrderController extends Controller
         $data['order'] = DB::table('orders')
             ->join('customers', 'customers.cust_id', '=', 'orders.customer_id')
             ->get();
-        // dd($data);
         return view('admin.layout.order.listorder', $data);
     }
 
@@ -47,7 +46,6 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->order_status = $request->input('status');
         $order->save();
-        // Session::flash('message','Successfully update');
 
         return redirect('admin/order');
     }

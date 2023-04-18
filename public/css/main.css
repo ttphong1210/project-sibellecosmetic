@@ -225,6 +225,32 @@ iframe {
 
   display: block;
 }
+.form{
+  display: flex;
+  justify-content: center;
+}
+.form-custom{
+  padding: 5px;
+}
+.form-custom a{
+  font-size: 17px !important;
+  text-decoration: none;
+}
+.form-custom a:hover{
+  color: #333333;
+}
+/* .container-register{
+  display: flex;
+  justify-content: end;
+  margin:10px 15px 0 0;
+}
+.container-register a{
+  font-size: 17px !important;
+  text-decoration: none;
+}
+.container-register a:hover{
+  color: #333333;
+} */
 
 
 /*------------------------------------------------------------------
@@ -404,7 +430,15 @@ iframe {
 .login100-form-btn:hover:before {
   opacity: 1;
 }
-
+.btn-back-to-login{
+  position: absolute;
+  bottom: 110px;
+  margin-left: 20px;
+  text-decoration: none;
+}
+.btn-back-to-login:hover{
+  color:#333333;
+}
 
 
 /*------------------------------------------------------------------

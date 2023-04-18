@@ -12,6 +12,12 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return 'Application cache has been cleared';
+});
 
 Route::get('contact', function () {
     return view('frontend.contact');
@@ -61,18 +67,20 @@ Route::group(['prefix' => 'account'], function () {
 
 // Route Admin
 Route::group(['namespace' => 'Admin'], function () {
-    Route::group(['prefix' => 'login', 'middleware' => 'CheckLogedIn'], function () {
-        Route::get('/', 'LoginController@getLogin');
-        Route::post('/', 'LoginController@postLogin')->name('login');
-    });
+    // Route::group(['prefix' => 'login', 'middleware' => 'CheckLogedIn'], function () {
+    //     Route::get('/', 'LoginController@getLogin');
+    //     Route::post('/', 'LoginController@postLogin')->name('login');
+    // });
    
-    Route::get('logout', 'HomeController@getLogout');
+    // Route::get('logout', 'HomeController@getLogout');
 
     Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogedOut'], function () {
         Route::get('home', 'HomeController@getHome');
 
-        Route::group(['prefix' => 'user'], function(){
+        Route::group(['prefix' => 'user' , 'middleware'=>'roles'], function(){
             Route::get('all-user', 'UserController@getAllUser');
+            Route::post('assign-role' , 'UserController@postAssignRole');
+            Route::get('delete-user/{id}','UserController@getDeleteUser');
         });
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', 'CategoryController@getCate');
@@ -98,7 +106,7 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::get('delete/{id}', 'BrandController@getDeleteBrand');
         });
 
-        Route::group(['prefix' => 'product'], function () {
+        Route::group(['prefix' => 'product', 'middleware'=>'roles'], function () {
             Route::get('/', 'ProductController@getProduct');
 
             Route::get('add', 'ProductController@getAddProduct');
@@ -135,3 +143,10 @@ Route::group(['namespace' => 'Admin'], function () {
 });
 
 //Authentication Route
+Route::get('register-auth', 'AccountController@getRegisterAuth');
+Route::post('register-auth', 'AccountController@postRegisterAuth');
+Route::get('login-auth', 'AccountController@getLoginAuth');
+Route::post('login-auth', 'AccountController@postLoginAuth');
+Route::get('logout-auth', 'AccountController@getLogOutAuth');
+
+

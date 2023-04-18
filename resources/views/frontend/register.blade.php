@@ -37,10 +37,9 @@
                         <label for="pass"><i class="zmdi zmdi-lock"></i></label>
                         <input type="password" required name="pass" id="pass" placeholder="Mật khẩu" />
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         Khách hàng mới: <input type="radio" style="width: auto;" name="level" value="2">
-                        <!-- Không: <input type="radio" checked name="featured" value="0">  -->
-                    </div>
+                    </div> -->
                     <div class="form-group form-button">
                         <input type="submit" name="signup" id="signup" class="form-submit" value="Đăng ký" />
                     </div>

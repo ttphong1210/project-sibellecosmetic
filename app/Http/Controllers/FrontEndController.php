@@ -65,7 +65,6 @@ class FrontEndController extends Controller
 
     public function getCategory($id)
     {
-        // $data['brand'] = Brand::all();
         $data['cateName'] = Category::find($id);
 
         if (isset($_GET['sort_by'])) {
@@ -119,6 +118,8 @@ class FrontEndController extends Controller
     }
     public function postAddProductFavorite(Request $request)
     {
+        //regex sql 
+        // sql thuan
         $data = $request->all();
         $product_id = $data['product_favorite_id'];
         $product_favorite = @Session::get('favorite');

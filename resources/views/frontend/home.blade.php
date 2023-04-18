@@ -278,6 +278,18 @@
             <p style="text-align: center;">Những chia sẻ thú vị và thông tin hữu ích</p>
           </div>
         </div>
+        <div class="main_carousel grid-carousel col-lg-12">
+          <div class="col-md-4">
+            
+            </div>
+            <div class="col-md-4">
+            
+          </div>
+          <div class="col-md-4">
+            
+          </div>
+          
+        </div>
       </div>
   </section>
   <!--================ End Knowledge $ Share Area =================-->

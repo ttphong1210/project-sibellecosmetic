@@ -10,6 +10,7 @@
         margin: 5px 0;
         height: 30px;
     }
+
     .btn-change-user {
         background-color: #66FF00;
         color: black;
@@ -18,7 +19,8 @@
         margin: 5px 0;
         height: 30px;
     }
-    .input-checkbox{
+
+    .input-checkbox {
         text-align: center;
     }
 </style>
@@ -48,29 +50,35 @@
                         </thead>
                         <tbody>
                             <?php $stt = 1 ?>
+                            @include('errors.note')
                             @foreach($userlist as $user)
-                            <tr>
-
-                                <td><?php echo $stt++ ?></td>
-                                <td>{{$user->name}}</td>
-                                <td></td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->password}}</td>
-                                <td class="input-checkbox">
-                                    <input type="checkbox" name="authorize" value="">
-                                </td>
-                                <td class="input-checkbox">
-                                    <input type="checkbox" name="admin" value="">
-                                </td>
-                                <td class="input-checkbox">
-                                    <input type="checkbox" name="user" value="">
-                                </td>
-                                <td>
-                                    <button type="submit" name="btn-author">Trao quyền</button>
-                                    <button type="submit" class="btn-delete-user">Xoá user</button>
-                                    <button type="submit" class="btn-change-user">Đổi user</button>
-                                </td>
-                            </tr>
+                            <form method="POST" action="{{asset('admin/user/assign-role')}}">
+                                {{csrf_field()}}
+                                
+                                <tr>
+                                    <td><?php echo $stt++ ?></td>
+                                    <td>{{$user->name}}</td>
+                                    <td></td>
+                                    <td>{{$user->email}}
+                                        <input type="hidden" name="email" value="{{$user->email}}">
+                                    </td>
+                                    <td>{{$user->password}}</td>
+                                    <td class="input-checkbox">
+                                        <input type="checkbox" name="author_role" {{ $user->hasRole('author') ? 'checked' : '' }}>
+                                    </td>
+                                    <td class="input-checkbox">
+                                        <input type="checkbox" name="admin_role" {{ $user->hasRole('admin') ? 'checked' : '' }}>
+                                    </td>
+                                    <td class="input-checkbox">
+                                        <input type="checkbox" name="user_role" {{ $user->hasRole('user') ? 'checked' : '' }}>
+                                    </td>
+                                    <td>
+                                        <input type="submit" name="" value="Trao quyền">
+                                        <a class="btn btn-sm btn-danger" href="{{asset('admin/user/delete-user/'.$user->id)}}">Xoá User</a>
+                                       
+                                    </td>
+                                </tr>
+                            </form>
                             @endforeach
                         </tbody>
                         <tfoot>

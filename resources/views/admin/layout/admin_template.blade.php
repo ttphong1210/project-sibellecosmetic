@@ -250,7 +250,7 @@
                 <img src="{{asset('vendor/dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                 {{ Auth::user()->name}}
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -275,7 +275,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="{{asset('logout')}}" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{asset('logout-auth')}}" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -323,7 +323,8 @@
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="{{asset('admin/home')}}"><i class="fa fa-link"></i> <span>Trang Chủ</span></a></li>
-        <!-- <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li> -->
+
+        @hasrole(['admin','author'])
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Tài khoản</span>
             <span class="pull-right-container">
@@ -334,6 +335,7 @@
             <li><a href="{{asset('admin/user/all-user')}}">Tất cả tài khoản</a></li>
           </ul>
         </li>
+      @endhasrole
         <li class="treeview">
           <a href="#"><i class="fa fa-link"></i> <span>Sản Phẩm</span>
             <span class="pull-right-container">

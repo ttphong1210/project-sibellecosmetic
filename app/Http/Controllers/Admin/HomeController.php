@@ -14,7 +14,7 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function getHome(){
-        return view('admin.layout.admin_template');
+        return view('admin.layout.home_admin');
     }
     public function getLogout(){
         Auth::logout();
