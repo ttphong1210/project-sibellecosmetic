@@ -33,7 +33,6 @@ class ProductController extends Controller
     public function postAddProduct(AddProductRequest $request){
         $filename = $request->file('img')->getClientOriginalName();
         $destination_path = 'public/avatar';
-        // $file_upload_gallery = $request->file('image-gallery')->getClientOriginalName();
         $allImage = array();
        
         $product = new Product;
@@ -115,4 +114,5 @@ class ProductController extends Controller
        Product::destroy($id);
        return back();
     }
+    
 }

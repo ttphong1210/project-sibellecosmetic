@@ -14,14 +14,19 @@
                 <thead>
                     <tr>
                         <th>STT</th>
+                        <th>Tiêu đề</th>
                         <th>Hình ảnh</th>
                     </tr>
                 </thead>
                 <tbody>
+                  <?php $stt = 1 ?>
+                @foreach($listSlider as $slider)
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td> <?php echo $stt++ ?></td>
+                        <td>{{$slider->title}}</td>
+                        <td><img width="200px" src="{{asset('storage/slider/'.$slider->image)}}" alt=""></td>
                     </tr>
+                    @endforeach
                 </tbody>
               </table>
             </div>

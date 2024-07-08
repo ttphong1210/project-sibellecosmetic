@@ -46,6 +46,17 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        // add guard account_customer
+        'account_customer' => [
+            'driver' => 'session',
+            'provider' => 'account_customers',
+        ],
+
+        'account_customer-api' => [
+            'driver' => 'token',
+            'provider' => 'account_customers',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -69,6 +80,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        // thêm provider
+        'account_customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AccountCustomer::class,
         ],
 
         // 'users' => [
@@ -95,6 +111,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        'account_customers' => [
+            'provider' => 'account_customers',
             'table' => 'password_resets',
             'expire' => 60,
         ],

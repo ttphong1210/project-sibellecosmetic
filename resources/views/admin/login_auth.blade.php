@@ -45,7 +45,9 @@
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" required name="password" placeholder="Mật khẩu">
+						<input id="pass" class="input100" type="password" required name="password" placeholder="Mật khẩu">
+						<input id="check" type="checkbox">
+						<p id="checkdisplay">Hiện mật khẩu</p>
 						<span class="focus-input100" data-placeholder="&#xe80f;"></span>
 					</div>
 
@@ -92,6 +94,22 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script>
+		check.onclick = togglePassword;
+		
+		function togglePassword(){
+			var text = document.getElementById('checkdisplay');
+
+		if(check.checked){ 
+			pass.type = 'text';
+			text.innerHTML = "Ẩn mật khẩu";
+		}
+			else {
+				pass.type = 'password';
+				text.innerHTML = "Hiện mật khẩu";
+			}
+		}
+	</script>
 
 </body>
 </html>

@@ -1,6 +1,27 @@
 @extends('layouts.app')
 @section('title','Đăng nhập tài khoản của bạn')
 @section('content')
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var check = document.getElementById('check');
+        var password = document.getElementById('password');
+        var text = document.getElementById('checkdisplay');
+
+        check.onclick = function(){
+            togglePassword();
+        }
+
+        function togglePassword() {
+            if(check.checked){
+                password.type = 'text';
+                text.innerHTML = "Ẩn mật khẩu";
+            }else{
+                password.type = 'password';
+                text.innerHTML = "Hiện mật khẩu";
+            }
+        }
+    })
+</script>
 <div class="container">
     <div class="returning_customer" style="margin: 5rem 0 ;">
         <div class="check_title">
@@ -16,36 +37,38 @@
         <div class="row contact_form" novalidate="novalidate">
             <div class="col-md-6 login flex-item">
                 <div class="wrap">
-                <form action="{{asset('account/login_customer')}}" method="POST">
-                {{csrf_field()}}
-                @include('errors.note')
-                    <div class="col-md-12 form-group p_star">
-                        <span class="placeholder" data-placeholder="Username or Email"></span>
-                        <input type="text" class="form-control" id="name" name="email" />
-                    </div>
-                    <div class="col-md-12 form-group p_star">
-                        <span class="placeholder" data-placeholder="Password"></span>
-                        <input type="password" class="form-control" id="password" name="password"/>
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <button type="submit" value="submit" class="btn submit_btn">
-                            Đăng nhập 
-                        </button>
-                        <div class="creat_account">
-                            <input type="checkbox" id="f-option" name="selector" />
-                            <label for="f-option">Ghi nhớ đăng nhập</label>
+                    <form action="{{asset('account/login-customer')}}" method="POST">
+                        {{csrf_field()}}
+                        @include('errors.note')
+                        <div class="col-md-12 form-group p_star">
+                            <span class="placeholder" data-placeholder="Username or Email"></span>
+                            <input type="text" class="form-control" id="name" name="email" />
                         </div>
-                        <a class="lost_pass" href="{{asset('account/forgot_password')}}">Quên mật khẩu?</a>
-                    </div>
-                    
-                </form>
+                        <div class="col-md-12 form-group p_star">
+                            <span class="placeholder" data-placeholder="Password"></span>
+                            <input type="password" class="form-control" id="password" name="password" />
+                            <input id="check" type="checkbox">
+                            <p id="checkdisplay">Hiện mật khẩu</p>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="btn submit_btn">
+                                Đăng nhập
+                            </button>
+                            <div class="creat_account">
+                                <input type="checkbox" id="f-option" name="selector" />
+                                <label for="f-option">Ghi nhớ đăng nhập</label>
+                            </div>
+                            <a class="lost_pass" href="{{asset('account/forgot-password')}}">Quên mật khẩu?</a>
+                        </div>
+
+                    </form>
                 </div>
             </div>
             <div class="col-md-6 flex-item">
                 <div class="wrap">
                     <h5>Khách hàng mới ?</h5>
                     <p style="font-family: 'FontAwesome' ;">Đăng ký trang web này cho phép bạn truy cập trạng thái và lịch sử đơn hàng của mình. Chúng tôi sẽ nhanh chóng thiết lập một tài khoản mới cho bạn. Vì điều này sẽ chỉ yêu cầu bạn cung cấp thông tin cần thiết để làm cho quá trình mua hàng nhanh hơn và dễ dàng hơn</p>
-                    <button class="btn"><a href="{{asset('account/register')}}" style="color:white ;" class="btn">Tạo tài khoản</a></button>
+                    <button class="btn"><a href="{{asset('account/register-customer')}}" style="color:white ;" class="btn">Tạo tài khoản</a></button>
                 </div>
             </div>
         </div>

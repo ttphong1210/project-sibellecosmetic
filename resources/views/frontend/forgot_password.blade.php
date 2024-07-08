@@ -23,7 +23,7 @@
                 </div>
                     <div class="col-md-12 form-group p_star">
                         <span class="placeholder" data-placeholder="Nhập email của bạn"></span>
-                        <input type="text" class="form-control" id="name" name="email" />
+                        <input type="text" class="form-control" id="email" name="email" />
                     </div>
                     <div class="col-md-12 form-group">
                         <button type="submit" value="submit" class="btn submit_btn submit_btn_forgotpass">

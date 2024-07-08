@@ -3123,6 +3123,9 @@ h6 {
     color: #fff;
     background: #71cd14;
 }
+.single-product .product-img .p_icon .icon-style{
+    line-height: 2 !important;
+}
 .single-product .product-img .img-fluid{
     width:255px;
     height: 258.44px;
@@ -4067,6 +4070,13 @@ h6 {
 .check_title h2 a {
     color: #71cd14;
     text-decoration: underline;
+}
+#check{
+    position: absolute;
+}
+#checkdisplay{
+    margin: 8px 15px !important;
+    position: relative;
 }
 .returning_customer p {
     margin-top: 15px;
@@ -5078,3 +5088,4 @@ body {
 
 /* CSS FILE ADMIN */
 
+/* CSS Update fix*/

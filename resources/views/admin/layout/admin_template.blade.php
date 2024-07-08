@@ -87,24 +87,18 @@
   </script>
   <script type="text/javascript">
       function fileUpload(event){
-       // var fileUploads = event.target.fileUploads;
         var reader = new FileReader();
         reader.onload = function(){
           var outputPreview = document.getElementById('previewImage');
           outputPreview.src = reader.result;
-          
         }
         reader.readAsDataURL(event.target.files[0]);
       }
   </script>
   <script type="text/javascript">
-
       function loadFileGallery(event){
         var input = document.getElementById('exampleInputFileGallery');
-        // console.log(input);
-        // debugger;
         var inputLe = input.files.length;
-        // console.log(inputLe);
           for(i = 0; i<= inputLe; i++){
           var urls = URL.createObjectURL(input.files[i]);
           document.getElementById('preview').innerHTML += '<img src="'+urls+'"style="width: 150px; margin:0px 5px;">';
@@ -391,13 +385,14 @@
           </ul>
         </li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Hình ảnh bìa</span>
+          <a href="#"><i class="fa fa-link"></i> <span>Banner</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{asset('admin/slider')}}">Tất cả hình ảnh</a></li>
+            <li><a href="{{asset('admin/slider')}}">Tất cả slider</a></li>
+            <li><a href="{{asset('admin/slider/add-slider')}}">Thêm slider</a></li>
           </ul>
         </li>
       </ul>

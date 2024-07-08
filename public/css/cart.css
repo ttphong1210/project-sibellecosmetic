@@ -162,4 +162,9 @@ button:focus {
 .delete-item-cart{
     color: red !important;
 }
+.card ul{
+    list-style: inside;
+    font-size: 14px;
+    
+}
 

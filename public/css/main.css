@@ -447,7 +447,14 @@ iframe {
 .validate-input {
   position: relative;
 }
-
+#check{
+  margin: 10px 35px;
+  position: absolute;
+}
+#checkdisplay{
+  position: relative;
+  margin: 7px 0 0 60px;
+}
 .alert-validate::before {
   content: attr(data-validate);
   position: absolute;
@@ -508,6 +515,7 @@ iframe {
     opacity: 1;
   }
 }
-
-
+.product-img .p_icon {
+  display: none;
+}
 

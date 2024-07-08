@@ -16,6 +16,3 @@
     margin-top: 15px;
     color: green;" class="alert alert-success">{{Session::get('status')}}</p>
 @endif
-<!-- @foreach($errors->all() as $error)
-    <p class="alert alert-danger">{{$error}}</p>
-@endforeach  -->

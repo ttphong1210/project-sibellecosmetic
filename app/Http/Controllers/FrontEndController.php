@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Exception;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -18,15 +19,15 @@ use function Psy\debug;
 
 class FrontEndController extends Controller
 {
+
     public function getHome()
     {
         $data['cartInfo'] = Cart::content();
-        // $data['categories'] = Category::orderBy('cate_id','desc')->get();
         $data['categories'] = Category::all();
         $data['featured'] = Product::where('prod_featured', 1)->orderBy('prod_id', 'desc')->get();
         $data['new'] = Product::orderBy('prod_id', 'desc')->take(4)->get();
         $data['suggested'] = Product::inRandomOrder()->take(8)->get();
-        //dd($data);
+
         return view('frontend.home', $data);
     }
 
@@ -119,10 +120,9 @@ class FrontEndController extends Controller
     public function postAddProductFavorite(Request $request)
     {
         //regex sql 
-        // sql thuan
         $data = $request->all();
         $product_id = $data['product_favorite_id'];
-        $product_favorite = @Session::get('favorite');
+        $product_favorite = Session::get('favorite');
         
         if (isset($product_favorite)) {
             if (empty($product_favorite[$product_id])) {

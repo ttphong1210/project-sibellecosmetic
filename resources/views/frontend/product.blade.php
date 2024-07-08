@@ -65,13 +65,13 @@
                     <img class="card-img" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
                     <div class="p_icon">
                       <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
-                        <i class="ti-eye"></i>
+                        <i class="ti-eye icon-style"></i>
                       </a>
                       <a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
-                        <i class=" ti-heart"></i>
+                        <i class=" ti-heart icon-style"></i>
                       </a>
-                      <a href="{{asset('cart/add/'.$item->prod_id)}}">
-                        <i class="ti-shopping-cart"></i>
+                      <a href="#" data-url="{{asset('cart/add/'.$item->prod_id)}}" class="add-to-cart">
+                        <i class="ti-shopping-cart icon-style"></i>
                       </a>
                     </div>
                   </div>

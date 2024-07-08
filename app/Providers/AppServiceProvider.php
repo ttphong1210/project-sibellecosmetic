@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Repositories\AccountCustomer\AccountCustomerRepository;
+use App\Repositories\AccountCustomer\AccountCustomerRepositoryInterface;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
@@ -18,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->bind(AccountCustomerRepositoryInterface::class, AccountCustomerRepository::class);
     }
 
     /**
@@ -35,7 +38,5 @@ class AppServiceProvider extends ServiceProvider
         $data['brands'] = Brand::all();
         view()->share($data);
         
-        // $data['cartInfo'] = Cart::content();
-        // view()->share($data);
     }
 }

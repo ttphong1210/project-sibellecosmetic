@@ -82,7 +82,7 @@
           <div class="contact-info address">
             <span class="contact-info__icon"><i class="ti-home"></i></span>
             <div class="media-body">
-              <h3>77 Quang Trung - TP Đà Nẵng</h3>
+              <h3>482 Trưng Nữ Vương - TP Đà Nẵng</h3>
               <p>Hãy đến và trải nghiệm sản phẩm!</p>
             </div>
           </div>
@@ -102,8 +102,7 @@
           </div>
         </div>
         <div class="store-item-map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3833.8269421847453!2d108.21686601497719!3d16.074467743566842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421837442bf9c7%3A0xb00e214c49ab12e5!2zNzcgUXVhbmcgVHJ1bmcsIFRo4bqhY2ggVGhhbmcsIEjhuqNpIENow6J1LCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1663407469956!5m2!1svi!2s" width="100%" height="200px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-          </iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d958.5773382570048!2d108.21320646962457!3d16.04942889903922!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314219b89ef45939%3A0x184c6a10a8486124!2zNDgyIFRyxrBuZyBO4buvIFbGsMahbmcsIEjDsmEgVGh14bqtbiBOYW0sIEjhuqNpIENow6J1LCDEkMOgIE7hurVuZyA1NTAwMDAsIFZp4buHdCBOYW0!5e0!3m2!1svi!2sus!4v1719853590739!5m2!1svi!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>

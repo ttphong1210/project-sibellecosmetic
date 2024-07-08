@@ -20,7 +20,6 @@ use App\Models\FeeShip;
 use App\Models\Wards;
 use Gloudemans\Shoppingcart\Cart as ShoppingcartCart;
 use Illuminate\Support\Facades\Session;
-// use Symfony\Component\HttpFoundation\Session\Session;
 
 class CheckOutController extends Controller
 {

@@ -4,26 +4,6 @@ ul > li {
      font-weight: lighter;
     cursor: pointer;
 }
-/* .item-photo .product-detail-image ul{
-    
-        list-style: none outside none;
-        padding-left: 0;
-        margin-bottom:0;
-}
-.item-photo .product-detail-image li{
-    display: block;
-    float: left;
-    margin-right: 6px;
-    cursor:pointer;
-}
-.item-photo .product-detail-image img{
-    display: block;
-    height: auto;
-    max-width: 100%;
-} */
-/* li.active {
-    border-bottom: 3px solid silver;
-} */ 
 .body{
     border-top: 1px ridge;
 }
@@ -31,11 +11,8 @@ ul > li {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border-right: 1px solid #f6f6f6; */
 }
 .menu-items {
-    /* list-style-type: none;
-    font-size: 11px; */
     display: inline-flex;
     margin-bottom: 0;
     margin-top: 20px;
@@ -45,9 +22,6 @@ ul > li {
     width: 100%;
     height: 40px;
 }
-/* .btn-action:hover{
-    background-color: #696969;
-} */
 .btn-add-to-cart{
     background-color: #333;
 }
@@ -193,23 +167,6 @@ div.section > div > input {
 .product-detail-option{
     margin-bottom: 11px;
 }
-/* .product-detail-summary p{
-        font-size: .075rem;
-        border: 1px solid #d6d6d6;
-        border-left: none;
-        border-right: none;
-        padding: 11px 0;
-        color: #666;
-        margin: 11px 0;
-} */
-/* .clearfix::after {
-    display: block;
-    clear: both;
-    content: "";
-} */
-/* .product-detail-name h1 a{
-    color: #333;
-} */
 .detail-saleoff {
     color: #333;
     font-size: 1.5rem;
@@ -242,9 +199,13 @@ div.section > div > input {
     padding: 10px 30px;
     display: block;
 }
+#product-info-section{
+    border-bottom: 1px solid;
+}
 .product-detail-description {
     font-size: .875rem;
-    border-bottom: 1px solid var(--main-color);
+    /* border-bottom: 1px solid; */
+    /* border-bottom: 1px solid var(--main-color); */
 }
 .product-detail-description-wrapper {
     background: #fff;
@@ -269,15 +230,14 @@ p {
     margin-left: auto;
     margin-right: auto;
 }
+#product-review-section{
+    padding: 20px 0 !important;
+}
 #divId{
     text-align: center;
     display: grid;
     justify-content: center;
 }
-/* .item-image-detail{
-    display: grid;
-    justify-content: center;
-} */
 .imgStyle {
     width: 80px;
     height: 80px;
@@ -287,5 +247,8 @@ p {
 #mainImage{
     width: 400px;
     height: auto;
+}
+.product-detail-content .pd-tabitem-link:hover{
+    cursor: pointer;
 }
   

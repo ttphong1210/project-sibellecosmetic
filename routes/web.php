@@ -34,13 +34,15 @@ Route::get('search', 'FrontEndController@getSearch');
 Route::get('favorite','FrontEndController@getFavorite');
 Route::post('add-product-favorite','FrontEndController@postAddProductFavorite');
 
+Route::group(['prefix' => 'blog'], function(){
+    Route::get('qua-tang', 'FrontendController@getBlogQTang');
+});
 // Route Cart
 Route::group(['prefix' => 'cart'], function () {
     Route::get('add/{id}', 'CartController@getAddCart');
     Route::get('show', 'CartController@getShowCart');
     Route::get('delete/{id}', 'CartController@getDeleteCart');
     Route::get('update', 'CartController@getUpdateCart');
-    // Route::post('show','CartController@postComplete');
 });
 Route::get('complete', 'CartController@getComplete');
 Route::get('checkout', 'CheckOutController@getCheckout');
@@ -51,29 +53,34 @@ Route::get('delete-feeship','CheckOutController@getDeleteFeeship');
 
 
 // Account Customer
-Route::group(['prefix' => 'account'], function () {
-    Route::get('login_customer', 'AccountCustomerController@getLoginCus');
-    Route::post('login_customer', 'AccountCustomerController@postLoginCus');
-    Route::get('register', 'AccountCustomerController@getAddAcc');
-    Route::post('register', 'AccountCustomerController@postAddAcc');
-    Route::get('logout_customer', 'AccountCustomerController@getLogOutCus');
-    Route::get('forgot_password', 'AccountCustomerController@getForgotPassword');
+Route::group(['prefix' => 'account'], function(){
+    Route::get('register-customer', 'AccountCustomerController@getRegisterCustomer');
+    Route::post('register-customer','AccountCustomerController@postRegisterCustomer');
+    Route::get('login-customer', 'AccountCustomerController@getLoginCustomer');
+    Route::post('login-customer', 'AccountCustomerController@postLoginCustomer');
+    Route::get('forgot-password', 'AccountCustomerController@getForgotPassword');
     Route::post('reset-password', 'AccountCustomerController@postResetPassword');
     Route::get('update-new-password', 'AccountCustomerController@getUpdateNewPassword');
     Route::post('update-new-password', 'AccountCustomerController@postUpdateNewPassword');
 
 
+    Route::get('logout-customer', 'AccountCustomerController@getLogOutCustomer');
 });
+// Route::get('login-repo','AccountCustomerController@getLoginCustomer');
+// Route::group(['prefix' => 'account'], function () {
+//     Route::get('login_customer', 'AccountController@getLoginCus');
+//     Route::post('login_customer', 'AccountController@postLoginCus');
+//     Route::get('register', 'AccountController@getAddAcc');
+//     Route::post('register', 'AccountController@postAddAcc');
+//     Route::get('logout_customer', 'AccountController@getLogOutCus');
+//     Route::get('forgot_password', 'AccountController@getForgotPassword');
+//     Route::post('reset-password', 'AccountController@postResetPassword');
+//     Route::get('update-new-password', 'AccountController@getUpdateNewPassword');
+//     Route::post('update-new-password', 'AccountController@postUpdateNewPassword');
+// });
 
 // Route Admin
 Route::group(['namespace' => 'Admin'], function () {
-    // Route::group(['prefix' => 'login', 'middleware' => 'CheckLogedIn'], function () {
-    //     Route::get('/', 'LoginController@getLogin');
-    //     Route::post('/', 'LoginController@postLogin')->name('login');
-    // });
-   
-    // Route::get('logout', 'HomeController@getLogout');
-
     Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogedOut'], function () {
         Route::get('home', 'HomeController@getHome');
 
@@ -84,13 +91,10 @@ Route::group(['namespace' => 'Admin'], function () {
         });
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', 'CategoryController@getCate');
-
             Route::get('add', 'CategoryController@getAddCate');
             Route::post('add', 'CategoryController@postAddCate');
-
             Route::get('edit/{id}', 'CategoryController@getEditCate');
             Route::post('edit/{id}', 'CategoryController@postEditCate');
-
             Route::get('delete/{id}', 'CategoryController@getDeleteCate');
         });
 
@@ -136,8 +140,12 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::post('add-delivery', 'DeliveryController@postAddDelivery');
             Route::post('update-delivery', 'DeliveryController@postEditDelivery');
         });
+
+        // Route slider banner
         Route::group(['prefix' => 'slider'], function () {
             Route::get('/', 'SliderController@getSlider');
+            Route::get('add-slider', 'SliderController@getAddSlider');
+            Route::post('add-slider', 'SliderController@postAddSlider');
         });
     });
 });
@@ -149,4 +157,5 @@ Route::get('login-auth', 'AccountController@getLoginAuth');
 Route::post('login-auth', 'AccountController@postLoginAuth');
 Route::get('logout-auth', 'AccountController@getLogOutAuth');
 
-
+// Route::get('res','AccountCustomerController@getRes');
+// Route::post('res','AccountCustomerController@postRes');

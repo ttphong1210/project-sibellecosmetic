@@ -9,3 +9,10 @@
     border: none;
     border-bottom: 1px solid;
 }
+
+#textbox .textbox-banking{
+    line-height: 1.5rem;
+    white-space: pre-line;
+    color: black;
+    text-align: center;
+}
