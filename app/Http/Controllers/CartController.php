@@ -45,7 +45,6 @@ class CartController extends Controller
     public function getUpdateCart(Request $request){
         Cart::update($request->rowId, $request->qty);
         $data['items'] = Cart::content();
-        $data['subtotal'] = Cart::subtotal(0, ',', '.');
         $data['total'] = Cart::total();
         $data['count'] = Cart::count();
         $cartComponent = view('frontend.component.shopping_cart_component', $data)->render();
