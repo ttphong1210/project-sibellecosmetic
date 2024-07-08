@@ -24,23 +24,24 @@
         </div>
     </div>
     <div id="cart-content">
-    @include('frontend.component.shopping_cart_component')
+        @include('frontend.component.shopping_cart_component')
     </div>
+</div>
+@else
+<div class="container">
+    <div class="row text-center">
+        <div class="col-sm-12 col-sm-offset-3">
+            <br><br>
+            <p> Chưa có sản phẩm trong giỏ hàng !</p>
 
-    @else
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-sm-12 col-sm-offset-3">
-                <br><br>
-                <p> Chưa có sản phẩm trong giỏ hàng !</p>
-
-                <a href="{{asset('product')}}" style="border-radius:20px ; width:20%;" class="btn btn-success"> Quay lại
-                    mua
-                    sắm </a>
-                <br><br>
-            </div>
-
+            <a href="{{asset('product')}}" style="border-radius:20px ; width:20%;" class="btn btn-success"> Quay lại
+                mua
+                sắm </a>
+            <br><br>
         </div>
+
     </div>
-    @endif
-    @endsection
+</div>
+
+@endif
+@endsection

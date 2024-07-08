@@ -27,7 +27,8 @@
                         </div>
                     </div>
                     <div class="col-2 product-favorite btn-buy">
-                        <a href="{{asset('cart/add/'.$item['product_id'])}}"> <button class="btn btn-buy-product">Mua ngay</button></a>
+                        <a href="#" data-url="{{asset('cart/add/'.$item['product_id'])}}"
+                                                class="add-to-cart"> <button class="btn btn-buy-product">Mua ngay</button></a>
                     </div>
                 </div>
                 @endforeach
