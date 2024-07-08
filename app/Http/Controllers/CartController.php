@@ -17,6 +17,7 @@ class CartController extends Controller
         $product = Product::find($id);        
         Cart::add(['id' => $product->prod_id, 'name' => $product->prod_name, 'qty' => 1, 'price' => $product->prod_price, 'weight' => 0 ,'options' => ['img' => $product->prod_img]]);
         $data['count'] = Cart::count();
+        $data['subtotal'] = Cart::subtotal(0, ',', '.');
         $miniCart = view('frontend.component.mini_cart', $data)->render();
         return response()->json([
             'count' => $data['count'],
@@ -44,6 +45,7 @@ class CartController extends Controller
     public function getUpdateCart(Request $request){
         Cart::update($request->rowId, $request->qty);
         $data['items'] = Cart::content();
+        $data['subtotal'] = Cart::subtotal(0, ',', '.');
         $data['total'] = Cart::total();
         $data['count'] = Cart::count();
         $cartComponent = view('frontend.component.shopping_cart_component', $data)->render();
@@ -51,6 +53,7 @@ class CartController extends Controller
         return response()->json([
             'cart_component' => $cartComponent,
             'mini_cart' => $miniCart,
+            'count_item_cart' => $data['count'],
             'code' => 200,
             'message' => 'Cập nhật số lượng thành công !',
             'error' => 'Lỗi cập nhật số lượng không thành công !'
@@ -59,6 +62,5 @@ class CartController extends Controller
 
     public function getComplete(){
         return view('frontend.success');
-
     }
 }

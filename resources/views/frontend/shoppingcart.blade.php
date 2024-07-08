@@ -7,7 +7,7 @@
 <div class="container px-4 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
         <div class="col-5">
-            <h5 class="heading">Giỏ hàng({{Cart::count()}} sản phẩm)</h5>
+            <h5 id="header-shopping-cart" class="heading"> <span> Giỏ hàng ( {{Cart::count()}} sản phẩm )</span> </h5>
         </div>
         <div class="col-7">
             <div class="row text-right">

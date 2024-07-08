@@ -42,6 +42,7 @@ function cartUpdate(event) {
               alert(data.message);
               $('#cart-content').html(data.cart_component);
               $('#list-product-minicart').html(data.mini_cart);
+              $('#header-shopping-cart').html( '<span> Giỏ hàng ( ' + data.count_item_cart + ' sản phẩm )</span>');
           }
       },
       error: function(error) {

@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="row d-flex justify-content-between px-4" id="cart-total">
-                            <p class="mb-1 text-left">Tổng tiền: </p>
+                            <p class="mb-1 text-left">Tổng tiền sản phẩm: </p>
                             <h6 class="mb-1 text-right">{{$total}}đ</h6>
                         </div>
                         <button class="btn-block btn-blue">
