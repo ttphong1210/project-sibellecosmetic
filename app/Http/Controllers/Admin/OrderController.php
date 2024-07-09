@@ -19,6 +19,14 @@ class OrderController extends Controller
 
         return view('admin.layout.order.listcustomer', $data);
     }
+
+    public function getDeleteCustomer($cust_id)
+    {
+        $customer = Customer::find($cust_id);
+        Customer::destroy($cust_id);
+        return back();
+    }
+
     public function getOrder()
     {
         $data['order'] = DB::table('orders')
@@ -55,5 +63,6 @@ class OrderController extends Controller
         Order::destroy($id);
         return back();
     }
+
 
 }

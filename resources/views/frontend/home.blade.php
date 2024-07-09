@@ -177,8 +177,8 @@
                         <div class="product-img">
                             <img class="img-fluid" src="img/product/new-product/images.png" alt="" />
                         </div>
-                        <h4>$120.70</h4>
-                        <a href="#" class="main_btn">Add to cart</a>
+                        <h4>120.000 VND</h4>
+                        <a href="#" class="main_btn">Thêm vào giỏ hàng</a>
                     </div>
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0">

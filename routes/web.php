@@ -132,7 +132,7 @@ Route::group(['namespace' => 'Admin'], function () {
             // Customer
 
             Route::get('customer', 'OrderController@getCustomer');
-            Route::get('delete-customer/{id}', 'OrderController@getDeleteCustomer');
+            Route::get('customer/delete-customer/{id}', 'OrderController@getDeleteCustomer');
         });
         Route::group(['prefix' => 'delivery'], function () {
             Route::get('/', 'DeliveryController@getDelivery');

@@ -32,7 +32,7 @@
                                 <td> {{$item->created_at}}</td>
                                 <td>{{$item->cust_email}}</td>
                                 <td>
-                                    <a href="{{asset('admin/order/delete-customer/'.$item->cust_id)}}" onclick="return confirm('Bạn có chắc chắn muốn xoá ?')" class="btn btn-danger">
+                                    <a href="{{asset('admin/order/customer/delete-customer/'.$item->cust_id)}}" onclick="return confirm('Bạn có chắc chắn muốn xoá ?')" class="btn btn-danger">
                                         <span class="glyphicon glyphicon-trash"></span> Xoá </a>
                                 </td>
                             </tr>
