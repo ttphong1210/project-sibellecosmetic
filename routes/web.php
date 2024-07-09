@@ -36,7 +36,9 @@ Route::post('add-product-favorite','FrontEndController@postAddProductFavorite');
 
 Route::group(['prefix' => 'blog'], function(){
     Route::get('qua-tang', 'FrontendController@getBlogQTang');
+    Route::get('kien-thuc', 'FrontendController@getBlogKThuc');
 });
+
 // Route Cart
 Route::group(['prefix' => 'cart'], function () {
     Route::get('add/{id}', 'CartController@getAddCart');
@@ -66,18 +68,6 @@ Route::group(['prefix' => 'account'], function(){
 
     Route::get('logout-customer', 'AccountCustomerController@getLogOutCustomer');
 });
-// Route::get('login-repo','AccountCustomerController@getLoginCustomer');
-// Route::group(['prefix' => 'account'], function () {
-//     Route::get('login_customer', 'AccountController@getLoginCus');
-//     Route::post('login_customer', 'AccountController@postLoginCus');
-//     Route::get('register', 'AccountController@getAddAcc');
-//     Route::post('register', 'AccountController@postAddAcc');
-//     Route::get('logout_customer', 'AccountController@getLogOutCus');
-//     Route::get('forgot_password', 'AccountController@getForgotPassword');
-//     Route::post('reset-password', 'AccountController@postResetPassword');
-//     Route::get('update-new-password', 'AccountController@getUpdateNewPassword');
-//     Route::post('update-new-password', 'AccountController@postUpdateNewPassword');
-// });
 
 // Route Admin
 Route::group(['namespace' => 'Admin'], function () {
@@ -156,6 +146,3 @@ Route::post('register-auth', 'AccountController@postRegisterAuth');
 Route::get('login-auth', 'AccountController@getLoginAuth');
 Route::post('login-auth', 'AccountController@postLoginAuth');
 Route::get('logout-auth', 'AccountController@getLogOutAuth');
-
-// Route::get('res','AccountCustomerController@getRes');
-// Route::post('res','AccountCustomerController@postRes');

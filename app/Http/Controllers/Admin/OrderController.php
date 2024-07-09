@@ -46,7 +46,6 @@ class OrderController extends Controller
             ->leftJoin('products', 'order_details.product_id', '=', 'products.prod_id')
             ->where('orders.customer_id', '=', $id)
             ->get();
-
         return view('admin.layout.order.editorder', $data);
     }
     public function postEditOrder(Request $request, $id)
