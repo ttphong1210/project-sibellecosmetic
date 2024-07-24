@@ -42,11 +42,11 @@
                         @include('errors.note')
                         <div class="col-md-12 form-group p_star">
                             <span class="placeholder" data-placeholder="Username or Email"></span>
-                            <input type="text" class="form-control" id="name" name="email" />
+                            <input type="email" required class="form-control" id="name" name="email" />
                         </div>
                         <div class="col-md-12 form-group p_star">
                             <span class="placeholder" data-placeholder="Password"></span>
-                            <input type="password" class="form-control" id="password" name="password" />
+                            <input type="password" required class="form-control" id="password" name="password" />
                             <input id="check" type="checkbox">
                             <p id="checkdisplay">Hiện mật khẩu</p>
                         </div>

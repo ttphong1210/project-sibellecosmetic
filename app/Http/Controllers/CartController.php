@@ -3,19 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Repositories\Interfaces\CartRepositoryInterface;
 use Illuminate\Http\Request;
-// use Cart;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Session;
+
 
 class CartController extends Controller
 {
+    protected $cartRepository;
+    public function __construct(CartRepositoryInterface $cartRepository)
+    {
+        $this->cartRepository = $cartRepository;
+    }
 
-    public function getAddCart($id){
-
-        $product = Product::find($id);        
-        Cart::add(['id' => $product->prod_id, 'name' => $product->prod_name, 'qty' => 1, 'price' => $product->prod_price, 'weight' => 0 ,'options' => ['img' => $product->prod_img]]);
+    public function getAddCart($id)
+    {
+        $product = Product::find($id);
+        $this->cartRepository->add($product);
         $data['count'] = Cart::count();
         $data['subtotal'] = Cart::subtotal(0, ',', '.');
         $miniCart = view('frontend.component.mini_cart', $data)->render();
@@ -25,30 +29,23 @@ class CartController extends Controller
             'code' => 200,
             'message' => 'Thêm sản phẩm vào giỏ hàng thành công !',
             'error' => 'Lỗi thêm sản phẩm vào giỏ hàng không thành công !'
-        ], 200 );
-
-       
+        ], 200);
     }
-
-    public function getShowCart(){
-        $data['total'] = Cart::subtotal(0,',','.');
-        $data['items'] = Cart::content();
-
+    public function getShowCart()
+    {
+        $data = $this->cartRepository->show();
         return view('frontend.shoppingcart', $data);
     }
 
-    public function getDeleteCart($id){
-        Cart::remove($id);
-        return back();
-
-    }
-    public function getUpdateCart(Request $request){
-        Cart::update($request->rowId, $request->qty);
-        $data['items'] = Cart::content();
-        $data['total'] = Cart::total();
-        $data['count'] = Cart::count();
+    public function getUpdateCart(Request $request)
+    {
+        $this->cartRepository->update($request->rowId, $request->qty);
+        $data['items'] = $this->cartRepository->content();
+        $data['total'] = $this->cartRepository->total();
+        $data['count'] = $this->cartRepository->count();
         $cartComponent = view('frontend.component.shopping_cart_component', $data)->render();
         $miniCart = view('frontend.component.mini_cart', $data)->render();
+
         return response()->json([
             'cart_component' => $cartComponent,
             'mini_cart' => $miniCart,
@@ -59,7 +56,13 @@ class CartController extends Controller
         ], 200);
     }
 
-    public function getComplete(){
+    public function getDeleteCart($id)
+    {
+        $this->cartRepository->delete($id);
+        return back();
+    }
+    public function getComplete()
+    {
         return view('frontend.success');
     }
 }

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md pr-md-5 mb-4 mb-md-0">
-          <h3> Si.Belle Cosmetic </h3>
+          <h3> Si.Belle Cosmetics </h3>
           <p class="mb-3"> Address: 77 Quang Trung - TP Đà Nẵng
           <p>
           <p class="mb-3"> Hotline: 077 940 6396 </p>

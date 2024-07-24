@@ -14,7 +14,7 @@ class AccountCustomerRepository extends EloquentRepository implements AccountCus
      * @return string
      */
     public function getModel(){
-        return App\Models\AccountCustomer::class;
+        return AccountCustomer::class;
     }
 
     public function __construct(AccountCustomer $_model ){

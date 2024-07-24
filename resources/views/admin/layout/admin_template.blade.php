@@ -24,6 +24,19 @@
   <script>
      CKEDITOR.replace('description');
      CKEDITOR.replace('edit_description');
+
+    //  $(document).ready(function() {
+    //   CKEDITOR.replace('description');
+    //  CKEDITOR.replace('edit_description');
+
+    //   CKEDITOR.on('instanceReady', function(event){
+    //     var editor = event.editor;
+    //     console.log(editor.name + 'is ready');
+
+    //     var instance = CKEDITOR.instance['description'];
+    //     console.log(instance.getData());
+    //   })
+    //  });
   </script>
   
   <script>

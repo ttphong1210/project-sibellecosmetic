@@ -24,7 +24,7 @@
 		min-height: 700px;
 	}
 	.home_banner_area .banner_inner {
-		min-height: 700px;
+		/* min-height: 700px; */
 	}
 	/* End Home Banner Area css
 	============================================================================================ */
@@ -73,6 +73,18 @@
 	.login_form_inner.reg_form {
 		padding-top: 30px;
 	}
+	.header_area .navbar .nav .nav-item .form-search{
+		width: 150px !important;
+	}
+	#input-search{
+		width: 100% !important;
+	} 
+	.header_area .navbar .icons button {
+		position: absolute !important;
+		right: 120px !important;
+		top: 26px !important;
+	}
+
 }
 
 @media (max-width:991px){
@@ -92,7 +104,7 @@
 	.header_area .navbar .right_nav hr {
 		display: none;
 	}
-    .navbar-toggler[aria-expanded="false"] span:nth-child(2) {
+     .navbar-toggler[aria-expanded="false"] span:nth-child(2) {
 		opacity: 1;
 	}
 	.navbar-toggler[aria-expanded="true"] span:nth-child(2) {
@@ -111,6 +123,9 @@
 		transform: rotate(45deg);
 		bottom: 6px;
 		position: relative;
+	}
+	.navbar-toggler[aria-expanded="false"] .icon-bar{
+		transform: rotate(0deg);
 	}
 	.navbar-toggler span{
 		display: block;
@@ -170,8 +185,19 @@
 	.header_area .navbar .search {
 		line-height: 40px;
 	}
+	.header_area .navbar .nav.navbar-nav.navbar-right .icons{
+		background-color: white !important;
+	}
+	.header_area .navbar .icons button{
+		width: 18px;
+		left: 22% !important;
+		top: 25px !important;
+	}
 	.header_area .navbar .nav.navbar-nav.navbar-right li {
 		margin-left: 0px;
+	}
+	#list-product-minicart, #user-account, #favorite-product{
+		display: none;
 	}
 	/* End Main Menu Area css
 	============================================================================================ */
@@ -203,6 +229,9 @@
 	}
 	/* End Contact page Area css
 	============================================================================================ */
+	.home_banner_area{
+		min-height: 0;
+	}
 	.home_banner_area .donation_inner{
 		margin-bottom: -30px;
 	}
@@ -498,11 +527,22 @@
 	
 	/* End Blog Page Area css
 	============================================================================================ */
-	.home_banner_area {
+	/* .home_banner_area {
 		min-height: 500px;
+	} */
+	.home_banner_area{
+		min-height: 0 !important;
 	}
 	.home_banner_area .banner_inner {
-		min-height: 500px;
+		/* min-height: 500px; */
+		min-height: 0 !important;
+	}
+	.home_banner_area .banner_inner .container{
+		padding: 0 !important;
+	}
+	.header_area .navbar .icons button{
+		left: 39% !important;
+		top: 26px !important;
 	}
 	.total_rate .col-6{
 		flex: 0 0 100%;

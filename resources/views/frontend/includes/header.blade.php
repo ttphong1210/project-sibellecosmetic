@@ -32,23 +32,22 @@
             </div>
         </div>
     </div>
+
     <div class="main_menu">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light w-100">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <a class="navbar-brand logo_h" href="{{route('home')}}">
                     <img src="{{asset('img/Si.belle.jpeg')}}" alt="" style="width: 137px; height: 38px;" />
-                    <!-- <img src="{{asset('img/logo.png')}}" alt="" /> -->
-
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <!-- Collect the nav links, forms, and other content for toggling -->
+
                 <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
                     <div class="row w-100 mr-0">
                         <div class="col-lg-7 pr-0">
@@ -57,38 +56,31 @@
                                     <a class="nav-link" href="{{route('home')}}">Trang chủ</a>
                                 </li>
                                 <li class="nav-item submenu dropdown">
-                                    <a href="{{route('product')}}" class="nav-link dropdown-toggle"
-                                        data-toggle="dropdown" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Sản phẩm</a>
+                                    <a href="{{route('product')}}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sản phẩm</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{route('product')}}">Tất cả sản phẩm</a>
                                         </li>
                                         @foreach($categories as $cate)
                                         <li class="nav-item">
-                                            <a class="nav-link"
-                                                href="{{asset('category/'.$cate->cate_id.'/'.$cate->cate_slug.'.html')}}">{{$cate->cate_name}}</a>
+                                            <a class="nav-link" href="{{asset('category/'.$cate->cate_id.'/'.$cate->cate_slug.'.html')}}">{{$cate->cate_name}}</a>
                                         </li>
                                         @endforeach
                                     </ul>
                                 </li>
                                 <li class="nav-item submenu dropdown">
-                                    <a href="{{route('product')}}" class="nav-link dropdown-toggle"
-                                        data-toggle="dropdown" role="button" aria-haspopup="true"
-                                        aria-expanded="false">Thương hiệu</a>
+                                    <a href="{{route('product')}}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thương hiệu</a>
                                     <ul class="dropdown-menu">
 
                                         @foreach($brands as $brand)
                                         <li class="nav-item">
-                                            <a class="nav-link"
-                                                href="{{asset('brand/'.$brand->brand_id.'/'.$brand->brand_slug.'.html')}}">{{$brand->brand_name}}</a>
+                                            <a class="nav-link" href="{{asset('brand/'.$brand->brand_id.'/'.$brand->brand_slug.'.html')}}">{{$brand->brand_name}}</a>
                                         </li>
                                         @endforeach
                                     </ul>
                                 </li>
                                 <li class="nav-item submenu dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                                        aria-haspopup="true" aria-expanded="false">Blog</a>
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{asset('blog/qua-tang')}}">Quà tặng</a>
@@ -109,21 +101,18 @@
                                 <li class="nav-item">
                                     <form action="{{asset('search/')}}" method="get" class="icons">
                                         <div class="form-search">
-                                            <input type="text" placeholder="Tìm kiếm.." id="input-search" name="result"
-                                                style="border:none; outline:none;">
-                                            <button type="submit" style="outline: none;"> <i id="icon-search"
-                                                    class="ti-search" aria-hidden="true"></i></button>
+                                            <input type="text" placeholder="Tìm kiếm.." id="input-search" name="result" style="border:none; outline:none;">
+                                            <button id="btn-submit-search" type="submit" style="outline: none;"> <i id="icon-search" class="ti-search" aria-hidden="true"></i></button>
                                         </div>
                                     </form>
                                 </li>
                                 <li id="list-product-minicart" class="nav-item submenu dropdown">
                                     @include('frontend.component.mini_cart')
-                                    
+
                                 </li>
 
-                                <li class="nav-item submenu dropdown">
-                                    <a href="#" target="_blank" class="icons nav-link dropdown-toggle"
-                                        data-toggle="dropdown">
+                                <li id="user-account" class="nav-item submenu dropdown">
+                                    <a href="#" target="_blank" class="icons nav-link dropdown-toggle" data-toggle="dropdown">
                                         <i class="ti-user" aria-hidden="true"></i>
                                     </a>
                                     @if(Auth::guard('account_customer')->check())
@@ -133,8 +122,7 @@
                                                 {{Auth::guard('account_customer')->user()->name}}</a>
                                         </li>
                                         <li class="nav-link">
-                                            <a href="{{asset('account/logout-customer')}}"
-                                                style="color: black;">Logout</a>
+                                            <a href="{{asset('account/logout-customer')}}" style="color: black;">Logout</a>
                                         </li>
                                     </ul>
                                     @else
@@ -151,7 +139,7 @@
                                     @endif
                                 </li>
 
-                                <li class="nav-item">
+                                <li id="favorite-product" class="nav-item">
                                     <a href="{{asset('favorite')}}" class="icons">
                                         <i class="ti-heart" aria-hidden="true"></i>
                                     </a>
@@ -166,9 +154,9 @@
 </header>
 
 <script>
-$(document).ready(function() {
-    $("#icon-search").click(function() {
-        $("#input-search").show();
+    $(document).ready(function() {
+        $("#icon-search").click(function() {
+            $("#input-search").show();
+        });
     });
-});
 </script>

@@ -27,7 +27,41 @@
 <!--================Category Product Area =================-->
 <section class="cat_product_area section_gap">
   <div class="container">
-    <div class="row flex-row-reverse">
+    <div class="row">
+      <div class="col-lg-3">
+        <div class="left_sidebar_area">
+          <aside class="left_widgets p_filter_widgets">
+              <div class="l_w_title" id="categoryDropdown">
+                <h3>Danh mục sản phẩm</h3>
+              </div>
+            <div class="widgets_inner" aria-labelledby="categoryDropdown">
+              <ul class="list">
+                @foreach($category as $cate)
+                <li>
+                  <a href="{{asset('category/'.$cate->cate_id.'/'.$cate->cate_slug.'.html')}}">{{$cate->cate_name}}</a>
+                </li>
+                @endforeach
+              </ul>
+            </div>
+          </aside>
+
+          <aside class="left_widgets p_filter_widgets">
+              <div class="l_w_title" id="brandDropdown">
+                <h3>Thương hiệu sản phẩm</h3>
+              </div>
+            <div class="widgets_inner" aria-labelledby="brandDropdown">
+              <ul class="list">
+                @foreach($brands as $brand)
+                <li>
+                  <a href="{{asset('brand/'.$brand->brand_id.'/'.$brand->brand_slug.'.html')}}">{{$brand->brand_name}}</a>
+                </li>
+                @endforeach
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+
       <div class="col-lg-9">
         <div class="product_top_bar">
           <div class="left_dorp">
@@ -38,13 +72,6 @@
                 <option value="{{Request::url()}}?sort_by=gia_tang_dan">Giá tăng dần...</option>
                 <option value="{{Request::url()}}?sort_by=gia_giam_dan">Giá giảm dần...</option>
               </select>
-
-              <!-- <select class="show" id="show">
-                    <option value="{{Request::url()}}?show_by=none">Hiển thị...</option>
-                    <option value="{{Request::url()}}?show_by=show_6">Hiển thị 6</option>
-                    <option value="{{Request::url()}}?show_by=show_10">Hiển thị 10</option>
-                    <option value="{{Request::url()}}?show_by=show_14">Hiển thị 14</option>
-                  </select> -->
               {{csrf_field()}}
             </form>
           </div>
@@ -54,7 +81,7 @@
           <div class="row">
             @foreach($product as $item)
             <div class="col-lg-4 col-md-6">
-              <div class="single-product">
+              <div class="single-product card-product">
                 <form>
                   {{csrf_field()}}
                   <input type="hidden" value="{{$item->prod_id}}" class="product_favorite_id_{{$item->prod_id}}">
@@ -94,39 +121,7 @@
         </div>
       </div>
 
-      <div class="col-lg-3">
-        <div class="left_sidebar_area">
-          <aside class="left_widgets p_filter_widgets">
-            <div class="l_w_title">
-              <h3>Danh mục sản phẩm</h3>
-            </div>
-            <div class="widgets_inner">
-              <ul class="list">
-                @foreach($category as $cate)
-                <li>
-                  <a href="{{asset('category/'.$cate->cate_id.'/'.$cate->cate_slug.'.html')}}">{{$cate->cate_name}}</a>
-                </li>
-                @endforeach
-              </ul>
-            </div>
-          </aside>
 
-          <aside class="left_widgets p_filter_widgets">
-            <div class="l_w_title">
-              <h3>Thương hiệu sản phẩm</h3>
-            </div>
-            <div class="widgets_inner">
-              <ul class="list">
-                @foreach($brands as $brand)
-                <li>
-                  <a href="{{asset('brand/'.$brand->brand_id.'/'.$brand->brand_slug.'.html')}}">{{$brand->brand_name}}</a>
-                </li>
-                @endforeach
-              </ul>
-            </div>
-          </aside>
-        </div>
-      </div>
     </div>
   </div>
 </section>

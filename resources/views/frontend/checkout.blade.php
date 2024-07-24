@@ -2,7 +2,6 @@
 @section('title','Xác nhận mua hàng')
 @section('content')
 <link rel="stylesheet" href="{{asset('css/login-checkout.css')}}">
-
 <!--================Checkout Area =================-->
 <section class="checkout_area section_gap">
     <div class="container">
@@ -11,28 +10,31 @@
                 <form class="row contact_form" action="{{asset('checkout')}}" method="POST" novalidate="novalidate">
                     <div class="col-lg-8">
                         <h3>Địa chỉ giao hàng</h3>
-                        @if(session('alert'))
-                        <div class="alert alert-success">
-                            {{session('alert')}}
-                        </div>
-                        @endif
+                        @include('errors.note')
                         <div class="row">
                             <div class="col-md-12 form-group p_star">
                                 <span class="placeholder" data-placeholder="Họ và Tên"></span>
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                                 <input type="text" required class="form-control" name="name" value="{{old('name')}}" />
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <span class="placeholder" data-placeholder="Số điện thoại"></span>
-                                <input type="text" required class="form-control" id="number" name="number_phone" value="{{old('number_phone')}}"/>
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" required class="form-control" id="number" name="number_phone"
+                                    value="{{old('number_phone')}}" />
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <span class="placeholder" data-placeholder=" Email"></span>
-                                <input type="text" required class="form-control" id="email" name="email" value="{{old('email')}}"/>
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" required class="form-control" id="email" name="email"
+                                    value="{{old('email')}}" />
                             </div>
 
                             <div class="col-md-12 form-group p_star">
                                 <span class="placeholder" data-placeholder="Địa chỉ"></span>
-                                <input type="text" required class="form-control" id="address" name="address" value="{{old('address')}}"/>
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" required class="form-control" id="address" name="address"
+                                    value="{{old('address')}}" />
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="creat_account">
@@ -46,7 +48,8 @@
                                     <input type="checkbox" id="f-option3" name="selector" />
                                     <label for="f-option3">Gửi hàng đến địa chỉ khác?</label>
                                 </div>
-                                <textarea class="form-control" name="notes" id="notes" rows="1" value="Không ghi chú cho đơn hàng" placeholder="Ghi chú đơn hàng"></textarea>
+                                <textarea class="form-control" name="notes" id="notes" rows="1"
+                                    value="Không ghi chú cho đơn hàng" placeholder="Ghi chú đơn hàng"></textarea>
                             </div>
                         </div>
                     </div>
@@ -54,63 +57,29 @@
                         <div class="order_box">
                             <h2>Thông tin đơn hàng</h2>
                             <ul class="list">
-                                <?php $totalProduct =  0 ?>
                                 @foreach($cart as $item)
                                 <li>
                                     <a href="#">
                                         <span style="width: 70%;" class="cart-name">{{$item->name}}</span>
                                         <span style="width: 10%;" class="middle">x {{$item->qty}}</span>
-                                        <span style="width: 20%;" class="last">{{number_format($item->price*$item->qty,0,',','.')}}đ</span>
+                                        <span style="width: 20%;"
+                                            class="last">{{number_format($item->price*$item->qty,0,',','.')}}đ</span>
                                     </a>
                                 </li>
-                                <?php $totalProduct += $item->price * $item->qty ?>
                                 @endforeach
                             </ul>
                             <ul class="list list_2">
                                 <li>
                                     <a class="summary-main table" style="margin: 0px;" href="#">
                                         <p class="col subtotal-title">Tạm tính:</p>
-                                        <span class="col text-right"><?php echo number_format($totalProduct, 0, ',', '.') ?>đ</span>
-                                    </a>
-                                </li>
 
-                                @if(Session::has('feeship'))
-                                <li>
-                                    <a href="{{asset('delete-feeship')}}" id="fee-ship-checkout">
-                                        <p class="col subtotal-title"> Phí ship:</p>
-                                        <i class="fa fa-close" style="padding:18px 10px;"></i>
-                                        <span>
-                                            {{number_format(Session::get('feeship'),0,',','.')}}đ
-                                        </span>
+                                        <span class="col text-right">{{$totalProduct}}đ</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a class="summary-main table" id="total-checkout" href="#">
-                                        <p class="col total-title">Tổng tiền:</p>
-                                        <?php $total_after_feeship = $totalProduct + session()->get('feeship') ?>
-                                        <span class="col text-right"> <?php echo number_format($total_after_feeship, 0, ',', '.') ?>đ </span>
-                                    </a>
-                                </li>
-                                @else
-                                <?php $fee = 25000 ?>
-                                <li>
-                                    <a href="" id="fee-ship-checkout">
-                                        <p class="col subtotal-title"> Phí ship: <small>Toàn quốc</small></p>
+                                <div class="check-total-checkout">
+                                    @include('frontend.component.checkout_component')
+                                </div>
 
-                                        <span>
-                                            {{number_format($fee,0,',','.')}}đ
-                                        </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="summary-main table" id="total-checkout" href="#">
-                                        <p class="col total-title">Tổng tiền:</p>
-                                        <?php $total_after_feeship = $totalProduct + $fee ?>
-                                        <span class="col text-right"> <?php echo number_format($total_after_feeship, 0, ',', '.') ?>đ </span>
-                                    </a>
-                                </li>
-
-                                @endif
                             </ul>
                             <div class="payment_item">
                                 <div class="radion_btn">
@@ -131,7 +100,6 @@
                                 </div>
                                 <div id="textbox" style="display: none;">
                                     <p class="textbox-banking">
-
                                         Số tài khoản: 0898238258
                                         Chủ tài khoản: TRAN THE PHONG
                                         Ngân hàng: MB BANK - MB (NGAN HANG QUAN DOI )
@@ -142,21 +110,15 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option4" name="selector" />
-                                <label for="f-option4">I’ve read and accept the </label>
-                                <a href="#">terms & conditions*</a>
-                            </div>
                             <div class="form-group" style="display: grid;">
                                 <button type="submit" class="main_btn" name="submit">Thực hiện đơn hàng</button>
                             </div>
                         </div>
                     </div>
-
                     {{csrf_field()}}
                 </form>
-                <form role="form delivery_form" method="POST" action="" style="width: 66%;" enctype="multipart/form-data">
-                    @include('errors.note')
+                <form role="form delivery_form" method="POST" action="" style="width: 66%;"
+                    enctype="multipart/form-data">
                     <div class="box-body">
                         <div class="form-group">
                             <select required name="city" id="city" class="form-control choose city">
@@ -177,7 +139,9 @@
                             </select>
                         </div>
                         <div class="box-footer">
-                            <button type="button" data-token="{{ csrf_token() }}" style="background-color:#71cd14 ;" name="charge-shipping" class="btn btn-primary charge-shipping">Tính phí vận chuyển</button>
+                            <button type="button" data-token="{{ csrf_token() }}" style="background-color:#71cd14 ;"
+                                name="charge-shipping" class="btn btn-primary charge-shipping">Tính phí vận
+                                chuyển</button>
                         </div>
                         {{csrf_field()}}
                 </form>

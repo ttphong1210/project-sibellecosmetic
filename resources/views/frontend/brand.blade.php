@@ -10,9 +10,9 @@
           <p>Very us move be blessed multiply night</p>
         </div>
         <div class="page_link">
-          <a href="{{route('home')}}">Home</a>
-          <a href="category.html">Shop</a>
-          <a href="category.html">Women Fashion</a>
+          <a href="{{route('home')}}">Trang chủ</a>
+          <!-- <a href="category.html">Shop</a>
+          <a href="category.html">Women Fashion</a> -->
         </div>
       </div>
     </div>
