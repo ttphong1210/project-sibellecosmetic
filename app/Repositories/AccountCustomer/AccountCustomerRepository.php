@@ -4,8 +4,7 @@ namespace App\Repositories\AccountCustomer;
 use App\Models\AccountCustomer;
 use App\Repositories\EloquentRepository;
 use App\Repositories\AccountCustomer\AccountCustomerRepositoryInterface;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Collection;
 
 class AccountCustomerRepository extends EloquentRepository implements AccountCustomerRepositoryInterface {
 
@@ -20,27 +19,7 @@ class AccountCustomerRepository extends EloquentRepository implements AccountCus
     public function __construct(AccountCustomer $_model ){
         $this->_model = $_model;
     }
-    public function getLoginCustomer(){
 
-    }
-    // public function postLoginCustomer(Request $request){
-    //     $credentials = $request->only('email','password');
-    // }
-    // public function postLoginCustomer($request){
-    //     $data = [
-    //         'email' => $request->email,
-    //         'password' => $request->password
-    //     ];
-    //     dd($data);
-    //     if (Auth::guard('account_customer')->attempt($data)) {
-    //         return redirect('/');
-    //     } else {
-    //         return redirect()->back()->with('error', 'Username hoặc Password không đúng');
-    //     }
-    // }
-    public function getRegisterCustomer(){
-
-    }
     public function postRegisterCustomer($data){
         return AccountCustomer::create([
             'name' => $data['name'],
@@ -48,5 +27,27 @@ class AccountCustomerRepository extends EloquentRepository implements AccountCus
             'email' => $data['email'],
             'password' => bcrypt($data['pass']),
         ]);
+    }
+
+    public function findByEmail(string $email){
+        return AccountCustomer::where('email', $email)->get();
+    }
+    public function updateForgotToken(int $id, string $token){
+        $accountCustomer = AccountCustomer::find($id);
+        $accountCustomer->forgot_token = $token;
+        $accountCustomer->save();
+    }
+    public function findByEmailAndToken(string $email, string $token): Collection
+    {
+        return AccountCustomer::where('email', $email)->where('forgot_token', $token)->get();
+    }
+    public function updatePassword(int $id, string $password, string $token): bool{
+        $account = AccountCustomer::find($id);
+        if($account){
+            $account->password = bcrypt($password);
+            $account->forgot_token = $token;
+            return $account->save();
+        } 
+        return false;
     }
 }

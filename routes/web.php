@@ -146,3 +146,11 @@ Route::post('register-auth', 'AccountController@postRegisterAuth');
 Route::get('login-auth', 'AccountController@getLoginAuth');
 Route::post('login-auth', 'AccountController@postLoginAuth');
 Route::get('logout-auth', 'AccountController@getLogOutAuth');
+Route::get('forgot-password-auth', 'AccountController@getForgotPassword');
+Route::post('forgot-password-auth', 'AccountController@postResetPassword');
+Route::get('update-password-auth', 'AccountController@getUpdateNewPassword');
+Route::post('update-password-auth', 'AccountController@postUpdateNewPassword');
+
+
+
+

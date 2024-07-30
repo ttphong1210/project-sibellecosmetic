@@ -16,7 +16,8 @@ class AccountCustomerController extends Controller
 {
     use Authenticatable;
     public $accountCustomerRepository;
-    public function __construct(AccountCustomerRepository $accountCustomerRepository){
+    public function __construct(AccountCustomerRepository $accountCustomerRepository)
+    {
         $this->accountCustomerRepository = $accountCustomerRepository;
     }
 
@@ -44,15 +45,8 @@ class AccountCustomerController extends Controller
     }
     public function postRegisterCustomer(Request $request)
     {
-        // $data = $request->all();
-
-        // $accountCustomer = new AccountCustomer;
-        // $accountCustomer->name = $data['name'];
-        // $accountCustomer->number_phone = $data['number_phone'];
-        // $accountCustomer->email = $data['email'];
-        // $accountCustomer->password = bcrypt($data['pass']);
-        // $accountCustomer->save();
-        $this->accountCustomerRepository->postRegisterCustomer($request->all());
+        $data = $request->all();
+        $this->accountCustomerRepository->postRegisterCustomer($data);
 
         return redirect()->back()->with('message', 'Đăng ký tài khoản thành công !');
     }
@@ -64,57 +58,47 @@ class AccountCustomerController extends Controller
     public function postResetPassword(Request $request)
     {
         $data = $request->all();
-
         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('d-m-y');
-        $title_send_mail = "Yêu cầu đặt lại mật khẩu Si.Belle Cosmetics" . '' . $now;
-        $account_customer = AccountCustomer::where('email', '=', $data['email'])->get();
-        foreach ($account_customer as $key => $value) {
-            $account_customer_id = $value->id;
-        }
-        if (!empty($account_customer)) {
-            $forgot_token_email = Str::random(10);
-            $account_customer = AccountCustomer::find($account_customer_id);
-            $account_customer->forgot_token = $forgot_token_email;
-            $account_customer->save();
+        $title_send_mail = "Yêu cầu đặt lại mật khẩu Si.Belle Cosmetics " . '' . $now;
+        $account_customer = $this->accountCustomerRepository->findByEmail($data['email']);
 
-            // send-link-reset-pass 
-            //Dependency injection(Services / Repository) -> sql
+        //check mail exist
+        if ($account_customer->isNotEmpty()) {
+            $account_customer_id = $account_customer->first()->id;
+            $forgot_token_email = Str::random(10);
+            $this->accountCustomerRepository->updateForgotToken($account_customer_id, $forgot_token_email);
+
+            // send link reset password
             $to_mail = $request->email;
             $url_reset_password = url('/account/update-new-password?email=' . $to_mail . '&token=' . $forgot_token_email);
             $data['body_send_mail'] = $url_reset_password;
-            //services 
             Mail::send('frontend.mail_reset_password_notify', $data, function ($message) use ($to_mail, $title_send_mail) {
                 $message->to($to_mail, $to_mail);
                 $message->subject($title_send_mail);
             });
-
-            return redirect()->back()->with('message', 'Vui lòng check mail để khôi phục mật khẩu !');
+            return redirect()->back()->with('message', 'Vui lòng check mail để khôi phục mật khẩu!');
         }
+        return redirect()->back()->with('error', 'Email không tồn tại!');
     }
     public function getUpdateNewPassword()
     {
         return view('frontend.new_password');
     }
-    public function postUpdateNewPassword(Request $request)
-    {
-        $token_email_random = Str::random();
+    public function postUpdateNewPassword(Request $request){
+        $tokenEmailRandom = Str::random();
         $data = $request->all();
-        $account_update_password = AccountCustomer::where('email', '=', $data['email'])
-            ->where('forgot_token', '=', $data['token'])
-            ->get();
-        $count_account = $account_update_password->count();
-        if ($count_account > 0) {
-            foreach ($account_update_password as $key => $value) {
-                $account_id = $value->id;
+        $accountUpdatePassword = $this->accountCustomerRepository->findByEmailAndToken($data['email'], $data['token']);
+        $countAccount = $accountUpdatePassword->count();
+        if($countAccount > 0){
+            $accountId = $accountUpdatePassword->first()->id;
+            $isUpdate = $this->accountCustomerRepository->updatePassword($accountId, $data['password'], $tokenEmailRandom);
+            if($isUpdate){
+                return redirect('account/login-customer')->with('message', 'Đặt lại mật khẩu thành công !');
+            }else{
+                return redirect('account/forgot-password')->with('error', 'Có lỗi xảy ra khi đặt lại mật khẩu!');
             }
-            $update_account_pass = AccountCustomer::find($account_id);
-            $update_account_pass->password = bcrypt($data['password']);
-            $update_account_pass->forgot_token = $token_email_random;
-            $update_account_pass->save();
-            
-            return redirect('account/login-customer')->with('message', 'Đặt lại mật khẩu thành công !');
-        } else {
-            return redirect('account/forgot-password')->with('error', 'Link đã hết hạn, vui lòng nhập lại email !');
+        }else{
+            return redirect('account/forgot-password')->with('error', 'Link đã hết hạn, vui lòng nhập lại email!');
         }
     }
     public function getLogOutCustomer()
@@ -122,5 +106,4 @@ class AccountCustomerController extends Controller
         Auth::guard('account_customer')->logout();
         return redirect()->back();
     }
-
 }

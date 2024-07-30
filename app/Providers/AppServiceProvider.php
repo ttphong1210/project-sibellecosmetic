@@ -6,6 +6,8 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Repositories\AccountCustomer\AccountCustomerRepository;
 use App\Repositories\AccountCustomer\AccountCustomerRepositoryInterface;
+use App\Repositories\Admin\Eloquent\AccountAdminRepository;
+use App\Repositories\Admin\Interfaces\AccountAdminRepositoryInterface;
 use App\Repositories\Eloquent\CartRepository;
 use App\Repositories\Eloquent\CustomerRepository;
 use App\Repositories\Eloquent\FeeShipRepository;
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        $this->app->bind(AccountAdminRepositoryInterface::class, AccountAdminRepository::class);
         $this->app->bind(AccountCustomerRepositoryInterface::class, AccountCustomerRepository::class);
         $this->app->bind(CartRepositoryInterface::class, CartRepository::class);
         $this->app->bind(CustomerRepositoryInterface::class, CustomerRepository::class);

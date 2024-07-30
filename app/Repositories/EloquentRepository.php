@@ -25,15 +25,28 @@ abstract class EloquentRepository
      */
     abstract public function getModel();
 
+    // final private function isConnected(){
+    //     return app('connection')->isConnected();
+    // }
     /**
      * Set model
      */
     public function setModel()
     {
+        // if(!$this->isConnected()){
+        //     app('connection')->setDriver('backup');
+        // }
+        // $model = $this->_model;
+        // if(!app()->make($model)){
+        //     app()->singleton($model, function() use ($model){
+        //         return new $model;
+        //     });
+        // }
         $this->_model = app()->make(
             $this->getModel()
         );
     }
+
 
     /**
      * Get All

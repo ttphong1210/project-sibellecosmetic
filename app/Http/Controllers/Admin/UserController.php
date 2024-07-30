@@ -19,7 +19,6 @@ class UserController extends Controller
     }
     public function postAssignRole(Request $request)
     {
-
         $user = User::where('email', $request->email)->first();
         $user->roles()->detach();
         if ($request->author_role) {
