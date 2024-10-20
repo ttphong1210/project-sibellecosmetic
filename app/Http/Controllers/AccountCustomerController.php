@@ -16,7 +16,7 @@ class AccountCustomerController extends Controller
 {
     use Authenticatable;
     public $accountCustomerRepository;
-    public function __construct(AccountCustomerRepository $accountCustomerRepository)
+    public function __construct(AccountCustomerRepositoryInterface $accountCustomerRepository)
     {
         $this->accountCustomerRepository = $accountCustomerRepository;
     }

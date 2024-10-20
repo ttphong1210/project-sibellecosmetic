@@ -28,7 +28,7 @@ class AccountController extends Controller
         $this->accountAdminRepository->createNewAccount($data);
         return redirect('/register-auth')->with('message', 'Đăng ký thành công !');
     }
-    public function validation($request)
+    public function validation(Request $request)
     {
         return $this->validate($request, [
             'name' => 'required|max:255',

@@ -7,12 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\AddCateRequest;
 use App\Http\Requests\EditCateRequest;
+use App\Repositories\Admin\Interfaces\CategoryRepositoryInterface;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
+    protected $categoryRepository;
+    public function __construct(CategoryRepositoryInterface $categoryRepository){
+        $this->categoryRepository = $categoryRepository;
+    }
     public function getCate(){
-        $data['catelist'] = Category::all();
+        $data['catelist'] = $this->categoryRepository->showAll();
         return view('admin.layout.category.listcategory',$data);
     }
 
@@ -21,27 +26,29 @@ class CategoryController extends Controller
     }
 
     public function postAddCate(AddCateRequest $request){
-        $category = new Category;
-        $category->cate_name = $request->name;
-        $category->cate_slug = Str::slug($request->name);
-        $category->save();
+        $categoryData = [
+            'cate_name' => $request->name,
+            'cate_slug' => Str::slug($request->name),
+        ];
+       $category = $this->categoryRepository->create($categoryData);
         return redirect('admin/category');
     }
 
     public function getEditCate($id){
-        $data['cate'] = Category::find($id);
+        $data['cate'] = $this->categoryRepository->findById($id);
         return view('admin.layout.category.editcategory', $data);
     }
 
     public function postEditCate(EditCateRequest $request,$id){
-        $category = Category::find($id);
-        $category->cate_name = $request->name;
-        $category->cate_slug = Str::slug($request->name);
-        $category->save();
+        $data = [
+            'cate_name' => $request->name,
+            'cate_slug' => Str::slug($request->name),
+        ];
+        $this->categoryRepository->update($id, $data);
         return redirect()->intended('admin/category');
     }
     public function getDeleteCate($id){
-        Category::destroy($id);
+        $this->categoryRepository->delete($id);
         return back();
     }
 }

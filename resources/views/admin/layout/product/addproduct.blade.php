@@ -39,20 +39,22 @@
                     </div>
                     <div class="form-group">
                         <label for="">Tóm tắt</label>
-                        <textarea class="ckeditor" require name="summary"></textarea>
+                        <textarea class="ckeditor" required name="summary"></textarea>
                     </div>
                     <div class="form-group">
                         <label>Miêu tả</label>
                         <textarea class="ckeditor" required name="description"></textarea>
                         <script>
-                            CKEDITOR.replace( 'description', {
-                                filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
-                                filebrowserImageBrowseUrl: '{{ asset('editor/ckfinder/ckfinder.html?type=Images') }}',
-                                filebrowserFlashBrowseUrl: '{{ asset('editor/ckfinder/ckfinder.html?type=Flash') }}',
-                                filebrowserUploadUrl: '{{ asset('editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
-                                filebrowserImageUploadUrl: '{{ asset('editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
-                                filebrowserFlashUploadUrl: '{{ asset('editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
-                            });
+                                CKEDITOR.replace('description', {
+                                    filebrowserBrowseUrl: "{{ asset('ckfinder/ckfinder.html') }}",
+                                    filebrowserImageBrowseUrl: "{{ asset('editor/ckfinder/ckfinder.html?type=Images') }}",
+                                    filebrowserFlashBrowseUrl: "{{ asset('editor/ckfinder/ckfinder.html?type=Flash') }}",
+                                    filebrowserUploadUrl: "{{ asset('editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}",
+                                    filebrowserImageUploadUrl: "{{ asset('editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}",
+                                    filebrowserFlashUploadUrl: "{{ asset('editor/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}"
+                                });
+                                // CKFinder.setupCKEditor();
+
                         </script>
                     </div>
                     <div class="form-group">

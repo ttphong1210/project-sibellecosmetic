@@ -15,18 +15,14 @@
                         <label for="exampleInputName">Tên sản phẩm :</label>
                         <input type="text" class="form-control" required name="name" placeholder="Tên sản phẩm..." value="{{$product->prod_name}}">
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="exampleInputName">Slug :</label>
-                        <input type="text" class="form-control" name="name"  value="{{$product->prod_slug}}">
-                    </div> -->
                     <div class="form-group">
                         <label for="exampleInputPrice">Giá :</label>
                         <input type="number" class="form-control"required name="price" placeholder="Giá..." min="0" value="{{$product->prod_price}}">
                     </div>
                     <div class="form-group" >
 						<label>Ảnh sản phẩm</label>
-						<input id="exampleInputFile" type="file" name="image" accept="image/*">
-					   <img src="{{asset('storage/avatar/'.$product->prod_img)}}" width="150px" alt="">
+						<input id="exampleInputFile" type="file" name="image" accept="image/*" onchange="fileUpload(event)">
+					   <img id="previewImage" src="{{asset('storage/avatar/'.$product->prod_img)}}" width="150px" alt="">
 					</div>
                     <div class="form-group" >
 						<label>Thư viện ảnh sản phẩm</label>

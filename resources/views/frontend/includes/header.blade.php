@@ -13,17 +13,17 @@
                         <ul class="right_side">
                             <li>
                                 <a href="cart.html">
-                                    gift card
+                                     Quà tặng
                                 </a>
                             </li>
                             <li>
-                                <a href="tracking.html">
-                                    track order
+                                <a href="{{url('tracking-order')}}">
+                                    Theo dõi đơn hàng
                                 </a>
                             </li>
                             <li>
-                                <a href="{{asset('contact')}}">
-                                    Contact Us
+                                <a href="{{url('contact')}}">
+                                    Liên hệ
                                 </a>
                             </li>
                         </ul>
@@ -97,26 +97,26 @@
                         </div>
 
                         <div class="col-lg-5 pr-0">
-                            <ul class="nav navbar-nav navbar-right right_nav pull-right">
+                            <ul class="nav navbar-nav navbar-right right_nav pull-right">                                
                                 <li class="nav-item">
-                                    <form action="{{asset('search/')}}" method="get" class="icons">
+                                    <form action="{{asset('search/')}}" method="get" class="icons form-search-icons">
                                         <div class="form-search">
                                             <input type="text" placeholder="Tìm kiếm.." id="input-search" name="result" style="border:none; outline:none;">
-                                            <button id="btn-submit-search" type="submit" style="outline: none;"> <i id="icon-search" class="ti-search" aria-hidden="true"></i></button>
+                                            <!-- <button id="btn-submit-search" type="submit" style="outline: none;">
+                                                 <i id="icon-search" class="ti-search" aria-hidden="true"></i>
+                                                </button> -->
                                         </div>
                                     </form>
                                 </li>
-                                <li id="list-product-minicart" class="nav-item submenu dropdown">
+                                <li id="list-product-minicart" class="nav-item submenu dropdown ">
                                     @include('frontend.component.mini_cart')
-
                                 </li>
-
-                                <li id="user-account" class="nav-item submenu dropdown">
-                                    <a href="#" target="_blank" class="icons nav-link dropdown-toggle" data-toggle="dropdown">
+                                <li id="user-account" class="nav-item submenu dropdown ">
+                                    <a class="icons nav-link dropdown-toggle" data-toggle="dropdown">
                                         <i class="ti-user" aria-hidden="true"></i>
                                     </a>
                                     @if(Auth::guard('account_customer')->check())
-                                    <ul class="dropdown-menu-user">
+                                    <ul class="dropdown-menu-user show-menu-login">
                                         <li class="nav-link">
                                             <a href="#" style="color: black;"> Chào
                                                 {{Auth::guard('account_customer')->user()->name}}</a>
@@ -126,7 +126,7 @@
                                         </li>
                                     </ul>
                                     @else
-                                    <ul class="dropdown-menu-user d-flex row">
+                                    <ul class="dropdown-menu-user d-flex row show-menu-login">
                                         <li class="col-md-6 nav-link">
                                             <a href="{{asset('account/login-customer')}}" style="color: black;">Đăng
                                                 nhập</a>
@@ -138,8 +138,7 @@
                                     </ul>
                                     @endif
                                 </li>
-
-                                <li id="favorite-product" class="nav-item">
+                                <li id="favorite-product" class="nav-item ">
                                     <a href="{{asset('favorite')}}" class="icons">
                                         <i class="ti-heart" aria-hidden="true"></i>
                                     </a>

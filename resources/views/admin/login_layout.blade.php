@@ -37,17 +37,19 @@
 </head>
 
 <body>
-
+    <!-- <div id="preloader">
+        <div class="loading"></div>
+    </div> -->
     @yield('content')
 
     <div id="dropDownSelect1"></div>
 
     <!--===============================================================================================-->
-    <!-- <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+     <script src="{{asset('js/main.js')}}"></script>
 
-    <script src="{{asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script> -->
+   <!-- <script src="{{asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script> -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
+    
     <!--===============================================================================================-->
     <script src="{{asset('vendor/animsition/js/animsition.min.js')}}"></script>
     <!--===============================================================================================-->

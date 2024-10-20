@@ -195,7 +195,7 @@
                                             <tr>
                                                 <td width="75%" align="left"
                                                     style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
-                                                    Tổng tiền:
+                                                    Tổng tiền (bao gồm phí ship):
                                                 </td>
                                                 <td width="25%" align="left"
                                                     style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
@@ -225,7 +225,7 @@
                                                     <td align="left" valign="top"
                                                         style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
                                                         <p style="font-weight: 800;">Địa chỉ giao hàng</p>
-                                                        <p>{{$info['address']}}</p>
+                                                        <p>{{$address}}</p>
                                                     </td>
                                                 </tr>
                                             </table>

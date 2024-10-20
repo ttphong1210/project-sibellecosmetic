@@ -3,7 +3,7 @@
 @section('content')
 <div class="container px-4 py-5 mx-auto">
     <div class="row d-flex justify-content-center border-top" style="padding-top:40px;">
-        <div class="col-2">
+        <div class="col-2 title-for-product-favorite">
             <div class="row d-flex">
                 <div class="my-auto flex-column d-flex pad-left">
                     <span class="mob-text"> Sản phẩm yêu thích</span>
@@ -16,7 +16,7 @@
                 @foreach(Session::get('favorite') as $key => $item)
                 <div class="row text-right favorite">
                     <div class="col-2">
-                        <img style="width:100%;" src="{{asset('storage/avatar/'.$item['product_image'])}}" alt="">
+                        <img style="width:auto;" src="{{asset('storage/avatar/'.$item['product_image'])}}" alt="">
                     </div>
                     <div class="col-8 product-favorite">
                         <div class="product-favorite-name">

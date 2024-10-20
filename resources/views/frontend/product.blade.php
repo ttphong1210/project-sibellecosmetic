@@ -38,7 +38,7 @@
               <ul class="list">
                 @foreach($category as $cate)
                 <li>
-                  <a href="{{asset('category/'.$cate->cate_id.'/'.$cate->cate_slug.'.html')}}">{{$cate->cate_name}}</a>
+                  <a href="{{url('category/'.$cate->cate_id.'/'.$cate->cate_slug.'.html')}}">{{$cate->cate_name}}</a>
                 </li>
                 @endforeach
               </ul>
@@ -53,7 +53,7 @@
               <ul class="list">
                 @foreach($brands as $brand)
                 <li>
-                  <a href="{{asset('brand/'.$brand->brand_id.'/'.$brand->brand_slug.'.html')}}">{{$brand->brand_name}}</a>
+                  <a href="{{url('brand/'.$brand->brand_id.'/'.$brand->brand_slug.'.html')}}">{{$brand->brand_name}}</a>
                 </li>
                 @endforeach
               </ul>
@@ -91,19 +91,19 @@
                   <div class="product-img">
                     <img class="card-img" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
                     <div class="p_icon">
-                      <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
+                      <a href="{{url('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
                         <i class="ti-eye icon-style"></i>
                       </a>
                       <a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
                         <i class=" ti-heart icon-style"></i>
                       </a>
-                      <a href="#" data-url="{{asset('cart/add/'.$item->prod_id)}}" class="add-to-cart">
+                      <a href="#" data-url="{{url('cart/add/'.$item->prod_id)}}" class="add-to-cart">
                         <i class="ti-shopping-cart icon-style"></i>
                       </a>
                     </div>
                   </div>
                   <div class="product-btm">
-                    <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
+                    <a href="{{url('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
                       <h4>{{$item->prod_name}}</h4>
                     </a>
                     <div class="mt-3">

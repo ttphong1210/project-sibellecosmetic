@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Repositories\Admin\Interfaces\ProductRepositoryInterface;
 use App\Repositories\Interfaces\CartRepositoryInterface;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -11,14 +12,17 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 class CartController extends Controller
 {
     protected $cartRepository;
-    public function __construct(CartRepositoryInterface $cartRepository)
+    protected $productRepository;
+    public function __construct(CartRepositoryInterface $cartRepository, ProductRepositoryInterface $productRepository)
     {
         $this->cartRepository = $cartRepository;
+        $this->productRepository = $productRepository;
     }
 
     public function getAddCart($id)
     {
-        $product = Product::find($id);
+        // $product = Product::find($id);
+        $product = $this->productRepository->findById($id);
         $this->cartRepository->add($product);
         $data['count'] = Cart::count();
         $data['subtotal'] = Cart::subtotal(0, ',', '.');
@@ -59,7 +63,18 @@ class CartController extends Controller
     public function getDeleteCart($id)
     {
         $this->cartRepository->delete($id);
-        return back();
+        $data['count'] = $this->cartRepository->count();
+        $data['items'] = $this->cartRepository->content();
+        $data['total'] = $this->cartRepository->total();
+        $cartComponent = view('frontend.component.shopping_cart_component', $data)->render();
+        $miniCart = view('frontend.component.mini_cart', $data)->render();
+        return response()->json([
+            'code' => 200,
+            'message' => 'Sản phẩm đã được xoá khỏi giỏ hàng.',
+            'cart_component' => $cartComponent,
+            'mini_cart' => $miniCart,
+            'count_item_cart' => $data['count'],
+        ], 200);
     }
     public function getComplete()
     {

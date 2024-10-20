@@ -235,37 +235,51 @@
                 @foreach($suggested as $item)
                 <div class="col-lg-3 col-md-6">
                     <div class="single-product">
-                        <div class="product-img suggested-product-img">
-                            <img class="img-fluid w-100" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
-                            <div class="p_icon">
-                                <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
-                                    <i class="ti-eye icon-style"></i>
-                                </a>
-                                <a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
-                                    <i class=" ti-heart icon-style"></i>
-                                </a>
-                                <a href="#" data-url="{{asset('cart/add/'.$item->prod_id)}}" class="add-to-cart">
-                                    <i class="ti-shopping-cart icon-style"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="product-btm">
-                            <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
-                                <h4>{{$item->prod_name}}</h4>
-                            </a>
-                            <div class="mt-3">
-                                <span class="mr-4">{{number_format($item->prod_price,0,',','.')}}VND</span>
-                                <del><small> {{number_format($item->prod_promotion,0,',','.')}}VND</small></del>
+                        <form>
+                            {{csrf_field()}}
+                            <input type="hidden" value="{{$item->prod_id}}" class="product_favorite_id_{{$item->prod_id}}">
+                            <input type="hidden" value="{{$item->prod_name}}" class="product_favorite_name_{{$item->prod_id}}">
+                            <input type="hidden" value="{{$item->prod_img}}" class="product_favorite_image_{{$item->prod_id}}">
+                            <input type="hidden" value="{{$item->prod_price}}" class="product_favorite_price_{{$item->prod_id}}">
 
+                            <div class="product-img suggested-product-img">
+                                <img class="img-fluid w-100" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
+                                <div class="p_icon">
+                                    <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
+                                        <i class="ti-eye icon-style"></i>
+                                    </a>
+                                    <a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
+                                        <i class=" ti-heart icon-style"></i>
+                                    </a>
+                                    <a href="#" data-url="{{asset('cart/add/'.$item->prod_id)}}" class="add-to-cart">
+                                        <i class="ti-shopping-cart icon-style"></i>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                            <div class="product-btm">
+                                <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
+                                    <h4>{{$item->prod_name}}</h4>
+                                </a>
+                                <div class="mt-3">
+                                    <span class="mr-4">{{number_format($item->prod_price,0,',','.')}}VND</span>
+                                    <del><small> {{number_format($item->prod_promotion,0,',','.')}}VND</small></del>
+
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 @endforeach
             </div>
     </section>
     <!--================ Start Knowledge $ Share Area =================-->
-    <section class="inspired_share_area section_gap_bottom_custom">
+
+    <!--================ End Knowledge $ Share Area =================-->
+
+    <!--================ End Inspired Product Area =================-->
+
+    <!--================ Start Blog Area =================-->
+    <section class="blog-area section-gap">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-12">
@@ -274,26 +288,37 @@
                         <p style="text-align: center;">Những chia sẻ thú vị và thông tin hữu ích</p>
                     </div>
                 </div>
-                <div class="main_carousel grid-carousel col-lg-12">
-                    <div class="col-md-4">
-
-                    </div>
-                    <div class="col-md-4">
-
-                    </div>
-                    <div class="col-md-4">
-
-                    </div>
-
-                </div>
             </div>
+            <div class="row">
+                @foreach ($blogs as $blog )
+                <div class="col-md-4">
+                    <div class="single-blog">
+                        <div class="image thumb">
+                            <img src="{{asset('storage/featured-img-blog/'.$blog->featured_image)}}" alt="">
+                        </div>
+                        <div class="detail-short-blog">
+                            <div class="meta-top d-flex">
+                                <a href="#">By Admin</a>
+                                <a href="#"><i class="ti-comments-smiley"></i>2 Comments</a>
+                            </div>
+                            <a class="d-block" href="single-blog.html">
+                                <h4>Ford clever bed stops your sleeping
+                                    partner hogging the whole</h4>
+                            </a>
+                            <div class="text-wrap">
+                                <p>
+                                    Let one fifth i bring fly to divided face for bearing the divide unto seed winged divided light
+                                    Forth.
+                                </p>
+                            </div>
+                            <a href="#" class="blog_btn">Learn More <span class="ml-2 ti-arrow-right"></span></a>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
     </section>
-    <!--================ End Knowledge $ Share Area =================-->
-
-
-    <!--================ End Inspired Product Area =================-->
-
-
     <!--================ End Blog Area =================-->
 </div>
 

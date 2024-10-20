@@ -26,7 +26,12 @@ abstract class EloquentRepository
     abstract public function getModel();
 
     // final private function isConnected(){
-    //     return app('connection')->isConnected();
+    //     try{
+    //         app('db')->connection()->getPdo();
+    //         return true;
+    //     }catch(\Exception $e){
+    //         return false;
+    //     }
     // }
     /**
      * Set model
@@ -41,6 +46,9 @@ abstract class EloquentRepository
         //     app()->singleton($model, function() use ($model){
         //         return new $model;
         //     });
+        // }
+        // if(!$this->isConnected()){
+        //     config(['database.default' => 'backup']);
         // }
         $this->_model = app()->make(
             $this->getModel()

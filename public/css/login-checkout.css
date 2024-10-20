@@ -16,3 +16,28 @@
     color: black;
     text-align: center;
 }
+
+/* CSS cho loader */
+#loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Làm mờ nền */
+    z-index: 9999; /* Đảm bảo loader luôn nằm trên cùng */
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+}
+
+#loader-overlay img {
+    width: 5%; /* Kích thước của ảnh loader */
+}
+
+/* Làm mờ form khi đang hiển thị loader */
+#checkoutForm.loader {
+    filter: blur(3px); /* Hiệu ứng làm mờ form */
+    pointer-events: none; /* Vô hiệu hóa các thao tác người dùng */
+    opacity: 0.5; /* Giảm độ trong suốt của form */
+}

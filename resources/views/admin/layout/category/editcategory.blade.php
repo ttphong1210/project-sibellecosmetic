@@ -24,7 +24,7 @@
                 <button type="submit" name="submit" class="btn btn-primary">Cập nhật</button>
               </div>
               <div class="box-footer">
-                <button class="btn btn-primary"><a href="{{asset('admin/category')}}"> Huỷ bỏ</a></button>
+                <button class="btn btn-primary"><a href="{{asset('admin/category')}}" style="color:white;"> Huỷ bỏ</a></button>
               </div>
               {{csrf_field()}}
             </form>

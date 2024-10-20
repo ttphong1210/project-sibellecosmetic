@@ -24,12 +24,12 @@
 </script>
 <div class="container">
     <div class="returning_customer" style="margin: 5rem 0 ;">
-        <div class="check_title">
+        <!-- <div class="check_title">
             <h2>
                 Returning Customer?
                 <a href="#">Click here to login</a>
             </h2>
-        </div>
+        </div> -->
         <p>
             Nếu bạn đã mua sắm với chúng tôi trước đây, vui lòng nhập thông tin chi tiết của bạn vào ô bên dưới. Nếu
             bạn là khách hàng mới, vui lòng Đăng ký tài khoản và chuyển đến phần Thanh toán & Giao hàng.
@@ -47,8 +47,10 @@
                         <div class="col-md-12 form-group p_star">
                             <span class="placeholder" data-placeholder="Password"></span>
                             <input type="password" required class="form-control" id="password" name="password" />
-                            <input id="check" type="checkbox">
-                            <p id="checkdisplay">Hiện mật khẩu</p>
+                            <div class="creat_account">
+                                <input type="checkbox" id="check" name="selector" />
+                                <label for="f-option" id="checkdisplay">Hiện mật khẩu</label>
+                            </div>
                         </div>
                         <div class="col-md-12 form-group">
                             <button type="submit" value="submit" class="btn submit_btn">
@@ -64,7 +66,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-6 flex-item">
+            <div class="col-md-6 notification-register  flex-item">
                 <div class="wrap">
                     <h5>Khách hàng mới ?</h5>
                     <p style="font-family: 'FontAwesome' ;">Đăng ký trang web này cho phép bạn truy cập trạng thái và lịch sử đơn hàng của mình. Chúng tôi sẽ nhanh chóng thiết lập một tài khoản mới cho bạn. Vì điều này sẽ chỉ yêu cầu bạn cung cấp thông tin cần thiết để làm cho quá trình mua hàng nhanh hơn và dễ dàng hơn</p>

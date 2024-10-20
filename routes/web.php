@@ -14,6 +14,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
+Route::get('welcome', function(){
+    return view('frontend.welcome');
+});
 Route::get('/clear-cache', function() {
     Artisan::call('cache:clear');
     return 'Application cache has been cleared';
@@ -33,22 +36,30 @@ Route::get('brand/{id}/{slug}.html', 'FrontEndController@getBrand');
 Route::get('search', 'FrontEndController@getSearch');
 Route::get('favorite','FrontEndController@getFavorite');
 Route::post('add-product-favorite','FrontEndController@postAddProductFavorite');
+Route::get('tracking-order', 'FrontEndController@getTrackOrder');
+
+Route::get('email', 'FrontEndController@getEmail');
+
 
 Route::group(['prefix' => 'blog'], function(){
-    Route::get('qua-tang', 'FrontendController@getBlogQTang');
-    Route::get('kien-thuc', 'FrontendController@getBlogKThuc');
+    Route::get('/', 'FrontendController@getBlog');
+    // Route::get('blog/{id}/{slug}.html', 'FrontendController@getDetailBlog');
+    Route::get('blog-id', 'FrontendController@getDetailBlog');
+
+
+    // Route::get('kien-thuc', 'FrontendController@getBlogKThuc');
 });
 
 // Route Cart
 Route::group(['prefix' => 'cart'], function () {
     Route::get('add/{id}', 'CartController@getAddCart');
     Route::get('show', 'CartController@getShowCart');
-    Route::get('delete/{id}', 'CartController@getDeleteCart');
+    Route::delete('delete/{id}', 'CartController@getDeleteCart');
     Route::get('update', 'CartController@getUpdateCart');
 });
 Route::get('complete', 'CartController@getComplete');
 Route::get('checkout', 'CheckOutController@getCheckout');
-Route::post('checkout', 'CheckOutController@postCheckout');
+Route::post('checkout', 'CheckOutController@postCheckout')->name('checkout.post');
 Route::post('select-shipping-infomation','CheckOutController@postSelectShippingInfomation');
 Route::post('charge-shipping','CheckOutController@postChargeShipping');
 Route::get('delete-feeship','CheckOutController@getDeleteFeeship');
@@ -72,7 +83,9 @@ Route::group(['prefix' => 'account'], function(){
 // Route Admin
 Route::group(['namespace' => 'Admin'], function () {
     Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogedOut'], function () {
-        Route::get('home', 'HomeController@getHome');
+        // Route::get('home', 'HomeController@getHome');
+        Route::get('home', 'DashboardController@index');
+
 
         Route::group(['prefix' => 'user' , 'middleware'=>'roles'], function(){
             Route::get('all-user', 'UserController@getAllUser');
@@ -136,6 +149,18 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::get('/', 'SliderController@getSlider');
             Route::get('add-slider', 'SliderController@getAddSlider');
             Route::post('add-slider', 'SliderController@postAddSlider');
+        });
+
+        //Route blog post
+        Route::group(['prefix' => 'blog'], function(){
+            Route::get('/', 'BlogPostController@getAllBlog');
+            Route::get('add-blog', 'BlogPostController@getAddBlog');
+            Route::post('add-blog', 'BlogPostController@postAddBlog');
+            Route::get('edit-blog/{id}', 'BlogPostController@getEditBlog');
+            Route::post('edit-blog/{id}', 'BlogPostController@postEditBlog');
+            Route::get('delete/{id}', 'BlogPostController@getDeleteBlog');
+
+
         });
     });
 });

@@ -6,22 +6,16 @@
 @if(Cart::count() >0)
 <div class="container px-4 py-5 mx-auto">
     <div class="row d-flex justify-content-center">
-        <div class="col-5">
-            <h5 id="header-shopping-cart" class="heading"> <span> Giỏ hàng ( {{Cart::count()}} sản phẩm )</span> </h5>
-        </div>
-        <div class="col-7">
-            <div class="row text-right">
-                <div class="col-4">
-                    <h6 class="mt-2">Số Lượng</h6>
-                </div>
-                <div class="col-4">
-                    <h6 class="mt-2">Đơn giá</h6>
-                </div>
-                <div class="col-4">
-                    <h6 class="mt-2">Thành tiền</h6>
-                </div>
-            </div>
-        </div>
+        <table class="cart-product-item-table">
+            <thead id="tableheader">
+            <tr>
+                <td id="header-shopping-cart" class="tablesheet-col1"> {{Cart::count()}} sản phẩm </td>
+                <td class="tablesheet-col2"></td>
+                <td class="tablesheet-col3">Số Lượng</td>
+                <td class="tablesheet-col4"></td>
+            </tr>
+            </thead>
+        </table>
     </div>
     <div id="cart-content">
         @include('frontend.component.shopping_cart_component')

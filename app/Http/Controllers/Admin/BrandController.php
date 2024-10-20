@@ -7,14 +7,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Http\Requests\AddBrandRequest;
 use App\Http\Requests\EditBrandRequest;
+use App\Repositories\Admin\Interfaces\BrandRepositoryInterface;
 use Illuminate\Support\Str;
 
 
 class BrandController extends Controller
 {
     //
+    protected $brandRepository;
+    public function __construct(BrandRepositoryInterface $brandRepository){
+        $this->brandRepository = $brandRepository;
+    }
     public function getBrand(){
-        $data['brandlist'] = Brand::all();
+        $data['brandlist'] = $this->brandRepository->getAll();
         return view('admin.layout.brand.listbrand', $data);
     }
 
@@ -23,26 +28,28 @@ class BrandController extends Controller
     }
 
     public function postAddBrand(AddBrandRequest $request){
-        $brand = new Brand;
-        $brand->brand_name = $request->name;
-        $brand->brand_slug = Str::slug($request->name);
-        $brand->save();
+        $data = [
+            'brand_name' => $request->name,
+            'brand_slug' => Str::slug($request->name)
+        ];
+        $this->brandRepository->create($data);
         return redirect('admin/brand');
     }
 
     public function getEditBrand($id){
-        $data['brand'] = Brand::find($id);
+        $data['brand'] = $this->brandRepository->getById($id);
         return view('admin.layout.brand.editbrand', $data);
     }
     public function postEditBrand(EditBrandRequest $request,$id){
-        $brand = Brand::find($id);
-        $brand->brand_name = $request->name;
-        $brand->brand_slug = Str::slug($request->name);
-        $brand->save();
+        $data = [
+            'brand_name' => $request->name,
+            'brand_slug' => Str::slug($request->name)
+        ];
+        $this->brandRepository->update($id, $data);
         return redirect()->intended('admin/brand');
     }
     public function getDeleteBrand($id){
-        Brand::destroy($id);
+        $this->brandRepository->delete($id);
         return back();
     }
 }

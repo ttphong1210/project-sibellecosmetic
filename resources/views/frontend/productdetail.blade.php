@@ -6,8 +6,8 @@
 <div class="container body">
     <div class="product-detail row">
         <div class="col-xs-4 col-md-6 product-detail-image">
-            <div class="row">
-                <div class="col-md-3">
+            <div class="row product-detail-image-info">
+                <div class="col-md-3 image-gallery">
                     <div id="divId" onclick="changeImageOnClick(event)">
                         <?php
                         $images = explode('|', $item->prod_gallery);
@@ -17,7 +17,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9 image-main-show">
                     <img id="mainImage" src="{{asset('storage/avatar/'.$item->prod_img)}}" />
                 </div>
             </div>
@@ -55,7 +55,9 @@
                             </div>
                             <div class="col-md-8">
                                 <div id="order-qty" class="enumber-control">
-                                    <input aria-label="Số lượng" value="1" min="1" max="100" maxlength="2" name="quantity" class="qty" type="number" style="text-align:center;">
+                                    <button class="decrement-btn" type="button">-</button>
+                                    <input aria-label="Số lượng" value="1" min="1" max="100" maxlength="2" name="quantity" class="qty" type="text" readonly style="text-align:center;">
+                                    <button class="increment-btn" type="button">+</button>
                                 </div>
                             </div>
                         </div>

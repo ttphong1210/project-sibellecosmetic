@@ -9,19 +9,74 @@ body {
 .plus-minus {
     position: relative;
 }
-#number-quantity {
-    text-align: center;
-    width: 50px;
+.cart-product-item-table{
+    width: 100%;
 }
+.cart-product-item-table td{
+    vertical-align: top;
+    padding: 10px;
+}
+
+.tablesheet-col1{
+    width: 20%;
+}
+.tablesheet-col2{
+    width: 55%;
+}
+.tablesheet-col3{
+    width: 20%;
+}
+.products-description-name{
+    width: 90%;
+    overflow: hidden;
+    max-height: 50px;
+}
+.products-description-price .mob-text,
+.products-description-subprice .mob-text{
+    font-size: .875rem;
+    line-height: 1em;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #333;
+}
+/* #number-quantity {
+    text-align: center;
+    width: 30%;
+} */
+.quantity-input{
+    height: 40px;
+    overflow: hidden;
+    border: 1px solid #c1c1c1;
+    border-radius: 5px;
+    width: 50%;
+}
+.quantity-input input{
+    border: none;
+    width: 30%;
+    text-align: center;
+}
+.quantity-input button{
+    width: 31%;
+    height: 100%;
+    font-size: 20px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    font-weight: lighter;
+    outline: none;
+}
+.quantity-input button:hover {
+    background-color: #ddd;
+  }
 .book .book-img {
     /* width: 120px; */
     height: 180px;
     border-radius: 5px;
 }
 
-.book {
+/* .book {
     margin: 20px 15px 5px 15px;
-}
+} */
 
 .border-top {
     border-top: 1px solid #eeeeee !important;
@@ -134,14 +189,33 @@ button:focus {
     float: right;
     color: #000;
 }
-
-@media screen and (max-width: 768px) {
-    .book,
-    .book-img {
-        width: 100px;
-        height: 150px;
+.cart-product-item-table .tablesheet-col2 .delete-item-cart{
+        display: none;
     }
-
+@media screen and (max-width: 1024px) {
+    .quantity-input input{
+        width: 28%;
+    }
+}
+@media screen and (max-width: 768px) {
+    /* .book{
+        width: 100px;
+    }
+    .book-img{
+        width: 100%;
+        height: auto;
+    } */
+    .btn-success{
+        font-size: 0.85rem !important;
+    }
+    .book {
+        width: 100px;
+        height: 110px;
+    }
+    .book-img{
+        width: 100%;
+        height: 100% !important;
+    } 
     .card {
         padding-left: 15px;
         padding-right: 15px;
@@ -154,14 +228,60 @@ button:focus {
     .pad-left {
         padding-left: 20px;
     }
+    .quantity-input{
+        width: 100%;
+    }
 }
+@media (max-width: 480px) {
+    /* .book .book-img{
+        height: auto;
+        width: 100%;
+    } */
+    .btn-success{
+        width: 40% !important; 
+    }
+    .btn-delete {
+        right: 42% !important;
+    }
+    #tableheader .tablesheet-col1{
+        width: 100%;
+    }
+    #tableheader .tablesheet-col3{
+        display: none;
+    }
+    .cart-product-item-table .tablesheet-col2 .delete-item-cart{
+        display: contents !important;
+    }
+    .cart-product-item-table .tablesheet-col2 .delete-item-cart a{
+        color: red;
+    }
+    .cart-product-item-table .tablesheet-col3{
+        padding: 0;
+        display: none;
+    }
+    .cart-product-item-table .tablesheet-col4{
+        display: none;
+    }
+    .quantity-input{
+        height: 100%;
+        width: 100%;
+        display: grid;
+    }
+    .quantity-input button{
+        width: 100%;
+    }
+    .quantity-input input{
+        width: 100%;
+    }
+}
+/* 
 .btn-delete{
     position: relative;
     right: 49%;
-}
-.delete-item-cart{
+} */
+/* .delete-item-cart{
     color: red !important;
-}
+} */
 .card ul{
     list-style: inside;
     font-size: 14px;

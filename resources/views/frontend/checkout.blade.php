@@ -1,39 +1,69 @@
 @extends('layouts.app')
 @section('title','Xác nhận mua hàng')
 @section('content')
-<link rel="stylesheet" href="{{asset('css/login-checkout.css')}}">
 <!--================Checkout Area =================-->
 <section class="checkout_area section_gap">
     <div class="container">
+        <!-- Loader -->
+        <div id="loader-overlay" style="display: none ; /* Mặc định ẩn */">
+            <img src="{{asset('img/loading.gif')}}" alt="Loading..." />
+        </div>
+        <!-- Thông báo -->
+        <div id="message" style="display: none;" class="alert alert-success"></div>
+
         <div class="billing_details">
             <div class="row">
-                <form class="row contact_form" action="{{asset('checkout')}}" method="POST" novalidate="novalidate">
+                <form id="checkoutForm" class="row contact_form" method="POST" enctype="multipart/form-data">
                     <div class="col-lg-8">
                         <h3>Địa chỉ giao hàng</h3>
-                        @include('errors.note')
                         <div class="row">
                             <div class="col-md-12 form-group p_star">
                                 <span class="placeholder" data-placeholder="Họ và Tên"></span>
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" required class="form-control" name="name" value="{{old('name')}}" />
+                                <input type="text" id="name" class="form-control" name="name" value="{{ old('name') }}" />
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <span class="placeholder" data-placeholder="Số điện thoại"></span>
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" required class="form-control" id="number" name="number_phone"
+                                <input type="text" class="form-control" id="number" name="number_phone"
                                     value="{{old('number_phone')}}" />
                             </div>
                             <div class="col-md-6 form-group p_star">
                                 <span class="placeholder" data-placeholder=" Email"></span>
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" required class="form-control" id="email" name="email"
+                                <input type="text" class="form-control" id="email" name="email"
                                     value="{{old('email')}}" />
                             </div>
-
+                            <div class="box-body col-md-12">
+                                <div class="row">
+                                    <div class="col-md-4 form-group">
+                                        <select name="city" id="city" class="form-control choose city">
+                                            <option value="0">-- Chọn tỉnh/thành phố --</option>
+                                            @foreach($city as $key => $c)
+                                            <option value="{{$c->matp}}">{{$c->name_city}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <select name="district" id="district" class="form-control choose district">
+                                            <option value="">-- Chọn quận/huyện --</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 form-group">
+                                        <select name="ward" id="ward" class="form-control ward">
+                                            <option value="">-- Chọn phường/xã --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-12 form-group p_star">
-                                <span class="placeholder" data-placeholder="Địa chỉ"></span>
+                                <span class="placeholder" data-placeholder="Địa chỉ chi tiết"></span>
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" required class="form-control" id="address" name="address"
+                                <input type="text" class="form-control" id="address" name="address"
                                     value="{{old('address')}}" />
                             </div>
                             <div class="col-md-12 form-group">
@@ -72,7 +102,6 @@
                                 <li>
                                     <a class="summary-main table" style="margin: 0px;" href="#">
                                         <p class="col subtotal-title">Tạm tính:</p>
-
                                         <span class="col text-right">{{$totalProduct}}đ</span>
                                     </a>
                                 </li>
@@ -83,7 +112,7 @@
                             </ul>
                             <div class="payment_item">
                                 <div class="radion_btn">
-                                    <input type="radio" id="f-option5" name="payments" value="0" />
+                                    <input type="radio" id="f-option5" name="payments" value="cash" />
                                     <label for="f-option5">Tiền mặt</label>
                                     <div class="check"></div>
                                 </div>
@@ -93,7 +122,7 @@
                             </div>
                             <div class="payment_item active">
                                 <div class="radion_btn">
-                                    <input type="radio" id="f-option6" name="payments" value="1" />
+                                    <input type="radio" id="f-option6" name="payments" value="credit_card" />
                                     <label for="f-option6">Chuyển khoản</label>
                                     <img src="img/product/single-product/card.jpg" alt="" />
                                     <div class="check"></div>
@@ -105,7 +134,7 @@
                                         Ngân hàng: MB BANK - MB (NGAN HANG QUAN DOI )
                                         Chi nhánh: DA NANG
 
-                                        Nội dung chuyển khoản: “Tên + SĐT đặt hàng” + maDH
+                                        Nội dung chuyển khoản: “ Tên + SĐT đặt hàng ”
 
                                     </p>
                                 </div>
@@ -117,39 +146,10 @@
                     </div>
                     {{csrf_field()}}
                 </form>
-                <form role="form delivery_form" method="POST" action="" style="width: 66%;"
-                    enctype="multipart/form-data">
-                    <div class="box-body">
-                        <div class="form-group">
-                            <select required name="city" id="city" class="form-control choose city">
-                                <option value="0">-- Chọn tỉnh/thành phố --</option>
-                                @foreach($city as $key => $c)
-                                <option value="{{$c->matp}}">{{$c->name_city}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select required name="district" id="district" class="form-control choose district">
-                                <option value="">-- Chọn quận/huyện --</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select required name="ward" id="ward" class="form-control ward">
-                                <option value="">-- Chọn phường/xã --</option>
-                            </select>
-                        </div>
-                        <div class="box-footer">
-                            <button type="button" data-token="{{ csrf_token() }}" style="background-color:#71cd14 ;"
-                                name="charge-shipping" class="btn btn-primary charge-shipping">Tính phí vận
-                                chuyển</button>
-                        </div>
-                        {{csrf_field()}}
-                </form>
             </div>
 
         </div>
     </div>
 </section>
 <!--================End Checkout Area =================-->
-
 @endsection

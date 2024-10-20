@@ -12,21 +12,18 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    //
     public function getCustomer()
     {
         $data['customer'] = DB::table('customers')->orderBy('cust_id', 'desc')->get();
 
         return view('admin.layout.order.listcustomer', $data);
     }
-
     public function getDeleteCustomer($cust_id)
     {
         $customer = Customer::find($cust_id);
         Customer::destroy($cust_id);
         return back();
     }
-
     public function getOrder()
     {
         $data['order'] = DB::table('orders')
@@ -34,7 +31,6 @@ class OrderController extends Controller
             ->get();
         return view('admin.layout.order.listorder', $data);
     }
-
     public function getEditOrder($id)
     {
         $data['customerInfo'] = DB::table('customers')
@@ -53,15 +49,14 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->order_status = $request->input('status');
         $order->save();
-
         return redirect('admin/order');
     }
-
     public function getDeleteOrder($id)
     {
         Order::destroy($id);
         return back();
     }
-
-
+    public function getTrackingOrder(){
+        
+    }
 }

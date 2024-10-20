@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\BlogPost;
 use Exception;
 
 use App\Models\Category;
@@ -19,7 +21,6 @@ use function Psy\debug;
 
 class FrontEndController extends Controller
 {
-
     public function getHome()
     {
         $data['cartInfo'] = Cart::content();
@@ -27,21 +28,17 @@ class FrontEndController extends Controller
         $data['featured'] = Product::where('prod_featured', 1)->orderBy('prod_id', 'desc')->get();
         $data['new'] = Product::orderBy('prod_id', 'desc')->take(4)->get();
         $data['suggested'] = Product::inRandomOrder()->take(8)->get();
-
+        $data['blogs'] = BlogPost::all();
         return view('frontend.home', $data);
     }
-
     public function getProduct()
     {
-
         $data['category'] = Category::all();
         $data['brand'] = Brand::all();
 
         if (isset($_GET['sort_by'])) {
             $sort_by = $_GET['sort_by'];
-
             if ($sort_by == 'gia_tang_dan') {
-
                 $data['product'] = DB::table('products')->orderBy('prod_price', 'ASC')->paginate(9)->appends(request()->query());
             } elseif ($sort_by == 'gia_giam_dan') {
                 $data['product'] = DB::table('products')->orderBy('prod_price', 'DESC')->paginate(9)->appends(request()->query());
@@ -49,10 +46,8 @@ class FrontEndController extends Controller
         } else {
             $data['product'] = Product::orderBy('prod_id', 'desc')->paginate(9);
         };
-
         return view('frontend.product', $data);
     }
-
     public function getDetail($id)
     {
         $data['item'] = Product::find($id);
@@ -79,15 +74,11 @@ class FrontEndController extends Controller
         } else {
             $data['items'] = Product::where('prod_cate', $id)->orderBy('prod_id', 'desc')->paginate(9);
         }
-
-
         return view('frontend.category', $data);
     }
-
     public function getBrand($id)
     {
         $data['brandName'] = Brand::find($id);
-
         if (isset($_GET['sort_by'])) {
             $sort_by = $_GET['sort_by'];
 
@@ -99,10 +90,8 @@ class FrontEndController extends Controller
         } else {
             $data['items'] = Product::where('prod_brand', $id)->orderBy('prod_id', 'desc')->paginate(9);
         }
-
         return view('frontend.brand', $data);
     }
-
     public function getSearch(Request $request)
     {
         $result = $request->result;
@@ -123,7 +112,7 @@ class FrontEndController extends Controller
         $data = $request->all();
         $product_id = $data['product_favorite_id'];
         $product_favorite = Session::get('favorite');
-        
+
         if (isset($product_favorite)) {
             if (empty($product_favorite[$product_id])) {
                 $product_favorite[$product_id] = array(
@@ -133,16 +122,15 @@ class FrontEndController extends Controller
                     'product_price' => $data['product_favorite_price'],
                 );
                 Session::put('favorite', $product_favorite);
-                 return response()->json(['action' => 'add', 'message' => 'Thêm sản phẩm vào yêu thích !']);
+                return response()->json(['action' => 'add', 'message' => 'Thêm sản phẩm vào yêu thích !']);
             } else {
                 unset($product_favorite[$product_id]);
                 Session::put('favorite', $product_favorite);
-                 return response()->json(['action' => 'remove', 'message' => 'Xoá sản phẩm khỏi yêu thích !']);
+                return response()->json(['action' => 'remove', 'message' => 'Xoá sản phẩm khỏi yêu thích !']);
             }
             Session::save();
             die();
-        }
-        else{
+        } else {
             $product_favorite[$product_id] = array(
                 'product_id' => $data['product_favorite_id'],
                 'product_name' => $data['product_favorite_name'],
@@ -152,6 +140,20 @@ class FrontEndController extends Controller
             Session::put('favorite', $product_favorite);
             return response()->json(['action' => 'add', 'message' => 'Thêm sản phẩm vào yêu thích !']);
             Session::save();
-        }      
+        }
     }
+
+    public function getBlog()
+    {
+        return view('frontend.blog');
+    }
+    public function getDetailBlog(){
+        return view('frontend.single_blog');
+    }
+    public function getTrackOrder(){
+        return view('frontend.track_order');
+    }
+    // public function getEmail(){
+    //     return view()
+    // }
 }

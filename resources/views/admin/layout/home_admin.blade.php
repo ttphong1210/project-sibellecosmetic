@@ -24,15 +24,33 @@
         text-align: center;
     }
 </style>
-<section class="content">
-    <div class="row">
-        <div class="col-xs-12">
-            @include('errors.note')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        </div>
-        <!-- /.col -->
+<div style="width: 50%; margin: auto;">
+        <canvas id="myChart"></canvas>
     </div>
-    <!-- /.row -->
-</section>
-<!-- /.content -->
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar', // hoặc 'line', 'pie', v.v.
+            data: {
+                labels: @json($months),
+                datasets: [{
+                    label: '# of Orders',
+                    data: @json($totals),
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

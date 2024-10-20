@@ -1,10 +1,12 @@
 <?php 
 namespace App\Repositories\Eloquent;
 
+use App\Repositories\EloquentRepository;
 use App\Repositories\Interfaces\CartRepositoryInterface;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartRepository implements CartRepositoryInterface{
+    
     public function add($product){
         return Cart::add([
             'id' => $product->prod_id,

@@ -8,25 +8,29 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Http\Requests\AddProductRequest;
 use App\Models\Brand;
+use App\Repositories\Admin\Interfaces\BrandRepositoryInterface;
+use App\Repositories\Admin\Interfaces\CategoryRepositoryInterface;
+use App\Repositories\Admin\Interfaces\ProductRepositoryInterface;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    
+    protected $productRepository, $categoryRepository, $brandRepository;
+
+    public function __construct(ProductRepositoryInterface $productRepository, CategoryRepositoryInterface $categoryRepository, BrandRepositoryInterface $brandRepository){
+        $this->productRepository = $productRepository;
+        $this->categoryRepository = $categoryRepository;
+        $this->brandRepository = $brandRepository;
+    }
     public function getProduct(){
-        $data['productlist'] = DB::table('products')
-                ->join('categories','products.prod_cate','=','categories.cate_id')
-                ->join('brands','products.prod_brand', '=','brands.brand_id')
-                ->orderBy('prod_id','desc')
-                ->get();
-                
+        $data['productlist'] = $this->productRepository->getAll();       
         return view('admin.layout.product.listproduct',$data);
     }
 
     public function getAddProduct(){
-        $data['catelist'] = Category::all();
-        $data['brandlist'] = Brand::all();
+        $data['catelist'] = $this->categoryRepository->showAll();
+        $data['brandlist'] = $this->brandRepository->getAll();
         return view('admin.layout.product.addproduct',$data);
     }
 
@@ -35,11 +39,20 @@ class ProductController extends Controller
         $destination_path = 'public/avatar';
         $allImage = array();
        
-        $product = new Product;
-        $product->prod_name = $request->name;
-        $product->prod_slug = Str::slug($request->name);
-        $product->prod_price = $request->price;
-        $product->prod_img = $filename;
+        $data = [
+            'prod_name' => $request->name,
+            'prod_slug' => Str::slug($request->name),
+            'prod_price' => $request->price,
+            'prod_img' => $filename,
+            'prod_status' => $request->status,
+            'prod_summary' => $request->summary,
+            'prod_des' => $request->description,
+            'prod_promotion' => $request->promotion,
+            'prod_cate' => $request->cate,
+            'prod_brand' => $request->brand,
+            'prod_featured' => $request->featured,
+        ];
+        
         if($request->hasFile('image-gallery')){
             foreach($request->file('image-gallery') as $file){
                 $filename_gallery = md5(rand(1000,10000));
@@ -49,52 +62,43 @@ class ProductController extends Controller
                 $file->storeAs($multiple_path, $image_full_name);
                 $allImage[]= $image_full_name;
             }
-            $product->prod_gallery = implode('|', $allImage);
+            $data['prod_gallery'] = implode('|', $allImage);
         }
-
-        $product->prod_status = $request->status;
-        $product->prod_summary= $request->summary;
-        $product->prod_des = $request->description;
-        $product->prod_promotion = $request->promotion;
-        $product->prod_cate = $request->cate;
-        $product->prod_brand = $request->brand;
-        $product->prod_featured = $request->featured;
-
-        $product->save();
+       
+        $this->productRepository->create($data);        
         $path = $request->file('img')->storeAs($destination_path, $filename);
-        return back()->with('status','Add Product Successfull');
+        return back()->with('status','Thêm sản phẩmm thành công !');
     }
 
     public function getEditProduct($id){
-        $data['product'] = Product::find($id);
-        $data['listcate'] = Category::all();
-        $data['listbrand'] = Brand::all();
+        $data['product'] = $this->productRepository->findById($id);
+        $data['listcate'] = $this->categoryRepository->showAll();
+        $data['listbrand'] = $this->brandRepository->getAll();
 
         return view('admin.layout.product.editproduct',$data);
     }
-
     public function postEditProduct(Request $request,$id){
 
-        $product = Product::find($id);
-
-        $product->prod_name = $request->name; 
-        $product->prod_slug = Str::slug($request->name);
-        $product->prod_price = $request->price;  
-        $product->prod_status = $request->status;
-        $product->prod_summary = $request->edit_summary;
-        $product->prod_des = $request->edit_description;
-        $product->prod_promotion = $request->promotion;
-        $product->prod_cate = $request->cate;   
-        $product->prod_brand = $request->brand;
-        $product->prod_featured = $request->featured;
+        $allImage = array();
+        $data = [
+            'prod_name' => $request->name,
+            'prod_slug' => Str::slug($request->name),
+            'prod_price' => $request->price,
+            'prod_status' => $request->status,
+            'prod_summary' => $request->edit_summary,
+            'prod_des' => $request->edit_description,
+            'prod_promotion' => $request->promotion,
+            'prod_cate' => $request->cate,
+            'prod_brand' => $request->brand,
+            'prod_featured' => $request->featured,
+        ];
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
             $path = $image->storeAs('public/avatar',$filename);
-            $product->prod_img = $request->file('image')->getClientOriginalName();
+            $data['prod_img'] = $request->file('image')->getClientOriginalName();
 
         }  
-        $allImage = array();
         if($request->hasFile('image-gallery')){
             foreach($request->file('image-gallery') as $file){
                 $filename_gallery = md5(rand(1000,10000));
@@ -104,15 +108,20 @@ class ProductController extends Controller
                 $file->storeAs($multiple_path, $image_full_name);
                 $allImage[]= $image_full_name;
             }
-            $product->prod_gallery = implode('|', $allImage);
+            $data['prod_gallery'] =  implode('|', $allImage);
         }
-        $product->update();
+        $this->productRepository->update($id, $data);
         return redirect('admin/product');
     }
 
     public function getDeleteProduct($id){
-       Product::destroy($id);
+    //    Product::destroy($id);
+       $this->productRepository->delete($id);
        return back();
+    }
+
+    public function getProductApi(){
+        return Product::all();
     }
     
 }

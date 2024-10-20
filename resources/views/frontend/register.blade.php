@@ -115,7 +115,7 @@
                     <div class="form-group">
                         <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                         <input type="text" required name="number_phone" id="number_phone" placeholder="Số điện thoại..."
-                            value="{{old('number-phone')}}" pattern="\d{10,11}" title="Số điện thoại phải có độ dài từ 10 đến 11 số"/>
+                            value="{{old('number-phone')}}" pattern="^0[0-9]{9,10}$" title="Số điện thoại phải có độ dài từ 10 đến 11 số và chỉ chứa số"/>
                     </div>
                     <div class="form-group">
                         <label for="email"><i class="zmdi zmdi-email"></i></label>

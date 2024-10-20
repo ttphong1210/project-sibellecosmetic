@@ -2,7 +2,7 @@
     <i class="ti-shopping-cart"></i>
     <span class="button-cart-total-item">{{Cart::count()}}</span>
 </a>
-<ul class="submenu-dropdown submenu-dropdown-list">
+<ul class="submenu-dropdown submenu-dropdown-list list-submenu-cart">
     <li class="nav-item" style="padding: 10px 15px;">
         <div class="minicart-header d-flex">
             <h5> Giỏ hàng</h5>
