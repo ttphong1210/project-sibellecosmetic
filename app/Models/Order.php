@@ -8,7 +8,7 @@ class Order extends Model
 {
     //
     protected $table = 'orders';
-    protected $primaKey = 'id';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'customer_id',
         'date_order',
@@ -18,4 +18,15 @@ class Order extends Model
         'order_code',
         'order_payment',
     ];
+    protected $casts = [
+        'date_order' => 'datetime',
+    ];
+
+    public function customer(){
+       return $this->belongsTo(Customer::class,'customer_id', 'cust_id');
+    }
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'order_id', 'id');
+    }
 }

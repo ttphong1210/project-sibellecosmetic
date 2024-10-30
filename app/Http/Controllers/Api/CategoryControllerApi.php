@@ -14,8 +14,8 @@ class CategoryControllerApi extends Controller{
         $this->categoryRepository = $categoryRepository;
     }
     public function getCategory(){
-        $data['category'] = $this->categoryRepository->showAll();
-        return response($data);
+        $categoryAll = $this->categoryRepository->showAll();
+        return response($categoryAll);
     }
     public function postCategory(Request $request){
         $categoryData = [

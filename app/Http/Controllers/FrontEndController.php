@@ -11,6 +11,7 @@ use App\Models\Product;
 // use DB;
 use Illuminate\Support\Facades\DB;
 use App\Models\Brand;
+use App\Models\Order;
 use CKSource\CKFinder\Command\Proxy;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Str;
@@ -153,7 +154,23 @@ class FrontEndController extends Controller
     public function getTrackOrder(){
         return view('frontend.track_order');
     }
-    // public function getEmail(){
-    //     return view()
-    // }
+    public function postTrackOrder(Request $request){
+        $order_code = $request->order_code;
+        $order = Order::where('order_code', $order_code)->first();
+        if (!$order) {
+            return response()->json([
+                'messageError' => 'Không tìm thấy đơn hàng!',
+            ], 404);
+        }
+        return response()->json([
+            'order_code' => $order->order_code,
+            'messageSuccess' =>  'Ok, chờ xíu nhé !',
+        ]);
+    }
+    public function getDetailTrackingOrder(Request $request){
+        $order_code = $request->query('order_code');
+        $order = Order::where('order_code', $order_code)->with('orderDetails','customer')->first();
+        return view('frontend.details_tracking_order', compact('order'));
+    }
+    
 }

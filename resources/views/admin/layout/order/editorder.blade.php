@@ -103,7 +103,6 @@
                                     giao</option>
                                 <option value="3" {{ $order->order_status == 3 ? 'selected' : '' }}>Đã
                                     giao</option>
-
                             </select>
 
                             <input type="submit" value="Xử lý" class="btn btn-primary">

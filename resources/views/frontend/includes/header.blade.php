@@ -37,7 +37,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light w-100">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <a class="navbar-brand logo_h" href="{{route('home')}}">
+                <a class="navbar-brand logo_h" href="{{route('home')}}">                   
                     <img src="{{asset('img/Si.belle.jpeg')}}" alt="" style="width: 137px; height: 38px;" />
                 </a>
                 <button id="navbar-toggler" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

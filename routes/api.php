@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\BrandControllerApi;
 use App\Http\Controllers\Api\CategoryControllerApi;
 use App\Http\Controllers\Api\ProductControllerApi;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -19,20 +21,20 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-// Route::middleware('cors')->group(function () {
-//     // Các route cần CORS
-//     Route::get('product', [ProductControllerApi::class, 'getAllProduct']);
-// });
+
 Route::middleware('cors')->group(function(){
     //Product
     Route::get('product', [ProductControllerApi::class, 'getAllProduct']);
+    Route::get('productfeatured', [ProductControllerApi::class, 'getProductFeatured']);
     Route::get('product/{id}', [ProductControllerApi::class, 'getEditProduct']);
+
     //Category
     Route::get('category', [CategoryControllerApi::class, 'getCategory']);
     Route::post('category', [CategoryControllerApi::class, 'postCategory']);
     Route::get('category/{id}', [CategoryControllerApi::class, 'getEditCategory']);
 
-
+    //Brand
+    Route::get('brand', [BrandControllerApi::class, 'getBrand']);
 
 });
 

@@ -229,6 +229,55 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function(){
+            $('.submit_btn_tracking_order').on('click', function(event){
+                event.preventDefault();
+                var order_code = $('input[name = "order_code"]').val();
+                var email_order = $('input[name = "email_order"]').val();
+                var _token = $('input[name = "_token"]').val();
+                if (!order_code || !email_order) {
+                    alert("Vui lòng điền đầy đủ mã đơn hàng và email đặt hàng.");
+                    return;
+                }
+
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if(!emailRegex.test(email_order)){
+                    alert("Vui lòng nhập đúng định dạng email.");
+                    return;
+                }
+
+                $.ajax({
+                    url: "/tracking-order",
+                    method: 'POST',
+                    data: {
+                        order_code: order_code,
+                        email_order: email_order,
+                        _token: _token
+                    },
+                    success: function(response){
+                        if (response.messageSuccess) {
+                            alert(response.messageSuccess);
+                            setTimeout(function(){
+                                window.location.href = '/detail-tracking-order?order_code=' + encodeURIComponent(String(response.order_code));
+                            },1000);
+                        } else {
+                            alert("Không tìm thấy thông tin đơn hàng.");
+                        }
+                    },
+                    error: function(xhr){
+                        if (xhr.status === 404) {
+                            alert(xhr.responseJSON.messageError);
+                        } else {
+                            alert("Thất bại khi theo dõi đơn hàng.");
+                        }
+                    }
+                })
+            })
+            
+        });
+    </script>
+
 </body>
 
 </html>

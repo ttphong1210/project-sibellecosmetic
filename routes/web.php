@@ -37,6 +37,8 @@ Route::get('search', 'FrontEndController@getSearch');
 Route::get('favorite','FrontEndController@getFavorite');
 Route::post('add-product-favorite','FrontEndController@postAddProductFavorite');
 Route::get('tracking-order', 'FrontEndController@getTrackOrder');
+Route::post('tracking-order', 'FrontEndController@postTrackOrder');
+Route::get('detail-tracking-order', 'FrontEndController@getDetailTrackingOrder');
 
 Route::get('email', 'FrontEndController@getEmail');
 

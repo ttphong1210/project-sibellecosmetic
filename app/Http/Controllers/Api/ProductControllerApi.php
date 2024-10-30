@@ -21,6 +21,10 @@ class ProductControllerApi extends Controller
         $product = Product::all();
         return response()->json($product, Response::HTTP_OK);
     }
+    public function getProductFeatured(){
+        $featured = Product::where('prod_featured', 1)->orderBy('prod_id', 'desc')->get();
+        return response()->json($featured, Response::HTTP_OK);
+    }
     
     public function getEditProduct($id)
     {

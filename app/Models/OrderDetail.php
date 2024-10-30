@@ -17,4 +17,7 @@ class OrderDetail extends Model
         'order_code',
         'order_payment',
     ];
+    public function product(){
+        return  $this->belongsTo(Product::class, 'product_id', 'prod_id');
+    }
 }
