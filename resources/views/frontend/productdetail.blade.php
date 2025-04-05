@@ -123,23 +123,70 @@
                 </div>
                 <div class="product-detail-review-content">
                     <div id="review-summary" class="row">
-                        <div class="product-review col-md-4 float-left">
-                            <div class="barChart">
-                                <div class="barChart__row" data-value="0"><span class="barChart__label">5
-                                        Star</span><span class="barChart__value">0</span><span class="barChart__bar"><span class="barChart__barFill"></span></span></div>
-                                <div class="barChart__row" data-value="0"><span class="barChart__label">4
-                                        Star</span><span class="barChart__value">0</span><span class="barChart__bar"><span class="barChart__barFill"></span></span></div>
-                                <div class="barChart__row" data-value="0"><span class="barChart__label">3
-                                        Star</span><span class="barChart__value">0</span><span class="barChart__bar"><span class="barChart__barFill"></span></span></div>
-                                <div class="barChart__row" data-value="0"><span class="barChart__label">2
-                                        Star</span><span class="barChart__value">0</span><span class="barChart__bar"><span class="barChart__barFill"></span></span></div>
-                                <div class="barChart__row" data-value="0"><span class="barChart__label">1
-                                        Star</span><span class="barChart__value">0</span><span class="barChart__bar"><span class="barChart__barFill"></span></span></div>
-                            </div>
-                        </div>
-                        <div class="product-review col-md-4 float-left text-right">
+                        <div class="product-review col-md-2 float-left text-right">
                             <a class="btnWriteReview btn elife-btn-yellow text-uppercase">Viết nhận xét</a>
                         </div>
+
+                        <div id="reviewForm" class="review-form col-md-6" style="display: none; background:#F5F5F5">
+                            <p style="margin-top:10px">Xin vui lòng chia sẻ đánh giá của bạn về sản phẩm này
+                            </p>
+                            <form action="" method="">
+                                {{csrf_field()}}
+                                <input type="hidden" name="product_id" class="product_id" value="{{ $item->prod_id }}">
+                                <div class="form-group">
+                                    <label for="name">Tiêu đề đánh giá (optional)</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="rating">Đánh giá</label>
+                                    <select class="form-control" id="rating" name="rating" required>
+                                        <option value="5">5 sao</option>
+                                        <option value="4">4 sao</option>
+                                        <option value="3">3 sao</option>
+                                        <option value="2">2 sao</option>
+                                        <option value="1">1 sao</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="comment">Nhận xét</label>
+                                    <textarea class="form-control" id="comment_content" name="comment_content" rows="4" required></textarea>
+                                </div>
+                                <button type="submit" class="btnWriteReview btn-submit-Write-Review btn btn-primary">Gửi nhận xét</button>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- Phần hiển thị bình luận -->
+                    <div class="user-comments mt-5 col-md-12">
+                        <h4 class="text-uppercase">Nhận xét về sản phẩm</h4>
+                        <!-- <form>
+                            {{csrf_field()}} -->
+                        <!-- <input type="hidden" name="_token" value=""> -->
+                        <input type="hidden" name="comments_product_id" class="comment_product_id" value="{{ $item->prod_id }}">
+                        <div id="show_comments">
+                            @foreach ($comments as $cmt)
+                            <div class="comment row mb-4">
+                                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                                    <!-- <img src="{{ $cmt->avatar ? asset('storage/avatars/'.$cmt->avatar) : asset('storage/avatars/default.png') }}"
+                                                alt="avatar" class="img-fluid rounded-circle" style="width: 70px; height: 70px;"> -->
+                                    <img src="" alt="avatar" class="img-fluid rounded-circle" style="width: 70px; height: 70px;">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="comment-header d-flex justify-content-between">
+                                        <strong>{{ $cmt->name }}</strong>
+                                        <span class="text-muted">{{ $cmt->created_at->format('d/m/Y H:i') }}</span>
+                                    </div>
+                                    <div class="comment-body mt-2">
+                                        <p>{{ $cmt->comment }}</p>
+                                        <span class="badge badge-primary">{{ $cmt->rating }} sao</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            @endforeach
+
+                        </div>
+                        <!-- </form> -->
                     </div>
 
                 </div>
@@ -205,11 +252,11 @@
     for (var i = 0; i < images.length; i++) {
         images[i].onmouseover = function() {
             this.style.cursor = "hand";
-            this.style.borderColor = "grey";
+            this.style.borderColor = "white";
         };
         images[i].onmouseout = function() {
             this.style.cursor = "pointer";
-            this.style.borderColor = "white";
+            this.style.borderColor = "grey";
         };
     }
 
@@ -224,9 +271,64 @@
     $(document).ready(function() {
         $('.product-review-section').on('click', function() {
             $('html, body').animate({
-                scrollTop: $('#product-review-section').offset().top - 60
+                scrollTop: $('#product-review-section').offset().top - 110
             }, 'slow');
         });
+    });
+</script>
+<script>
+    document.querySelector('.btnWriteReview').addEventListener('click', function() {
+        document.getElementById('reviewForm').style.display = 'block';
+    });
+    $(document).ready(function() {
+        load_comments();
+
+        $(document).on('click', '.btn-submit-Write-Review', add_comments);
+
+        function add_comments(event) {
+            event.preventDefault();
+            var product_id = $('input[name="product_id"]').val();
+            var rating = $('#rating').val();
+            var comment_content = $('#comment_content').val();
+            var _token = $('input[name="_token"]').val();
+            // alert(product_id);
+
+            $.ajax({
+                url: '/add-comments',
+                method: 'POST',
+                data: {
+                    product_id: product_id,
+                    rating: rating,
+                    comment_content: comment_content,
+                    _token: _token,
+                },
+                success: function(response) {
+                    alert(response.message);
+                },
+                error: function(response) {
+
+                },
+            })
+        }
+
+        function load_comments() {
+            var product_id = $('.comment_product_id').val();
+
+            $.ajax({
+                url: '/load-comments',
+                method: 'GET',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    product_id: product_id,
+                },
+                success: function(response) {
+                    $('#show_comments').html(response.html);
+                },
+
+            });
+        }
     });
 </script>
 @endsection

@@ -18,7 +18,7 @@
                             </li>
                             <li>
                                 <a href="{{url('tracking-order')}}">
-                                    Theo dõi đơn hàng
+                                    Tra cứu đơn hàng
                                 </a>
                             </li>
                             <li>

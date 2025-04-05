@@ -144,6 +144,7 @@ class CheckOutController extends Controller
                 $this->orderDetailRepository->create($orderDetailData);
             }
             $data['info'] = $validated;
+            $data['order_code'] = $checkout_code;
             $data['address'] = $fullAddress;
             $email = $validated['email'];
             $data['cart'] = $this->cartRepository->content();

@@ -4,9 +4,8 @@ namespace App\Repositories\Admin\Eloquent;
 
 use App\Models\Product;
 use App\Repositories\Admin\Interfaces\ProductRepositoryInterface;
-use App\Repositories\EloquentRepository;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -21,17 +20,26 @@ class ProductRepository implements ProductRepositoryInterface
         $this->_model = $_model;
     }
 
-    public function getAll(): Collection
+    public function getAll(): LengthAwarePaginator
     {
         return DB::table('products')
             ->join('categories', 'products.prod_cate', '=', 'categories.cate_id')
             ->join('brands', 'products.prod_brand', '=', 'brands.brand_id')
             ->orderBy('prod_id', 'desc')
-            ->get();
+            ->paginate(10);
     }
     public function findById(int $id): ?Product
     {
         return $this->_model->find($id);
+    }
+    public function findByStr(?string $str){
+        $product = $this->_model::query()
+        ->join('categories', 'products.prod_cate', '=', 'categories.cate_id')
+        ->join('brands', 'products.prod_brand', '=', 'brands.brand_id');
+        if(!is_null($str) && $str !== ''){
+            $product->where('prod_name', 'LIKE', '%'.$str.'%');
+        }
+        return $product->get();
     }
     public function create(array $attributes): Product
     {

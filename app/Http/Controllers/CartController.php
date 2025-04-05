@@ -21,7 +21,6 @@ class CartController extends Controller
 
     public function getAddCart($id)
     {
-        // $product = Product::find($id);
         $product = $this->productRepository->findById($id);
         $this->cartRepository->add($product);
         $data['count'] = Cart::count();

@@ -24,33 +24,37 @@
         text-align: center;
     }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<div style="width: 50%; margin: auto;">
-        <canvas id="myChart"></canvas>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Biểu đồ</h3>
     </div>
-
-    <script>
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar', // hoặc 'line', 'pie', v.v.
-            data: {
-                labels: @json($months),
-                datasets: [{
-                    label: '# of Orders',
-                    data: @json($totals),
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
+    <div class="card-body">
+        <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+</div>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar', // hoặc 'line', 'pie', etc.
+        data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Doanh thu',
+                data: [12, 19, 3, 5, 2, 3, 7],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
-        });
-    </script>
+        }
+    });
+</script>
+
 @endsection

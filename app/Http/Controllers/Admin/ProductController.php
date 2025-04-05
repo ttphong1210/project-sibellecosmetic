@@ -4,10 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Product;
-use App\Models\Category;
 use App\Http\Requests\AddProductRequest;
-use App\Models\Brand;
 use App\Repositories\Admin\Interfaces\BrandRepositoryInterface;
 use App\Repositories\Admin\Interfaces\CategoryRepositoryInterface;
 use App\Repositories\Admin\Interfaces\ProductRepositoryInterface;
@@ -67,7 +64,7 @@ class ProductController extends Controller
        
         $this->productRepository->create($data);        
         $path = $request->file('img')->storeAs($destination_path, $filename);
-        return back()->with('status','Thêm sản phẩmm thành công !');
+        return back()->with('status','Thêm sản phẩm thành công !');
     }
 
     public function getEditProduct($id){
@@ -120,8 +117,19 @@ class ProductController extends Controller
        return back();
     }
 
-    public function getProductApi(){
-        return Product::all();
+    public function getSearch(Request $request){
+        $inputQuerySearch = $request->query('inputQuery');
+        $data['productlist'] = $this->productRepository->findByStr($inputQuerySearch);
+        
+        if(empty($inputQuerySearch)){
+            $data['productlist'] = $this->productRepository->getAll();
+            $htmlRender = view('admin.layout.product.listproductSearch',$data)->render();  
+        } elseif($data['productlist']->isEmpty()){
+            $htmlRender = '<p style="text-align:center; font-size: 1.15em">Không tìm thấy sản phẩm nào</p>';
+        }else{
+            $htmlRender = view('admin.layout.product.listproductSearch', $data)->render();
+        }
+        return response()->json($htmlRender);
     }
     
 }

@@ -88,6 +88,8 @@ return [
 
     'password' => env('MAIL_PASSWORD'),
 
+    'manager_mail' => env('MAIL_MANAGER_EMAIL', 'huuduongn91@gmail.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path

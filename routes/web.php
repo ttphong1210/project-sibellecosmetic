@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\Api\CheckOutControllerApi;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
@@ -41,6 +42,8 @@ Route::post('tracking-order', 'FrontEndController@postTrackOrder');
 Route::get('detail-tracking-order', 'FrontEndController@getDetailTrackingOrder');
 
 Route::get('email', 'FrontEndController@getEmail');
+Route::get('load-comments', 'FrontEndController@getLoadComments');
+Route::post('add-comments', 'FrontEndController@postAddComments');
 
 
 Route::group(['prefix' => 'blog'], function(){
@@ -86,7 +89,9 @@ Route::group(['prefix' => 'account'], function(){
 Route::group(['namespace' => 'Admin'], function () {
     Route::group(['prefix' => 'admin', 'middleware' => 'CheckLogedOut'], function () {
         // Route::get('home', 'HomeController@getHome');
-        Route::get('home', 'DashboardController@index');
+        Route::get('/home', 'DashboardController@index');
+        Route::get('profile-user', 'DashboardController@getProfileUser');
+       
 
 
         Route::group(['prefix' => 'user' , 'middleware'=>'roles'], function(){
@@ -125,6 +130,8 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::post('edit/{id}', 'ProductController@postEditProduct');
 
             Route::get('delete/{id}', 'ProductController@getDeleteProduct');
+
+            Route::get('search', 'ProductController@getSearch');
         });
 
         Route::group(['prefix' => 'order'], function () {
@@ -151,6 +158,8 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::get('/', 'SliderController@getSlider');
             Route::get('add-slider', 'SliderController@getAddSlider');
             Route::post('add-slider', 'SliderController@postAddSlider');
+            Route::post('update-status-slider', 'SliderController@postUpdateStatusSlider');
+
         });
 
         //Route blog post
@@ -177,7 +186,4 @@ Route::get('forgot-password-auth', 'AccountController@getForgotPassword');
 Route::post('forgot-password-auth', 'AccountController@postResetPassword');
 Route::get('update-password-auth', 'AccountController@getUpdateNewPassword');
 Route::post('update-password-auth', 'AccountController@postUpdateNewPassword');
-
-
-
 

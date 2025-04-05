@@ -29,4 +29,14 @@ class SliderController extends Controller
         $path = $request->file('img')->storeAs($destination_path, $filename);
         return back()->with('status','Add Slider Successfull');
     }
+    public function postUpdateStatusSlider(Request $request){   
+        $slider = Slider::find($request->slider_id);
+        if($slider){
+            $slider->status = $request->status;
+            $slider->save();
+            return response()->json(['message' => 'Cập nhật trạng thái thành công!']);
+        };
+        return response()->json(['message' => 'Không tìm thấy mục.'], 404);
+
+    }
 }

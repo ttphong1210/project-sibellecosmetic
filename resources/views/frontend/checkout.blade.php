@@ -5,7 +5,7 @@
 <section class="checkout_area section_gap">
     <div class="container">
         <!-- Loader -->
-        <div id="loader-overlay" style="display: none ; /* Mặc định ẩn */">
+        <div id="loader-overlay" style="display: none ;">
             <img src="{{asset('img/loading.gif')}}" alt="Loading..." />
         </div>
         <!-- Thông báo -->

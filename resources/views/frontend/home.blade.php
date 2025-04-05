@@ -9,28 +9,18 @@
             <div class="container">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                        
+                        @foreach ( $sliders as $index => $slider )
+                            <li data-target="#carouselExampleIndicators" data-slide-to="{{$index}}" class="{{$index == 0 ? 'active' : ''}}"></li>
+                        
+                        @endforeach
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img class="d-block w-100" src="./img/banner/bioderma_banner.png" alt="">
+                        @foreach ($sliders as $index => $slider )
+                        <div class="carousel-item {{$index == 0 ? 'active' : ''}}">
+                            <img class="d-block w-100" src="{{asset('storage/slider/'.$slider->image)}}" alt="{{$slider->title}}">
                         </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="./img/banner/banner-11.png" alt="">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="./img/banner/banner-lumi-1.jpeg" alt="">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="./img/banner/la-mer.png" alt="">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="d-block w-100" src="./img/banner/website-banner.png" alt="">
-                        </div>
+                        @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

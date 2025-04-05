@@ -5,9 +5,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>@yield('title') | SE.BELLE Comestic</title>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="icon" href="{{asset('img/logo-cosmetic.png')}}" type="image/png" />
   <link rel="stylesheet" href="{{asset('vendor/bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('vendor/bower_components/font-awesome/css/font-awesome.min.css')}}">
   <!-- Ionicons -->
@@ -16,13 +19,21 @@
   <link rel="stylesheet" href="{{asset('vendor/dist/css/AdminLTE.min.css')}}">
 
   <link rel="stylesheet" href="{{asset('vendor/dist/css/skins/skin-blue.min.css')}}">
+  <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+  <!-- <link rel="stylesheet" href="{{asset('css/sb-admin-2.min.css')}}"> -->
 
   <script type="text/javascript" src="{{asset('editor/ckeditor/ckeditor.js')}}"></script>
   <script type="text/javascript" src="{{asset('editor/ckfinder/ckfinder.js')}}"></script>
 
   <!-- <script src="{{ asset('ckeditor/ckeditor.js') }}"></script> -->
+   
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{asset('js/admin-script.js')}}"></script>
 
   <script>
     var description = CKEDITOR.replace('description');
@@ -124,6 +135,23 @@
       }
     }
   </script>
+  <script type="text/javascript">
+
+    function togglePasswordVisibility() {
+            const passwordInput = document.getElementById("exampleInputPassword");
+            const passwordIcon = document.getElementById("passwordIcon");
+        
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                passwordIcon.classList.remove("fa-eye");
+                passwordIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordInput.type = "password";
+                passwordIcon.classList.remove("fa-eye-slash");
+                passwordIcon.classList.add("fa-eye");
+            }
+        }
+  </script>
   <!-- Google Font -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -136,11 +164,10 @@
     <header class="main-header">
 
       <!-- Logo -->
-      <a href="index2.html" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>A</b>LT</span>
+      <a href="{{url('admin/home')}}" class="logo">
+          <!-- <img src="{{asset('img/Si.belle.jpeg')}}" alt="SI BELLE" width=""> -->
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Admin</b>LTE</span>
+        <span class="logo-lg">SI BELLE</span>
       </a>
 
       <!-- Header Navbar -->
@@ -285,7 +312,7 @@
                 <!-- Menu Footer-->
                 <li class="user-footer">
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                    <a href="{{url('admin/profile-user')}}" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
                     <a href="{{asset('logout-auth')}}" class="btn btn-default btn-flat">Sign out</a>
@@ -449,11 +476,11 @@
     <!-- Main Footer -->
     <footer class="main-footer">
       <!-- To the right -->
-      <div class="pull-right hidden-xs">
+      <!-- <div class="pull-right hidden-xs">
         Anything you want
-      </div>
+      </div> -->
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+      <!-- <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved. -->
     </footer>
 
     <!-- Control Sidebar -->
@@ -539,7 +566,6 @@
   <script src="{{asset('vendor/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
   <!-- AdminLTE App -->
   <script src="{{asset('vendor/dist/js/adminlte.min.js')}}"></script>
-
 
 </body>
 

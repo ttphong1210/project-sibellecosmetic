@@ -189,7 +189,7 @@
                     success: function(response) {
                         if (response.action == 'add') {
                             $('a[data-id = ' + product_favorite_id + ']').html(
-                                '<i class="fa fa-heart" style="font-size:20px;color:red;line-height:1.8"></i>'
+                                '<i class="ti-heart icon-style" style="color:red"></i>'
                             );
                             alert(response.message);
                         } else if (response.action == 'remove') {
@@ -213,14 +213,7 @@
             });
         });
     </script>
-    <!-- Search -->
-    <!-- <script>
-        $(document).ready(function() {
-            $("#icon-search").click(function() {
-                $("#input-search").show();
-            });
-        });
-    </script> -->
+
     <script>
         $(document).ready(function(event){
             $('#user-account').click(function(){

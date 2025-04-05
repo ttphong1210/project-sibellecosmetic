@@ -7,66 +7,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <style type="text/css">
-    body,
-    table,
-    td,
-    a {
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
-    }
-
-    table,
-    td {
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
-    }
-
-    img {
-        -ms-interpolation-mode: bicubic;
-    }
-
-    img {
-        border: 0;
-        height: auto;
-        line-height: 100%;
-        outline: none;
-        text-decoration: none;
-    }
-
-    table {
-        border-collapse: collapse !important;
-    }
-
-    body {
-        height: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        width: 100% !important;
-    }
-
-
-    a[x-apple-data-detectors] {
-        color: inherit !important;
-        text-decoration: none !important;
-        font-size: inherit !important;
-        font-family: inherit !important;
-        font-weight: inherit !important;
-        line-height: inherit !important;
-    }
-
-    @media screen and (max-width: 480px) {
-        .mobile-hide {
-            display: none !important;
+        body,
+        table,
+        td,
+        a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
         }
 
-        .mobile-center {
-            text-align: center !important;
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
         }
-    }
 
-    div[style*="margin: 16px 0;"] {
-        margin: 0 !important;
-    }
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        table {
+            border-collapse: collapse !important;
+        }
+
+        body {
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+
+
+        a[x-apple-data-detectors] {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+        }
+
+        @media screen and (max-width: 480px) {
+            .mobile-hide {
+                display: none !important;
+            }
+
+            .mobile-center {
+                text-align: center !important;
+            }
+        }
+
+        div[style*="margin: 16px 0;"] {
+            margin: 0 !important;
+        }
     </style>
 
 <body style="margin: 0 !important; padding: 0 !important; background-color: #eeeeee;" bgcolor="#eeeeee">
@@ -116,7 +116,8 @@
                                                             style="font-size: 18px; font-weight: 400; margin: 0; color: #ffffff;">
                                                             <a href="{{asset('/')}}" target="_blank"
                                                                 style="color: #ffffff; text-decoration: none;">Shop
-                                                                &nbsp;</a></p>
+                                                                &nbsp;</a>
+                                                        </p>
                                                     </td>
                                                     <td
                                                         style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 24px;">
@@ -154,10 +155,14 @@
                                 <tr>
                                     <td align="left"
                                         style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 10px;">
-                                        <!-- <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium iste ipsa numquam odio dolores, nam.
-                            </p> -->
+                                        <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
+                                            Mã đơn hàng: {{$checkout_code}}
+                                        </p>
+                                        <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
+                                Bạn có thể kiểm tra mã đơn trên website của Shop theo đường dẫn <a href="http://192.168.2.1:8081/tracking-order.html">Theo dõi đơn hàng</a>
+                            </p>
                                     </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td align="left" style="padding-top: 20px;">
@@ -174,15 +179,15 @@
                                                 </td>
 
                                             </tr>
-                                            @foreach($cart as $item)
+                                            @foreach($cartInfo as $item)
                                             <tr>
                                                 <td width="75%" align="left"
                                                     style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                                    {{$item->name}}
+                                                    {{$item['name']}}
                                                 </td>
                                                 <td width="25%" align="left"
                                                     style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding: 15px 10px 5px 10px;">
-                                                    {{number_format($item->price,0,',','.')}}
+                                                    {{number_format($item['price'],0,',','.')}}
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -199,7 +204,7 @@
                                                 </td>
                                                 <td width="25%" align="left"
                                                     style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding: 10px; border-top: 3px solid #eeeeee; border-bottom: 3px solid #eeeeee;">
-                                                    {{$total_after_feeship}} VND
+                                                {{number_format($total_after_feeship,0,',','.')}} ₫
                                                 </td>
                                             </tr>
                                         </table>
@@ -225,7 +230,7 @@
                                                     <td align="left" valign="top"
                                                         style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
                                                         <p style="font-weight: 800;">Địa chỉ giao hàng</p>
-                                                        <p>{{$address}}</p>
+                                                        <p>{{$fullAddress}}</p>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -238,7 +243,7 @@
                                                     <td align="left" valign="top"
                                                         style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
                                                         <p style="font-weight: 800;">Ghi chú đơn hàng</p>
-                                                        <p>{{$info['notes']}}</p>
+                                                        <p>{{$notes}}</p>
                                                     </td>
                                                 </tr>
                                             </table>

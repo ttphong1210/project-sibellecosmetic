@@ -2,7 +2,7 @@
 @section('title', 'Chi tiết đơn hàng của bạn')
 @section('content')
 <link rel="stylesheet" href="{{asset('css/trackingorder.css')}}">
-<div class="container">
+<div class="container" style="padding: 20px">
     <h2>Thông tin đơn hàng</h2>
 
     @if(session('error'))

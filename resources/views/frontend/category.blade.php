@@ -50,29 +50,39 @@
             @foreach($items as $item)
             <div class="col-lg-4 col-md-6">
               <div class="single-product">
-                <div class="product-img">
-                  <img class="card-img" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
-                  <div class="p_icon">
-                    <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
-                      <i class="ti-eye icon-style"></i>
-                    </a>
-                    <a href="#">
+                <form action="">
+                  {{csrf_field()}}
+                  <input type="hidden" value="{{$item->prod_id}}" class="product_favorite_id_{{$item->prod_id}}">
+                  <input type="hidden" value="{{$item->prod_name}}" class="product_favorite_name_{{$item->prod_id}}">
+                  <input type="hidden" value="{{$item->prod_img}}" class="product_favorite_image_{{$item->prod_id}}">
+                  <input type="hidden" value="{{$item->prod_price}}" class="product_favorite_price_{{$item->prod_id}}">
+                  <div class="product-img">
+                    <img class="card-img" src="{{asset('storage/avatar/'.$item->prod_img)}}" alt="" />
+                    <div class="p_icon">
+                      <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}">
+                        <i class="ti-eye icon-style"></i>
+                      </a>
+                      <!-- <a href="#">
                       <i class="ti-heart icon-style"></i>
-                    </a>
-                    <a href="#" data-url="{{asset('cart/add/'.$item->prod_id)}}" class="add-to-cart">
-                      <i class="ti-shopping-cart icon-style"></i>
-                    </a>
+                    </a> -->
+                      <a class="icon-ti-heart ti-heart-favorite" data-id="{{$item->prod_id}}">
+                        <i class=" ti-heart icon-style"></i>
+                      </a>
+                      <a href="#" data-url="{{asset('cart/add/'.$item->prod_id)}}" class="add-to-cart">
+                        <i class="ti-shopping-cart icon-style"></i>
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div class="product-btm">
-                  <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
-                    <h4>{{$item->prod_name}}</h4>
-                  </a>
-                  <div class="mt-3">
-                    <span class="mr-4">{{number_format($item->prod_price,0,',','.')}}VND</span>
-                    <del>{{$item->prod_promotion}}VND</del>
+                  <div class="product-btm">
+                    <a href="{{asset('detail/'.$item->prod_id.'/'.$item->prod_slug.'.html')}}" class="d-block">
+                      <h4>{{$item->prod_name}}</h4>
+                    </a>
+                    <div class="mt-3">
+                      <span class="mr-4">{{number_format($item->prod_price,0,',','.')}}VND</span>
+                      <del>{{$item->prod_promotion}}VND</del>
+                    </div>
                   </div>
-                </div>
+                </form>
               </div>
             </div>
             @endforeach

@@ -1,11 +1,4 @@
 <li>
-    <!-- <a href="{{asset('delete-feeship')}}" id="fee-ship-checkout">
-        <p class="col subtotal-title"> Phí ship:</p>
-        <i class="fa fa-close" style="padding:18px 10px;"></i>
-        <span>
-             {{$feeship}} đ
-        </span>
-    </a> -->
     <a id="fee-ship-checkout">
         <p class="col subtotal-title"> Phí ship:</p>
         <span>

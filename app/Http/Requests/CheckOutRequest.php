@@ -55,9 +55,12 @@ class CheckOutRequest extends FormRequest
             'number_phone.digits_between' => 'Số điện thoại có độ dài 10-11 số',
             'email.required'  => 'Vui lòng nhập địa chỉ Email',
             'email.email'  => 'Vui lòng nhập đúng định dang email có @',
-            'city.exists' => 'Vui lòng chọn Tỉnh/Thành phố.',  // Thêm dòng này
+            'city.required' => 'Vui lòng chọn Tỉnh/Thành phố.',  
+            'city.exists' => 'Vui lòng chọn Tỉnh/Thành phố.',  
             'district.required' => 'Vui lòng chọn Quận/Huyện',
+            'district.exists' => 'Vui lòng chọn Quận/Huyện',
             'ward.required' => 'Vui lòng chọn Xã/Phường/Thị trấn',
+            'ward.exists' => 'Vui lòng chọn Xã/Phường/Thị trấn',
             'address.required' => 'Nhập địa chỉ chi tiết',
             'payments.required' => 'Chọn phương thức thanh toán',
         ];

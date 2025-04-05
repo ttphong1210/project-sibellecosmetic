@@ -3,27 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\BlogPost;
-use Exception;
-
+use App\Models\Slider;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Product;
-// use DB;
+use App\Models\Comment;
 use Illuminate\Support\Facades\DB;
 use App\Models\Brand;
 use App\Models\Order;
-use CKSource\CKFinder\Command\Proxy;
 use Gloudemans\Shoppingcart\Facades\Cart;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
-use Symfony\Component\VarDumper\Cloner\Data;
-
-use function Psy\debug;
 
 class FrontEndController extends Controller
 {
     public function getHome()
     {
+        $data['sliders'] = Slider::orderBy('id', 'DESC')->where('status', '1')->take(4)->get();
         $data['cartInfo'] = Cart::content();
         $data['categories'] = Category::all();
         $data['featured'] = Product::where('prod_featured', 1)->orderBy('prod_id', 'desc')->get();
@@ -56,6 +51,7 @@ class FrontEndController extends Controller
             ->join('categories', 'products.prod_cate', '=', 'categories.cate_id')
             ->get();
         $data['product'] = Product::inRandomOrder()->get();
+        $data['comments'] = Comment::where('comment_product_id', $id)->orderBy('created_at', 'desc')->get();
 
         return view('frontend.productdetail', $data);
     }
@@ -171,6 +167,22 @@ class FrontEndController extends Controller
         $order_code = $request->query('order_code');
         $order = Order::where('order_code', $order_code)->with('orderDetails','customer')->first();
         return view('frontend.details_tracking_order', compact('order'));
+    }
+
+    public function postAddComments(Request $request){
+        // $product_id = $request->input('product_id');
+        $comment_content = $request->input('comment_content');
+
+        // $data = $request->all();
+        dd($comment_content);
+        return response()->json([
+            'message' => 'Nhận xét đã được gửi thành công.',
+        ]);
+    }
+    public function getLoadComments(Request $request){
+        $product_id = $request->query('product_id');
+        $comment = Comment::where('comment_product_id', $product_id)->get();
+
     }
     
 }
