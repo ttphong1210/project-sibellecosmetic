@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AddProductRequest;
 use App\Repositories\Admin\Eloquent\CategoryRepository;
 use App\Repositories\Admin\Eloquent\ProductRepository;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ManagerProductControllerApi extends Controller
@@ -82,6 +83,7 @@ class ManagerProductControllerApi extends Controller
     }
     public function actionEditProduct(Request $request, $id)
     {
+        $product = $this->productRepository->findById($id);
         $data = [
             'prod_name' => $request->prod_name,
             'prod_slug' => Str::slug($request->prod_name),
@@ -96,12 +98,21 @@ class ManagerProductControllerApi extends Controller
             'prod_featured' => $request->prod_featured,
         ];
         if ($request->hasFile('imageAvatar')) {
+            if ($product->prod_img) {
+                Storage::delete('public/avatar/' . $product->prod_img);
+            }
             $image = $request->file('imageAvatar');
             $imageName = time() . '_' . $image->getClientOriginalName();
             $image->storeAs('public/avatar', $imageName);
             $data['prod_img'] = $imageName;
         }
-        $currentGallery = explode("|", $request->currentGallery) ?? [];
+
+        $galleryFromDB = explode("|", $product->prod_gallery);
+        $currentGallery = $request->currentGallery ? explode("|",$product->prod_gallery) : [];
+        $imageDelete = array_diff($galleryFromDB, $currentGallery);
+        foreach($imageDelete as $img){
+            Storage::delete('public/gallery/'. $img);
+        }
         if ($request->hasFile('gallery')) {
             $galleryFile = $request->file('gallery');
             $newGallery = [];
@@ -113,14 +124,14 @@ class ManagerProductControllerApi extends Controller
                 }
             }
             $finalGallery = array_merge($currentGallery, $newGallery);
-        } else{
+        } else {
             $finalGallery = $currentGallery;
         }
         $data['prod_gallery'] = implode("|", $finalGallery);
         $this->productRepository->update($id, $data);
         return response()->json([
             'message' => 'Cập nhật thay đổi thành công !',
-            'gallery' => $data['prod_gallery']
+            'data' => $data
         ]);
     }
     public function actionDeleteProduct($id)
