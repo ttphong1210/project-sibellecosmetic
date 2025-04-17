@@ -25,13 +25,13 @@ class AddBrandRequest extends FormRequest
     {
         return [
             //
-            'name' => 'unique:brands,brand_name'
+            'name' => 'required|unique:brands,brand_name'
         ];
     }
     public function messages(){
         return[
-            //
-            'name.unique'=>'Tên danh mục đã tồn tại !'
+            'name.required'=>'Vui lòng nhập tên thương hiệu ',
+            'name.unique'=>'Tên thương hiệu đã tồn tại '
         ]; 
     }
 }

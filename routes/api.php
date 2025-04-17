@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\ManagerBrandControllerApi;
+use App\Http\Controllers\Api\Admin\ManagerCategoryControllerApi;
+use App\Http\Controllers\Api\Admin\ManagerProductControllerApi;
+use App\Http\Controllers\Api\Authentication\AuthControllerApi;
 use App\Http\Controllers\Api\BrandControllerApi;
 use App\Http\Controllers\Api\CartControllerApi;
 use App\Http\Controllers\Api\CategoryControllerApi;
@@ -24,8 +28,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::middleware('cors')->group(function(){
-    Route::middleware('cors')->group(function(){
+
+Route::middleware('cors')->group(function () {
 
     //Product page user
     Route::get('product', [ProductControllerApi::class, 'getAllProduct']);
@@ -53,7 +57,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         Route::get('/', [CartControllerApi::class, 'getCart']);
         Route::get('add/{id}', [CartControllerApi::class, 'addToCart']);
     });
-    
+
     // CheckOut
     Route::get('city', [CheckOutControllerApi::class, 'getCityApi']);
     Route::post('select-shipping-information', [CheckOutControllerApi::class, 'postSelectShippingInformationApi']);
@@ -61,11 +65,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
         return response()->json([], 200);
     });
     Route::post('charge-shipping', [CheckOutControllerApi::class, 'calculateShipping']);
-    Route::options('charge-shipping', function(){
+    Route::options('charge-shipping', function () {
         return response()->json([], 200);
     });
     Route::post('checkout', [CheckOutControllerApi::class, 'actionPostCheckOut']);
-    Route::options('checkout', function(){
+    Route::options('checkout', function () {
         return response()->json([], 200);
     });
 
@@ -73,6 +77,37 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::post('tracking-order', [TrackingOrderControllerApi::class, 'postTrackingOrder']);
     Route::get('detail-tracking-order', [TrackingOrderControllerApi::class, 'detailTrackingOrder']);
 
+    //Login authentication
+    Route::post('login', [AuthControllerApi::class, 'actionLoginAuth']);
+    Route::get('logout', [AuthControllerApi::class, 'actionLogOutAuth']);
+
+    //ADMIN
+    // 'middleware' => 'CheckLogedOut'
+    Route::group(['prefix' => 'admin'], function () {
+        //Product
+        Route::group(['prefix' => 'product'], function(){
+            Route::get('/', [ManagerProductControllerApi::class, 'listManagerProduct']);
+            Route::post('add', [ManagerProductControllerApi::class, 'ManagerAddProduct']);
+            Route::post('edit/{id}', [ManagerProductControllerApi::class, 'actionEditProduct']);
+            Route::get('search', [ManagerProductControllerApi::class, 'actionSearchProduct']);
+            Route::get('delete/{id}', [ManagerProductControllerApi::class, 'actionDeleteProduct']);
+        });
+        
+        //Category
+        Route::group(['prefix' => 'category'], function(){
+            Route::get('/', [ManagerCategoryControllerApi::class, 'listManagerCategory']);
+            Route::post('add', [ManagerCategoryControllerApi::class, 'actionAddNewCategory']);
+            Route::get('delete/{id}', [ManagerCategoryControllerApi::class, 'actionDeleteCategory']);
+    
+        });
+    
+        //Brand
+        Route::group(['prefix' => 'brand'], function(){
+            Route::get('list-brands', [ManagerBrandControllerApi::class, 'listManagerBrands']);
+            Route::post('add', [ManagerBrandControllerApi::class, 'actionAddNewBrands']);
+            Route::get('delete/{id}', [ManagerBrandControllerApi::class, 'actionDeleteBrands']);
+
+        });
+
+    });
 });
-
-

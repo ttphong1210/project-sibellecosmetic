@@ -19,6 +19,11 @@ class CheckLogedOut
     public function handle($request, Closure $next)
     {
         if(Auth::guest()){
+            if($request->expectsJson()){
+                return response()->json([
+                    'message' => 'Unauthenticated',
+                ], 401);
+            }
             return redirect()->intended('login-auth');
         }
         return $next($request);

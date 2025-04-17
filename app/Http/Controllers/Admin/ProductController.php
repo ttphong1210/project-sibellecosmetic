@@ -63,7 +63,7 @@ class ProductController extends Controller
         }
        
         $this->productRepository->create($data);        
-        $path = $request->file('img')->storeAs($destination_path, $filename);
+        $request->file('img')->storeAs($destination_path, $filename);
         return back()->with('status','Thêm sản phẩm thành công !');
     }
 
@@ -92,7 +92,7 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
-            $path = $image->storeAs('public/avatar',$filename);
+            $image->storeAs('public/avatar',$filename);
             $data['prod_img'] = $request->file('image')->getClientOriginalName();
 
         }  
@@ -112,7 +112,6 @@ class ProductController extends Controller
     }
 
     public function getDeleteProduct($id){
-    //    Product::destroy($id);
        $this->productRepository->delete($id);
        return back();
     }

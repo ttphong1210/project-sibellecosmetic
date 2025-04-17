@@ -230,7 +230,9 @@
                                                     <td align="left" valign="top"
                                                         style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px;">
                                                         <p style="font-weight: 800;">Địa chỉ giao hàng</p>
-                                                        <p>{{$fullAddress}}</p>
+                                                        <a href="https://www.google.com/maps/search/?api=1&query={{ urlencode($fullAddress) }}" target="_blank" rel="noopener noreferrer ">
+                                                            <p>{{$fullAddress}}</p>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </table>

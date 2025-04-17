@@ -15,6 +15,7 @@ class Product extends Model
         'prod_name',
         'prod_slug',
         'prod_price',
+        'quantity',
         'prod_img',
         'prod_summary',
         'prod_des',

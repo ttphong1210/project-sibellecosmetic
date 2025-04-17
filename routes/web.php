@@ -15,10 +15,10 @@ use App\Http\Controllers\Api\CheckOutControllerApi;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
-Route::get('welcome', function(){
+Route::get('welcome', function () {
     return view('frontend.welcome');
 });
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
     return 'Application cache has been cleared';
 });
@@ -35,8 +35,8 @@ Route::get('detail/{id}/{slug}.html', 'FrontEndController@getDetail');
 Route::get('category/{id}/{slug}.html', 'FrontEndController@getCategory');
 Route::get('brand/{id}/{slug}.html', 'FrontEndController@getBrand');
 Route::get('search', 'FrontEndController@getSearch');
-Route::get('favorite','FrontEndController@getFavorite');
-Route::post('add-product-favorite','FrontEndController@postAddProductFavorite');
+Route::get('favorite', 'FrontEndController@getFavorite');
+Route::post('add-product-favorite', 'FrontEndController@postAddProductFavorite');
 Route::get('tracking-order', 'FrontEndController@getTrackOrder');
 Route::post('tracking-order', 'FrontEndController@postTrackOrder');
 Route::get('detail-tracking-order', 'FrontEndController@getDetailTrackingOrder');
@@ -46,7 +46,7 @@ Route::get('load-comments', 'FrontEndController@getLoadComments');
 Route::post('add-comments', 'FrontEndController@postAddComments');
 
 
-Route::group(['prefix' => 'blog'], function(){
+Route::group(['prefix' => 'blog'], function () {
     Route::get('/', 'FrontendController@getBlog');
     // Route::get('blog/{id}/{slug}.html', 'FrontendController@getDetailBlog');
     Route::get('blog-id', 'FrontendController@getDetailBlog');
@@ -65,15 +65,15 @@ Route::group(['prefix' => 'cart'], function () {
 Route::get('complete', 'CartController@getComplete');
 Route::get('checkout', 'CheckOutController@getCheckout');
 Route::post('checkout', 'CheckOutController@postCheckout')->name('checkout.post');
-Route::post('select-shipping-infomation','CheckOutController@postSelectShippingInfomation');
-Route::post('charge-shipping','CheckOutController@postChargeShipping');
-Route::get('delete-feeship','CheckOutController@getDeleteFeeship');
+Route::post('select-shipping-infomation', 'CheckOutController@postSelectShippingInfomation');
+Route::post('charge-shipping', 'CheckOutController@postChargeShipping');
+Route::get('delete-feeship', 'CheckOutController@getDeleteFeeship');
 
 
 // Account Customer
-Route::group(['prefix' => 'account'], function(){
+Route::group(['prefix' => 'account'], function () {
     Route::get('register-customer', 'AccountCustomerController@getRegisterCustomer');
-    Route::post('register-customer','AccountCustomerController@postRegisterCustomer');
+    Route::post('register-customer', 'AccountCustomerController@postRegisterCustomer');
     Route::get('login-customer', 'AccountCustomerController@getLoginCustomer');
     Route::post('login-customer', 'AccountCustomerController@postLoginCustomer');
     Route::get('forgot-password', 'AccountCustomerController@getForgotPassword');
@@ -91,13 +91,11 @@ Route::group(['namespace' => 'Admin'], function () {
         // Route::get('home', 'HomeController@getHome');
         Route::get('/home', 'DashboardController@index');
         Route::get('profile-user', 'DashboardController@getProfileUser');
-       
 
-
-        Route::group(['prefix' => 'user' , 'middleware'=>'roles'], function(){
+        Route::group(['prefix' => 'user', 'middleware' => 'roles'], function () {
             Route::get('all-user', 'UserController@getAllUser');
-            Route::post('assign-role' , 'UserController@postAssignRole');
-            Route::get('delete-user/{id}','UserController@getDeleteUser');
+            Route::post('assign-role', 'UserController@postAssignRole');
+            Route::get('delete-user/{id}', 'UserController@getDeleteUser');
         });
         Route::group(['prefix' => 'category'], function () {
             Route::get('/', 'CategoryController@getCate');
@@ -120,7 +118,7 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::get('delete/{id}', 'BrandController@getDeleteBrand');
         });
 
-        Route::group(['prefix' => 'product', 'middleware'=>'roles'], function () {
+        Route::group(['prefix' => 'product', 'middleware' => 'roles'], function () {
             Route::get('/', 'ProductController@getProduct');
 
             Route::get('add', 'ProductController@getAddProduct');
@@ -159,19 +157,16 @@ Route::group(['namespace' => 'Admin'], function () {
             Route::get('add-slider', 'SliderController@getAddSlider');
             Route::post('add-slider', 'SliderController@postAddSlider');
             Route::post('update-status-slider', 'SliderController@postUpdateStatusSlider');
-
         });
 
         //Route blog post
-        Route::group(['prefix' => 'blog'], function(){
+        Route::group(['prefix' => 'blog'], function () {
             Route::get('/', 'BlogPostController@getAllBlog');
             Route::get('add-blog', 'BlogPostController@getAddBlog');
             Route::post('add-blog', 'BlogPostController@postAddBlog');
             Route::get('edit-blog/{id}', 'BlogPostController@getEditBlog');
             Route::post('edit-blog/{id}', 'BlogPostController@postEditBlog');
             Route::get('delete/{id}', 'BlogPostController@getDeleteBlog');
-
-
         });
     });
 });
@@ -186,4 +181,3 @@ Route::get('forgot-password-auth', 'AccountController@getForgotPassword');
 Route::post('forgot-password-auth', 'AccountController@postResetPassword');
 Route::get('update-password-auth', 'AccountController@getUpdateNewPassword');
 Route::post('update-password-auth', 'AccountController@postUpdateNewPassword');
-
